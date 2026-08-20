@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -19,10 +19,16 @@ SITE_JSON_PATH = PROJECT_ROOT / "docs" / "data" / "matches.json"
 
 
 def fetch_upcoming_matches(api_key: str, limit: int = 20) -> tuple[list[dict], str | None]:
+    today = datetime.now(timezone.utc).date()
+    end_date = today + timedelta(days=7)
     response = requests.get(
         API_URL,
         headers={"x-apisports-key": api_key},
-        params={"next": limit, "timezone": "Europe/Istanbul"},
+        params={
+            "from": today.isoformat(),
+            "to": end_date.isoformat(),
+            "timezone": "Europe/Istanbul",
+        },
         timeout=30,
     )
     response.raise_for_status()
@@ -32,7 +38,11 @@ def fetch_upcoming_matches(api_key: str, limit: int = 20) -> tuple[list[dict], s
         raise RuntimeError(f"API-Football hatasi: {payload['errors']}")
 
     matches = []
-    for item in payload.get("response", []):
+    fixtures = sorted(
+        payload.get("response", []),
+        key=lambda item: item.get("fixture", {}).get("date", ""),
+    )
+    for item in fixtures[:limit]:
         fixture = item.get("fixture", {})
         league = item.get("league", {})
         teams = item.get("teams", {})
