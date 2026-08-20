@@ -1,7 +1,143 @@
 {
-  "generated_at": "2026-08-20T23:45:09.627732+00:00",
+  "generated_at": "2026-08-20T23:49:41.652035+00:00",
   "timezone": "Europe/Istanbul",
-  "count": 0,
+  "count": 15,
   "source": "manual_coupon",
-  "matches": []
+  "matches": [
+    {
+      "fixture_id": "1",
+      "date": "2026-08-21T21:30:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Erzurumspor FK",
+      "away": "Galatasaray"
+    },
+    {
+      "fixture_id": "2",
+      "date": "2026-08-22T19:00:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Çaykur Rizespor",
+      "away": "Samsunspor"
+    },
+    {
+      "fixture_id": "3",
+      "date": "2026-08-22T19:00:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Arca Çorum FK",
+      "away": "Kasımpaşa"
+    },
+    {
+      "fixture_id": "4",
+      "date": "2026-08-22T21:30:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Fenerbahçe",
+      "away": "Tümosan Konyaspor"
+    },
+    {
+      "fixture_id": "5",
+      "date": "2026-08-23T19:00:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Eyüpspor",
+      "away": "Gaziantep FK"
+    },
+    {
+      "fixture_id": "6",
+      "date": "2026-08-23T19:00:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Trabzonspor",
+      "away": "İstanbul Başakşehir"
+    },
+    {
+      "fixture_id": "7",
+      "date": "2026-08-23T21:30:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Corendon Alanyaspor",
+      "away": "Beşiktaş"
+    },
+    {
+      "fixture_id": "8",
+      "date": "2026-08-23T21:30:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Göztepe",
+      "away": "Gençlerbirliği"
+    },
+    {
+      "fixture_id": "9",
+      "date": "2026-08-24T21:30:00+03:00",
+      "status": "NS",
+      "league": "Süper Lig",
+      "country": "Türkiye",
+      "home": "Kocaelispor",
+      "away": "Amed Sportif Faaliyetler"
+    },
+    {
+      "fixture_id": "10",
+      "date": "2026-08-22T21:30:00+03:00",
+      "status": "NS",
+      "league": "Bundesliga",
+      "country": "Almanya",
+      "home": "Borussia Dortmund",
+      "away": "Bayern Münih"
+    },
+    {
+      "fixture_id": "11",
+      "date": "2026-08-21T21:45:00+03:00",
+      "status": "NS",
+      "league": "Ligue 1",
+      "country": "Fransa",
+      "home": "Marsilya",
+      "away": "Strasbourg"
+    },
+    {
+      "fixture_id": "12",
+      "date": "2026-08-23T18:30:00+03:00",
+      "status": "NS",
+      "league": "Premier League",
+      "country": "İngiltere",
+      "home": "Newcastle United",
+      "away": "Liverpool"
+    },
+    {
+      "fixture_id": "13",
+      "date": "2026-08-21T22:00:00+03:00",
+      "status": "NS",
+      "league": "La Liga",
+      "country": "İspanya",
+      "home": "Real Betis",
+      "away": "Real Sociedad"
+    },
+    {
+      "fixture_id": "14",
+      "date": "2026-08-23T18:00:00+03:00",
+      "status": "NS",
+      "league": "La Liga",
+      "country": "İspanya",
+      "home": "Atletico Madrid",
+      "away": "Villarreal"
+    },
+    {
+      "fixture_id": "15",
+      "date": "2026-08-23T21:45:00+03:00",
+      "status": "NS",
+      "league": "Serie A",
+      "country": "İtalya",
+      "home": "Torino",
+      "away": "Milan"
+    }
+  ]
 }
