@@ -17,6 +17,27 @@ JSON_PATH = PROJECT_ROOT / "data" / "matches.json"
 CSV_PATH = PROJECT_ROOT / "data" / "matches.csv"
 SITE_JSON_PATH = PROJECT_ROOT / "docs" / "data" / "matches.json"
 
+# Spor Toto kuponlarinda sik kullanilan liglerin API-Football kimlikleri.
+LEAGUES = {
+    203: "Turkiye Super Lig",
+    204: "Turkiye 1. Lig",
+    39: "England Premier League",
+    40: "England Championship",
+    41: "England League One",
+    78: "Germany Bundesliga",
+    79: "Germany 2. Bundesliga",
+    135: "Italy Serie A",
+    136: "Italy Serie B",
+    140: "Spain La Liga",
+    141: "Spain Segunda Division",
+    61: "France Ligue 1",
+    62: "France Ligue 2",
+    88: "Netherlands Eredivisie",
+    94: "Portugal Primeira Liga",
+    144: "Belgium Pro League",
+    179: "Scotland Premiership",
+}
+
 
 def coupon_dates() -> list:
     """Aktif veya siradaki Spor Toto donemini Cuma-Pazartesi olarak verir."""
@@ -28,15 +49,21 @@ def coupon_dates() -> list:
 
 
 def fetch_upcoming_matches(api_key: str, limit: int = 500) -> tuple[list[dict], str | None]:
+    target_dates = {match_date.isoformat() for match_date in coupon_dates()}
+    today = datetime.now(timezone(timedelta(hours=3))).date()
+    season = today.year if today.month >= 7 else today.year - 1
     raw_fixtures = []
     remaining = None
+    successful_requests = 0
+    errors = []
 
-    for match_date in coupon_dates():
+    for league_id, league_name in LEAGUES.items():
         response = requests.get(
             API_URL,
             headers={"x-apisports-key": api_key},
             params={
-                "date": match_date.isoformat(),
+                "league": league_id,
+                "season": season,
                 "timezone": "Europe/Istanbul",
             },
             timeout=30,
@@ -45,10 +72,22 @@ def fetch_upcoming_matches(api_key: str, limit: int = 500) -> tuple[list[dict], 
         payload = response.json()
 
         if payload.get("errors"):
-            raise RuntimeError(f"API-Football hatasi: {payload['errors']}")
+            errors.append(f"{league_name}: {payload['errors']}")
+            continue
 
-        raw_fixtures.extend(payload.get("response", []))
+        successful_requests += 1
+        raw_fixtures.extend(
+            item
+            for item in payload.get("response", [])
+            if item.get("fixture", {}).get("date", "")[:10] in target_dates
+        )
         remaining = response.headers.get("x-ratelimit-requests-remaining")
+
+    if successful_requests == 0:
+        raise RuntimeError("Lig verileri alinamadi: " + " | ".join(errors))
+
+    for error in errors:
+        print(f"Uyari: {error}")
 
     matches = []
     fixtures = sorted(
