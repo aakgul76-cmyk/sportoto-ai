@@ -18,28 +18,41 @@ CSV_PATH = PROJECT_ROOT / "data" / "matches.csv"
 SITE_JSON_PATH = PROJECT_ROOT / "docs" / "data" / "matches.json"
 
 
-def fetch_upcoming_matches(api_key: str, limit: int = 20) -> tuple[list[dict], str | None]:
-    today = datetime.now(timezone.utc).date()
-    end_date = today + timedelta(days=7)
-    response = requests.get(
-        API_URL,
-        headers={"x-apisports-key": api_key},
-        params={
-            "from": today.isoformat(),
-            "to": end_date.isoformat(),
-            "timezone": "Europe/Istanbul",
-        },
-        timeout=30,
-    )
-    response.raise_for_status()
-    payload = response.json()
+def coupon_dates() -> list:
+    """Aktif veya siradaki Spor Toto donemini Cuma-Pazartesi olarak verir."""
+    istanbul_time = timezone(timedelta(hours=3))
+    today = datetime.now(istanbul_time).date()
+    friday_offset = {0: -3, 1: 3, 2: 2, 3: 1, 4: 0, 5: -1, 6: -2}
+    friday = today + timedelta(days=friday_offset[today.weekday()])
+    return [friday + timedelta(days=day) for day in range(4)]
 
-    if payload.get("errors"):
-        raise RuntimeError(f"API-Football hatasi: {payload['errors']}")
+
+def fetch_upcoming_matches(api_key: str, limit: int = 500) -> tuple[list[dict], str | None]:
+    raw_fixtures = []
+    remaining = None
+
+    for match_date in coupon_dates():
+        response = requests.get(
+            API_URL,
+            headers={"x-apisports-key": api_key},
+            params={
+                "date": match_date.isoformat(),
+                "timezone": "Europe/Istanbul",
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+        payload = response.json()
+
+        if payload.get("errors"):
+            raise RuntimeError(f"API-Football hatasi: {payload['errors']}")
+
+        raw_fixtures.extend(payload.get("response", []))
+        remaining = response.headers.get("x-ratelimit-requests-remaining")
 
     matches = []
     fixtures = sorted(
-        payload.get("response", []),
+        raw_fixtures,
         key=lambda item: item.get("fixture", {}).get("date", ""),
     )
     for item in fixtures[:limit]:
@@ -58,7 +71,6 @@ def fetch_upcoming_matches(api_key: str, limit: int = 20) -> tuple[list[dict], s
             }
         )
 
-    remaining = response.headers.get("x-ratelimit-requests-remaining")
     return matches, remaining
 
 
