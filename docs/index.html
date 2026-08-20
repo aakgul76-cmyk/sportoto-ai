@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spor Toto Analiz</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
+    body { margin: 0; background: #07140f; color: #edf7f1; }
+    main { width: min(960px, calc(100% - 32px)); margin: 48px auto; }
+    header { margin-bottom: 28px; }
+    h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 3.5rem); }
+    .accent { color: #5ee28c; }
+    #status { color: #a9bdb1; }
+    .grid { display: grid; gap: 14px; }
+    article { background: #10241a; border: 1px solid #254735; border-radius: 16px; padding: 18px; }
+    .teams { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.1rem; font-weight: 700; }
+    .versus { color: #5ee28c; font-size: .8rem; }
+    .meta { margin-top: 12px; color: #a9bdb1; font-size: .9rem; }
+    .empty { text-align: center; padding: 48px 20px; color: #a9bdb1; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Spor Toto <span class="accent">Analiz</span></h1>
+      <div id="status">Veriler yükleniyor…</div>
+    </header>
+    <section id="matches" class="grid"></section>
+  </main>
+  <script>
+    const escapeHtml = (value) => String(value ?? "-").replace(/[&<>'"]/g, char => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
+    })[char]);
+
+    async function loadMatches() {
+      const status = document.querySelector("#status");
+      const container = document.querySelector("#matches");
+      try {
+        const response = await fetch("data/matches.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("Veri dosyası okunamadı");
+        const data = await response.json();
+        status.textContent = data.generated_at
+          ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })}`
+          : "Henüz API verisi alınmadı.";
+
+        if (!data.matches.length) {
+          container.innerHTML = '<div class="empty">İlk GitHub Actions çalışmasından sonra maçlar burada görünecek.</div>';
+          return;
+        }
+
+        container.innerHTML = data.matches.map(match => `
+          <article>
+            <div class="teams">
+              <span>${escapeHtml(match.home)}</span>
+              <span class="versus">VS</span>
+              <span>${escapeHtml(match.away)}</span>
+            </div>
+            <div class="meta">
+              ${escapeHtml(match.league)} ·
+              ${new Date(match.date).toLocaleString("tr-TR", { timeZone: data.timezone })}
+            </div>
+          </article>`).join("");
+      } catch (error) {
+        status.textContent = "Veri yüklenemedi.";
+        container.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
+      }
+    }
+    loadMatches();
+  </script>
+</body>
+</html>
