@@ -1,4 +1,4 @@
-"""Elle girilen Spor Toto kuponunu web paneli icin JSON'a donusturur."""
+"""Spor Toto kuponu ve tahminlerini web paneli icin JSON'a donusturur."""
 
 from __future__ import annotations
 
@@ -10,15 +10,39 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 COUPON_PATH = PROJECT_ROOT / "data" / "coupon.csv"
+PREDICTIONS_PATH = PROJECT_ROOT / "data" / "predictions.csv"
 JSON_PATH = PROJECT_ROOT / "data" / "matches.json"
 SITE_JSON_PATH = PROJECT_ROOT / "docs" / "data" / "matches.json"
+
+
+def load_predictions() -> dict[str, dict[str, str]]:
+    if not PREDICTIONS_PATH.exists():
+        raise SystemExit("data/predictions.csv bulunamadi.")
+
+    predictions = {}
+    with PREDICTIONS_PATH.open(newline="", encoding="utf-8-sig") as file:
+        for row_number, row in enumerate(csv.DictReader(file), start=2):
+            match_no = (row.get("match_no") or "").strip()
+            if not match_no:
+                raise SystemExit(
+                    f"predictions.csv satir {row_number}: match_no zorunludur."
+                )
+
+            predictions[match_no] = {
+                "wide_pick": (row.get("wide_pick") or "").strip(),
+                "narrow_pick": (row.get("narrow_pick") or "").strip(),
+            }
+
+    return predictions
 
 
 def load_coupon() -> list[dict]:
     if not COUPON_PATH.exists():
         raise SystemExit("data/coupon.csv bulunamadi.")
 
+    predictions = load_predictions()
     matches = []
+
     with COUPON_PATH.open(newline="", encoding="utf-8-sig") as file:
         for row_number, row in enumerate(csv.DictReader(file), start=2):
             home = (row.get("home") or "").strip()
@@ -26,21 +50,37 @@ def load_coupon() -> list[dict]:
             if not home and not away:
                 continue
             if not home or not away:
-                raise SystemExit(f"coupon.csv satir {row_number}: home ve away zorunludur.")
+                raise SystemExit(
+                    f"coupon.csv satir {row_number}: home ve away zorunludur."
+                )
+
+            match_no = (row.get("match_no") or str(len(matches) + 1)).strip()
+            picks = predictions.get(match_no)
+            if not picks:
+                raise SystemExit(
+                    f"predictions.csv icinde {match_no}. mac icin tahmin bulunamadi."
+                )
+            if not picks["wide_pick"] or not picks["narrow_pick"]:
+                raise SystemExit(
+                    f"predictions.csv icinde {match_no}. macin tahmini bos."
+                )
 
             matches.append(
                 {
-                    "fixture_id": (row.get("match_no") or str(len(matches) + 1)).strip(),
+                    "fixture_id": match_no,
                     "date": (row.get("date") or "").strip() or None,
                     "status": "NS",
                     "league": (row.get("league") or "Spor Toto").strip(),
                     "country": (row.get("country") or "").strip(),
                     "home": home,
                     "away": away,
-                    "wide_pick": (row.get("wide_pick") or "").strip(),
-                    "narrow_pick": (row.get("narrow_pick") or "").strip(),
+                    "wide_pick": picks["wide_pick"],
+                    "narrow_pick": picks["narrow_pick"],
                 }
             )
+
+    if len(matches) != 15:
+        raise SystemExit(f"Kuponda 15 yerine {len(matches)} mac bulundu.")
 
     return matches
 
@@ -50,7 +90,7 @@ def save_outputs(matches: list[dict]) -> None:
         total = 1
         for match in matches:
             pick = match.get(field, "")
-            total *= max(1, sum(symbol in pick for symbol in ("1", "X", "2")))
+            total *= sum(symbol in pick for symbol in ("1", "0", "2"))
         return total
 
     document = {
