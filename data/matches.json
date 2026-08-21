@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-21T14:21:42.140954+00:00",
+  "generated_at": "2026-08-21T14:53:37.480408+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "manual_coupon",
@@ -15,7 +15,8 @@
       "home": "Erzurumspor FK",
       "away": "Galatasaray",
       "wide_pick": "2",
-      "narrow_pick": "2"
+      "narrow_pick": "2",
+      "score_predictions": []
     },
     {
       "fixture_id": "2",
@@ -26,7 +27,8 @@
       "home": "Çaykur Rizespor",
       "away": "Samsunspor",
       "wide_pick": "1X",
-      "narrow_pick": "1X"
+      "narrow_pick": "1X",
+      "score_predictions": []
     },
     {
       "fixture_id": "3",
@@ -37,7 +39,8 @@
       "home": "Arca Çorum FK",
       "away": "Kasımpaşa",
       "wide_pick": "1X2",
-      "narrow_pick": "1X2"
+      "narrow_pick": "1X2",
+      "score_predictions": []
     },
     {
       "fixture_id": "4",
@@ -48,7 +51,8 @@
       "home": "Fenerbahçe",
       "away": "Tümosan Konyaspor",
       "wide_pick": "1",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "5",
@@ -59,7 +63,8 @@
       "home": "Eyüpspor",
       "away": "Gaziantep FK",
       "wide_pick": "1X2",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "6",
@@ -70,7 +75,8 @@
       "home": "Trabzonspor",
       "away": "İstanbul Başakşehir",
       "wide_pick": "1X",
-      "narrow_pick": "1X"
+      "narrow_pick": "1X",
+      "score_predictions": []
     },
     {
       "fixture_id": "7",
@@ -81,7 +87,8 @@
       "home": "Corendon Alanyaspor",
       "away": "Beşiktaş",
       "wide_pick": "X2",
-      "narrow_pick": "X2"
+      "narrow_pick": "X2",
+      "score_predictions": []
     },
     {
       "fixture_id": "8",
@@ -92,7 +99,8 @@
       "home": "Göztepe",
       "away": "Gençlerbirliği",
       "wide_pick": "1",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "9",
@@ -103,7 +111,8 @@
       "home": "Kocaelispor",
       "away": "Amed Sportif Faaliyetler",
       "wide_pick": "1",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "10",
@@ -114,7 +123,8 @@
       "home": "Borussia Dortmund",
       "away": "Bayern Münih",
       "wide_pick": "X2",
-      "narrow_pick": "X2"
+      "narrow_pick": "X2",
+      "score_predictions": []
     },
     {
       "fixture_id": "11",
@@ -125,7 +135,8 @@
       "home": "Marsilya",
       "away": "Strasbourg",
       "wide_pick": "1",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "12",
@@ -136,7 +147,8 @@
       "home": "Newcastle United",
       "away": "Liverpool",
       "wide_pick": "X2",
-      "narrow_pick": "X2"
+      "narrow_pick": "X2",
+      "score_predictions": []
     },
     {
       "fixture_id": "13",
@@ -147,7 +159,8 @@
       "home": "Real Betis",
       "away": "Real Sociedad",
       "wide_pick": "1X",
-      "narrow_pick": "1X"
+      "narrow_pick": "1X",
+      "score_predictions": []
     },
     {
       "fixture_id": "14",
@@ -158,7 +171,8 @@
       "home": "Atletico Madrid",
       "away": "Villarreal",
       "wide_pick": "1X",
-      "narrow_pick": "1"
+      "narrow_pick": "1",
+      "score_predictions": []
     },
     {
       "fixture_id": "15",
@@ -169,7 +183,8 @@
       "home": "Torino",
       "away": "Milan",
       "wide_pick": "X2",
-      "narrow_pick": "2"
+      "narrow_pick": "2",
+      "score_predictions": []
     }
   ]
 }
