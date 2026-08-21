@@ -15,7 +15,48 @@ JSON_PATH = PROJECT_ROOT / "data" / "matches.json"
 SITE_JSON_PATH = PROJECT_ROOT / "docs" / "data" / "matches.json"
 
 
-def load_predictions() -> dict[str, dict[str, str]]:
+def load_score_predictions(row: dict[str, str], row_number: int) -> list[dict]:
+    scores = []
+
+    for index in range(1, 4):
+        score = (row.get(f"score_{index}") or "").strip()
+        percentage_text = (row.get(f"score_{index}_pct") or "").strip()
+
+        if not score and not percentage_text:
+            continue
+        if not score or not percentage_text:
+            raise SystemExit(
+                f"predictions.csv satir {row_number}: "
+                f"score_{index} ve score_{index}_pct birlikte doldurulmalidir."
+            )
+
+        try:
+            percentage = float(percentage_text)
+        except ValueError as error:
+            raise SystemExit(
+                f"predictions.csv satir {row_number}: "
+                f"score_{index}_pct sayi olmalidir."
+            ) from error
+
+        if not 0 <= percentage <= 100:
+            raise SystemExit(
+                f"predictions.csv satir {row_number}: "
+                f"score_{index}_pct 0 ile 100 arasinda olmalidir."
+            )
+
+        scores.append(
+            {
+                "score": score,
+                "percentage": int(percentage)
+                if percentage.is_integer()
+                else percentage,
+            }
+        )
+
+    return scores
+
+
+def load_predictions() -> dict[str, dict]:
     if not PREDICTIONS_PATH.exists():
         raise SystemExit("data/predictions.csv bulunamadi.")
 
@@ -31,6 +72,7 @@ def load_predictions() -> dict[str, dict[str, str]]:
             predictions[match_no] = {
                 "wide_pick": (row.get("wide_pick") or "").strip(),
                 "narrow_pick": (row.get("narrow_pick") or "").strip(),
+                "score_predictions": load_score_predictions(row, row_number),
             }
 
     return predictions
@@ -76,6 +118,7 @@ def load_coupon() -> list[dict]:
                     "away": away,
                     "wide_pick": picks["wide_pick"].replace("0", "X"),
                     "narrow_pick": picks["narrow_pick"].replace("0", "X"),
+                    "score_predictions": picks["score_predictions"],
                 }
             )
 
