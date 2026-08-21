@@ -17,6 +17,11 @@
     .teams { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.1rem; font-weight: 700; }
     .versus { color: #5ee28c; font-size: .8rem; }
     .meta { margin-top: 12px; color: #a9bdb1; font-size: .9rem; }
+    .picks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pick { border-radius: 999px; padding: 7px 11px; font-size: .86rem; font-weight: 700; }
+    .wide { background: #1d4f35; color: #a8f0c1; }
+    .narrow { background: #3b3320; color: #ffe08a; }
+    .match-no { color: #5ee28c; margin-right: 8px; }
     .empty { text-align: center; padding: 48px 20px; color: #a9bdb1; }
   </style>
 </head>
@@ -41,7 +46,7 @@
         if (!response.ok) throw new Error("Veri dosyası okunamadı");
         const data = await response.json();
         status.textContent = data.generated_at
-          ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })}`
+          ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Geniş: ${data.wide_columns ?? "-"} kolon · Dar: ${data.narrow_columns ?? "-"} kolon`
           : "Henüz API verisi alınmadı.";
 
         if (!data.matches.length) {
@@ -52,13 +57,17 @@
         container.innerHTML = data.matches.map(match => `
           <article>
             <div class="teams">
-              <span>${escapeHtml(match.home)}</span>
+              <span><b class="match-no">${escapeHtml(match.fixture_id)}.</b>${escapeHtml(match.home)}</span>
               <span class="versus">VS</span>
               <span>${escapeHtml(match.away)}</span>
             </div>
             <div class="meta">
               ${escapeHtml(match.league)} ·
               ${new Date(match.date).toLocaleString("tr-TR", { timeZone: data.timezone })}
+            </div>
+            <div class="picks">
+              <span class="pick wide">Geniş kupon: ${escapeHtml(match.wide_pick || "-")}</span>
+              <span class="pick narrow">Dar kupon: ${escapeHtml(match.narrow_pick || "-")}</span>
             </div>
           </article>`).join("");
       } catch (error) {
