@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-21T15:03:09.711992+00:00",
+  "generated_at": "2026-08-21T16:14:24.948921+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
-  "source": "api_football_odds",
+  "source": "statistical_model_and_market_odds",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "matches": [
@@ -15,44 +15,17 @@
       "away": "Galatasaray",
       "wide_pick": "2",
       "narrow_pick": "2",
-      "api_fixture_id": 1584378,
-      "api_match_score": 1.0,
-      "market_odds": {
-        "1x2": {
-          "1": 6.485,
-          "X": 4.29,
-          "2": 1.48
-        },
-        "btts": {
-          "yes": 3.14,
-          "no": 1.31
-        },
-        "over_under": {
-          "1.5": {
-            "over": 1.84,
-            "under": 1.83
-          },
-          "2.5": {
-            "over": 1.705,
-            "under": 1.99
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-0",
-          "percentage": 19.7
-        },
-        {
-          "score": "0-1",
-          "percentage": 19.2
-        },
-        {
-          "score": "0-2",
-          "percentage": 10.3
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "2",
@@ -63,44 +36,17 @@
       "away": "Samsunspor",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "api_fixture_id": 1584383,
-      "api_match_score": 0.767,
-      "market_odds": {
-        "1x2": {
-          "1": 2.3,
-          "X": 3.3,
-          "2": 3.1
-        },
-        "btts": {
-          "yes": 2.865,
-          "no": 1.36
-        },
-        "over_under": {
-          "1.5": {
-            "over": 1.97,
-            "under": 1.775
-          },
-          "2.5": {
-            "over": 1.9,
-            "under": 1.24
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-0",
-          "percentage": 22.2
-        },
-        {
-          "score": "1-0",
-          "percentage": 15.4
-        },
-        {
-          "score": "0-1",
-          "percentage": 13.3
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "3",
@@ -111,44 +57,17 @@
       "away": "Kasımpaşa",
       "wide_pick": "1X2",
       "narrow_pick": "1X2",
-      "api_fixture_id": 1584377,
-      "api_match_score": 0.833,
-      "market_odds": {
-        "1x2": {
-          "1": 2.265,
-          "X": 3.4,
-          "2": 3.0
-        },
-        "btts": {
-          "yes": 3.05,
-          "no": 1.345
-        },
-        "over_under": {
-          "1.5": {
-            "over": 2.05,
-            "under": 1.7
-          },
-          "2.5": {
-            "over": 1.94,
-            "under": 1.22
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-0",
-          "percentage": 22.8
-        },
-        {
-          "score": "1-0",
-          "percentage": 15.0
-        },
-        {
-          "score": "0-1",
-          "percentage": 13.5
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "4",
@@ -159,44 +78,17 @@
       "away": "Tümosan Konyaspor",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_fixture_id": 1584380,
-      "api_match_score": 1.0,
-      "market_odds": {
-        "1x2": {
-          "1": 1.28,
-          "X": 5.475,
-          "2": 9.45
-        },
-        "btts": {
-          "yes": 3.25,
-          "no": 1.3
-        },
-        "over_under": {
-          "1.5": {
-            "over": 1.72,
-            "under": 2.035
-          },
-          "2.5": {
-            "over": 1.61,
-            "under": 1.75
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "1-0",
-          "percentage": 19.7
-        },
-        {
-          "score": "0-0",
-          "percentage": 17.6
-        },
-        {
-          "score": "2-0",
-          "percentage": 12.8
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "5",
@@ -209,7 +101,13 @@
       "narrow_pick": "1",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -224,7 +122,13 @@
       "narrow_pick": "1X",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -239,7 +143,13 @@
       "narrow_pick": "X2",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -254,7 +164,13 @@
       "narrow_pick": "1",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -269,7 +185,13 @@
       "narrow_pick": "1",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -282,44 +204,17 @@
       "away": "Bayern Münih",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "api_fixture_id": 1582362,
-      "api_match_score": 0.923,
-      "market_odds": {
-        "1x2": {
-          "1": 4.625,
-          "X": 4.275,
-          "2": 1.64
-        },
-        "btts": {
-          "yes": 2.26,
-          "no": 1.575
-        },
-        "over_under": {
-          "1.5": {
-            "over": 1.53,
-            "under": 2.44
-          },
-          "2.5": {
-            "over": 1.37,
-            "under": 2.885
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-1",
-          "percentage": 15.8
-        },
-        {
-          "score": "0-0",
-          "percentage": 15.4
-        },
-        {
-          "score": "1-1",
-          "percentage": 10.7
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "11",
@@ -330,44 +225,17 @@
       "away": "Strasbourg",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_fixture_id": 1552733,
-      "api_match_score": 0.853,
-      "market_odds": {
-        "1x2": {
-          "1": 1.74,
-          "X": 4.1,
-          "2": 4.375
-        },
-        "btts": {
-          "yes": 2.65,
-          "no": 1.435
-        },
-        "over_under": {
-          "1.5": {
-            "over": 1.72,
-            "under": 2.07
-          },
-          "2.5": {
-            "over": 1.57,
-            "under": 2.39
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-0",
-          "percentage": 18.1
-        },
-        {
-          "score": "1-0",
-          "percentage": 16.9
-        },
-        {
-          "score": "1-1",
-          "percentage": 10.4
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "12",
@@ -380,7 +248,13 @@
       "narrow_pick": "X2",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -393,44 +267,17 @@
       "away": "Real Sociedad",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "api_fixture_id": 1570345,
-      "api_match_score": 1.0,
-      "market_odds": {
-        "1x2": {
-          "1": 2.065,
-          "X": 3.475,
-          "2": 3.525
-        },
-        "btts": {
-          "yes": 3.1,
-          "no": 1.34
-        },
-        "over_under": {
-          "1.5": {
-            "over": 2.01,
-            "under": 1.78
-          },
-          "2.5": {
-            "over": 1.91,
-            "under": 1.9
-          }
-        }
+      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
+      "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
       },
-      "score_predictions": [
-        {
-          "score": "0-0",
-          "percentage": 22.3
-        },
-        {
-          "score": "1-0",
-          "percentage": 17.0
-        },
-        {
-          "score": "0-1",
-          "percentage": 12.3
-        }
-      ],
-      "score_model": "correct_score_odds"
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
       "match_no": "14",
@@ -443,7 +290,13 @@
       "narrow_pick": "1",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     },
@@ -458,7 +311,13 @@
       "narrow_pick": "2",
       "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
       "api_fixture_id": null,
+      "model_1x2": {},
+      "model_score_predictions": [],
       "market_odds": {},
+      "market_score_predictions": [],
+      "model_internal_alignment": {
+        "status": "unavailable"
+      },
       "score_predictions": [],
       "score_model": "unavailable"
     }
