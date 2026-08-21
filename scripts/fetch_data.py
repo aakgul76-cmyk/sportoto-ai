@@ -37,6 +37,8 @@ def load_coupon() -> list[dict]:
                     "country": (row.get("country") or "").strip(),
                     "home": home,
                     "away": away,
+                    "wide_pick": (row.get("wide_pick") or "").strip(),
+                    "narrow_pick": (row.get("narrow_pick") or "").strip(),
                 }
             )
 
@@ -44,11 +46,20 @@ def load_coupon() -> list[dict]:
 
 
 def save_outputs(matches: list[dict]) -> None:
+    def column_count(field: str) -> int:
+        total = 1
+        for match in matches:
+            pick = match.get(field, "")
+            total *= max(1, sum(symbol in pick for symbol in ("1", "X", "2")))
+        return total
+
     document = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "timezone": "Europe/Istanbul",
         "count": len(matches),
         "source": "manual_coupon",
+        "wide_columns": column_count("wide_pick"),
+        "narrow_columns": column_count("narrow_pick"),
         "matches": matches,
     }
 
