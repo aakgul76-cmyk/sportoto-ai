@@ -225,6 +225,58 @@ def main() -> None:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "timezone": "Europe/Istanbul",
         "count": len(matches),
+        "source": "statistical_model_and_market_odds",
+        "wide_columns": columns("wide_pick"),
+        "narrow_columns": columns("narrow_pick"),
+        "matches": matches,
+    }
+    for path in OUTPUTS:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"API-Football tamamlandi: {len(matches)} mac, {sum(bool(m['score_predictions']) for m in matches)} skor modeli.")
+
+
+if __name__ == "__main__":
+    main()    for match in matches:
+        fixture_id = match.get("api_fixture_id")
+        match["model_1x2"] = {}
+        match["model_score_predictions"] = []
+        match["market_odds"] = {}
+        match["market_score_predictions"] = []
+        match["model_internal_alignment"] = {"status": "unavailable"}
+        if fixture_id:
+            try:
+                markets, correct = collect_odds(api_get("/odds", key, fixture=fixture_id))
+                market_scores, market_source = score_predictions(markets, correct)
+                model_1x2, model_scores = statistical_model(
+                    api_get("/predictions", key, fixture=fixture_id), markets
+                )
+                match["market_odds"] = markets
+                match["market_score_predictions"] = market_scores
+                match["market_score_model"] = market_source if market_scores else "unavailable"
+                match["model_1x2"] = model_1x2
+                match["model_score_predictions"] = model_scores
+                match["score_predictions"] = model_scores
+                match["score_model"] = "api_football_statistical"
+                match["model_internal_alignment"] = alignment(
+                    model_1x2, model_scores, match["narrow_pick"]
+                )
+            except (RuntimeError, requests.RequestException) as error:
+                match["api_error"] = str(error)
+                match["score_predictions"] = []
+                match["score_model"] = "unavailable"
+        else:
+            match["score_predictions"] = []
+            match["score_model"] = "unavailable"
+    def columns(field: str) -> int:
+        result = 1
+        for match in matches:
+            result *= sum(symbol in match[field] for symbol in ("1", "X", "2"))
+        return result
+    document = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "timezone": "Europe/Istanbul",
+        "count": len(matches),
         "source": "api_football_odds",
         "wide_columns": columns("wide_pick"),
         "narrow_columns": columns("narrow_pick"),
