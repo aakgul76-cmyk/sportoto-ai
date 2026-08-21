@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - "data/coupon.csv"
+      - "data/predictions.csv"
       - "scripts/fetch_data.py"
       - "docs/index.html"
   schedule:
@@ -17,7 +18,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: sportoto-data-and-pages
+  group: sportoto-data-and-pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -26,19 +27,17 @@ jobs:
     steps:
       - name: Repository'yi indir
         uses: actions/checkout@v6
-
       - name: Python'u hazirla
         uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
-
       - name: Kutuphaneleri kur
         run: pip install -r requirements.txt
-
-      - name: Spor Toto kuponunu hazirla
+      - name: API-Football oranlariyla kuponu hazirla
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: python scripts/fetch_data.py
-
       - name: Yeni verileri repository'ye kaydet
         run: |
           git config user.name "github-actions[bot]"
@@ -46,15 +45,12 @@ jobs:
           git add data docs/data
           git diff --cached --quiet || git commit -m "Verileri otomatik guncelle"
           git push
-
       - name: GitHub Pages'i hazirla
         uses: actions/configure-pages@v5
-
       - name: Site dosyalarini paketle
         uses: actions/upload-pages-artifact@v4
         with:
           path: docs
-
   deploy:
     environment:
       name: github-pages
