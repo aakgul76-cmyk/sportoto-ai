@@ -220,7 +220,7 @@ def main() -> None:
     for path in OUTPUTS:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Tamamlandi: {len(matches)} mac, {sum(bool(m['score_predictions']) for m in matches)} skor modeli.")
+    print(f"API-Football tamamlandi: {len(matches)} mac, {sum(bool(m['score_predictions']) for m in matches)} skor modeli.")
 
 
 if __name__ == "__main__":
