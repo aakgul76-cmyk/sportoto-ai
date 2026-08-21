@@ -1,190 +1,466 @@
 {
-  "generated_at": "2026-08-21T14:53:37.480408+00:00",
+  "generated_at": "2026-08-21T15:03:09.711992+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
-  "source": "manual_coupon",
+  "source": "api_football_odds",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "matches": [
     {
-      "fixture_id": "1",
+      "match_no": "1",
       "date": "2026-08-21T21:30:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Erzurumspor FK",
       "away": "Galatasaray",
       "wide_pick": "2",
       "narrow_pick": "2",
-      "score_predictions": []
+      "api_fixture_id": 1584378,
+      "api_match_score": 1.0,
+      "market_odds": {
+        "1x2": {
+          "1": 6.485,
+          "X": 4.29,
+          "2": 1.48
+        },
+        "btts": {
+          "yes": 3.14,
+          "no": 1.31
+        },
+        "over_under": {
+          "1.5": {
+            "over": 1.84,
+            "under": 1.83
+          },
+          "2.5": {
+            "over": 1.705,
+            "under": 1.99
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-0",
+          "percentage": 19.7
+        },
+        {
+          "score": "0-1",
+          "percentage": 19.2
+        },
+        {
+          "score": "0-2",
+          "percentage": 10.3
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "2",
+      "match_no": "2",
       "date": "2026-08-22T19:00:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Çaykur Rizespor",
       "away": "Samsunspor",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "score_predictions": []
+      "api_fixture_id": 1584383,
+      "api_match_score": 0.767,
+      "market_odds": {
+        "1x2": {
+          "1": 2.3,
+          "X": 3.3,
+          "2": 3.1
+        },
+        "btts": {
+          "yes": 2.865,
+          "no": 1.36
+        },
+        "over_under": {
+          "1.5": {
+            "over": 1.97,
+            "under": 1.775
+          },
+          "2.5": {
+            "over": 1.9,
+            "under": 1.24
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-0",
+          "percentage": 22.2
+        },
+        {
+          "score": "1-0",
+          "percentage": 15.4
+        },
+        {
+          "score": "0-1",
+          "percentage": 13.3
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "3",
+      "match_no": "3",
       "date": "2026-08-22T19:00:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Arca Çorum FK",
       "away": "Kasımpaşa",
       "wide_pick": "1X2",
       "narrow_pick": "1X2",
-      "score_predictions": []
+      "api_fixture_id": 1584377,
+      "api_match_score": 0.833,
+      "market_odds": {
+        "1x2": {
+          "1": 2.265,
+          "X": 3.4,
+          "2": 3.0
+        },
+        "btts": {
+          "yes": 3.05,
+          "no": 1.345
+        },
+        "over_under": {
+          "1.5": {
+            "over": 2.05,
+            "under": 1.7
+          },
+          "2.5": {
+            "over": 1.94,
+            "under": 1.22
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-0",
+          "percentage": 22.8
+        },
+        {
+          "score": "1-0",
+          "percentage": 15.0
+        },
+        {
+          "score": "0-1",
+          "percentage": 13.5
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "4",
+      "match_no": "4",
       "date": "2026-08-22T21:30:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Fenerbahçe",
       "away": "Tümosan Konyaspor",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_fixture_id": 1584380,
+      "api_match_score": 1.0,
+      "market_odds": {
+        "1x2": {
+          "1": 1.28,
+          "X": 5.475,
+          "2": 9.45
+        },
+        "btts": {
+          "yes": 3.25,
+          "no": 1.3
+        },
+        "over_under": {
+          "1.5": {
+            "over": 1.72,
+            "under": 2.035
+          },
+          "2.5": {
+            "over": 1.61,
+            "under": 1.75
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "1-0",
+          "percentage": 19.7
+        },
+        {
+          "score": "0-0",
+          "percentage": 17.6
+        },
+        {
+          "score": "2-0",
+          "percentage": 12.8
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "5",
+      "match_no": "5",
       "date": "2026-08-23T19:00:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Eyüpspor",
       "away": "Gaziantep FK",
       "wide_pick": "1X2",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "6",
+      "match_no": "6",
       "date": "2026-08-23T19:00:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Trabzonspor",
       "away": "İstanbul Başakşehir",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "7",
+      "match_no": "7",
       "date": "2026-08-23T21:30:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Corendon Alanyaspor",
       "away": "Beşiktaş",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "8",
+      "match_no": "8",
       "date": "2026-08-23T21:30:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Göztepe",
       "away": "Gençlerbirliği",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "9",
+      "match_no": "9",
       "date": "2026-08-24T21:30:00+03:00",
-      "status": "NS",
       "league": "Süper Lig",
       "country": "Türkiye",
       "home": "Kocaelispor",
       "away": "Amed Sportif Faaliyetler",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "10",
+      "match_no": "10",
       "date": "2026-08-22T21:30:00+03:00",
-      "status": "NS",
       "league": "Bundesliga",
       "country": "Almanya",
       "home": "Borussia Dortmund",
       "away": "Bayern Münih",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "score_predictions": []
+      "api_fixture_id": 1582362,
+      "api_match_score": 0.923,
+      "market_odds": {
+        "1x2": {
+          "1": 4.625,
+          "X": 4.275,
+          "2": 1.64
+        },
+        "btts": {
+          "yes": 2.26,
+          "no": 1.575
+        },
+        "over_under": {
+          "1.5": {
+            "over": 1.53,
+            "under": 2.44
+          },
+          "2.5": {
+            "over": 1.37,
+            "under": 2.885
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-1",
+          "percentage": 15.8
+        },
+        {
+          "score": "0-0",
+          "percentage": 15.4
+        },
+        {
+          "score": "1-1",
+          "percentage": 10.7
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "11",
+      "match_no": "11",
       "date": "2026-08-21T21:45:00+03:00",
-      "status": "NS",
       "league": "Ligue 1",
       "country": "Fransa",
       "home": "Marsilya",
       "away": "Strasbourg",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_fixture_id": 1552733,
+      "api_match_score": 0.853,
+      "market_odds": {
+        "1x2": {
+          "1": 1.74,
+          "X": 4.1,
+          "2": 4.375
+        },
+        "btts": {
+          "yes": 2.65,
+          "no": 1.435
+        },
+        "over_under": {
+          "1.5": {
+            "over": 1.72,
+            "under": 2.07
+          },
+          "2.5": {
+            "over": 1.57,
+            "under": 2.39
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-0",
+          "percentage": 18.1
+        },
+        {
+          "score": "1-0",
+          "percentage": 16.9
+        },
+        {
+          "score": "1-1",
+          "percentage": 10.4
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "12",
+      "match_no": "12",
       "date": "2026-08-23T18:30:00+03:00",
-      "status": "NS",
       "league": "Premier League",
       "country": "İngiltere",
       "home": "Newcastle United",
       "away": "Liverpool",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "13",
+      "match_no": "13",
       "date": "2026-08-21T22:00:00+03:00",
-      "status": "NS",
       "league": "La Liga",
       "country": "İspanya",
       "home": "Real Betis",
       "away": "Real Sociedad",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "score_predictions": []
+      "api_fixture_id": 1570345,
+      "api_match_score": 1.0,
+      "market_odds": {
+        "1x2": {
+          "1": 2.065,
+          "X": 3.475,
+          "2": 3.525
+        },
+        "btts": {
+          "yes": 3.1,
+          "no": 1.34
+        },
+        "over_under": {
+          "1.5": {
+            "over": 2.01,
+            "under": 1.78
+          },
+          "2.5": {
+            "over": 1.91,
+            "under": 1.9
+          }
+        }
+      },
+      "score_predictions": [
+        {
+          "score": "0-0",
+          "percentage": 22.3
+        },
+        {
+          "score": "1-0",
+          "percentage": 17.0
+        },
+        {
+          "score": "0-1",
+          "percentage": 12.3
+        }
+      ],
+      "score_model": "correct_score_odds"
     },
     {
-      "fixture_id": "14",
+      "match_no": "14",
       "date": "2026-08-23T18:00:00+03:00",
-      "status": "NS",
       "league": "La Liga",
       "country": "İspanya",
       "home": "Atletico Madrid",
       "away": "Villarreal",
       "wide_pick": "1X",
       "narrow_pick": "1",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     },
     {
-      "fixture_id": "15",
+      "match_no": "15",
       "date": "2026-08-23T21:45:00+03:00",
-      "status": "NS",
       "league": "Serie A",
       "country": "İtalya",
       "home": "Torino",
       "away": "Milan",
       "wide_pick": "X2",
       "narrow_pick": "2",
-      "score_predictions": []
+      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
+      "api_fixture_id": null,
+      "market_odds": {},
+      "score_predictions": [],
+      "score_model": "unavailable"
     }
   ]
 }
