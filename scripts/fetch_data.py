@@ -74,8 +74,8 @@ def load_coupon() -> list[dict]:
                     "country": (row.get("country") or "").strip(),
                     "home": home,
                     "away": away,
-                    "wide_pick": picks["wide_pick"],
-                    "narrow_pick": picks["narrow_pick"],
+                    "wide_pick": picks["wide_pick"].replace("0", "X"),
+                    "narrow_pick": picks["narrow_pick"].replace("0", "X"),
                 }
             )
 
@@ -90,7 +90,7 @@ def save_outputs(matches: list[dict]) -> None:
         total = 1
         for match in matches:
             pick = match.get(field, "")
-            total *= sum(symbol in pick for symbol in ("1", "0", "2"))
+            total *= sum(symbol in pick for symbol in ("1", "X", "2"))
         return total
 
     document = {
