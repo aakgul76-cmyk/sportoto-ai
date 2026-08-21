@@ -74,7 +74,13 @@ def resolve_fixtures(matches: list[dict], key: str) -> None:
     for match in matches:
         by_date.setdefault(match["date"][:10], []).append(match)
     for date, dated_matches in by_date.items():
-        fixtures = api_get("/fixtures", key, date=date, timezone="Europe/Istanbul")
+        try:
+            fixtures = api_get("/fixtures", key, date=date, timezone="Europe/Istanbul")
+        except RuntimeError as error:
+            for match in dated_matches:
+                match["api_error"] = str(error)
+                match["api_fixture_id"] = None
+            continue
         for match in dated_matches:
             candidates = []
             for item in fixtures:
@@ -194,11 +200,18 @@ def main() -> None:
     for match in matches:
         fixture_id = match.get("api_fixture_id")
         if fixture_id:
-            markets, correct = collect_odds(api_get("/odds", key, fixture=fixture_id))
-            scores, source = score_predictions(markets, correct)
-            match["market_odds"] = markets
-            match["score_predictions"] = scores
-            match["score_model"] = source
+            try:
+                odds_payload = api_get("/odds", key, fixture=fixture_id)
+                markets, correct = collect_odds(odds_payload)
+                scores, source = score_predictions(markets, correct)
+                match["market_odds"] = markets
+                match["score_predictions"] = scores
+                match["score_model"] = source if scores else "odds_unavailable"
+            except (RuntimeError, requests.RequestException) as error:
+                match["api_error"] = str(error)
+                match["market_odds"] = {}
+                match["score_predictions"] = []
+                match["score_model"] = "odds_unavailable"
         else:
             match["market_odds"] = {}
             match["score_predictions"] = []
