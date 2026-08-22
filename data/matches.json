@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-22T11:27:05.005662+00:00",
+  "generated_at": "2026-08-22T11:32:12.536529+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -199,16 +199,80 @@
       "away": "Bayern Münih",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "model_1x2": {},
-      "model_score_predictions": [],
-      "model_markets": {},
+      "model_1x2": {
+        "1": 39.4,
+        "X": 21.4,
+        "2": 39.2
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 8.2
+        },
+        {
+          "score": "2-1",
+          "percentage": 7.7
+        },
+        {
+          "score": "1-2",
+          "percentage": 7.7
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 72.0,
+          "no": 28.0
+        },
+        "over_under": {
+          "1.5": {
+            "over": 89.1,
+            "under": 10.9
+          },
+          "2.5": {
+            "over": 72.7,
+            "under": 27.3
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "divergent",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "2"
+        ],
+        "matching_scores": 1,
+        "coupon_match": false
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "football_data_match_id": null,
+      "football_data_status": "COUPON_ONLY",
+      "fixture_match_type": "teams_from_competition_history",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 8.2
+        },
+        {
+          "score": "2-1",
+          "percentage": 7.7
+        },
+        {
+          "score": "1-2",
+          "percentage": 7.7
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 306,
+        "home_home_matches": 17,
+        "away_away_matches": 17,
+        "expected_home_goals": 1.893,
+        "expected_away_goals": 1.886
+      }
     },
     {
       "match_no": "11",
@@ -270,6 +334,7 @@
       },
       "football_data_match_id": 559715,
       "football_data_status": "FINISHED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
@@ -353,6 +418,7 @@
       },
       "football_data_match_id": 560550,
       "football_data_status": "TIMED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
@@ -436,6 +502,7 @@
       },
       "football_data_match_id": 564647,
       "football_data_status": "FINISHED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
@@ -519,6 +586,7 @@
       },
       "football_data_match_id": 564646,
       "football_data_status": "TIMED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
@@ -602,6 +670,7 @@
       },
       "football_data_match_id": 558634,
       "football_data_status": "TIMED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
