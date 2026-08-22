@@ -1,4 +1,4 @@
-"""Spor Toto kuponunu API-Football oranlariyla zenginlestirir."""
+"""Build Spor Toto model predictions from football-data.org match history."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import csv
 import json
 import math
 import os
-import statistics
+import time
 import unicodedata
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
@@ -18,27 +18,46 @@ ROOT = Path(__file__).resolve().parents[1]
 COUPON = ROOT / "data/coupon.csv"
 PREDICTIONS = ROOT / "data/predictions.csv"
 OUTPUTS = (ROOT / "data/matches.json", ROOT / "docs/data/matches.json")
-API = "https://v3.football.api-sports.io"
+API = "https://api.football-data.org/v4"
+LEAGUE_CODES = {
+    "süper lig": "TSL",
+    "bundesliga": "BL1",
+    "ligue 1": "FL1",
+    "premier league": "PL",
+    "la liga": "PD",
+    "serie a": "SA",
+}
 
 
-def api_get(path: str, key: str, **params) -> list:
-    response = requests.get(
-        API + path,
-        headers={"x-apisports-key": key},
-        params=params,
-        timeout=45,
-    )
-    response.raise_for_status()
-    payload = response.json()
-    if payload.get("errors"):
-        raise RuntimeError(f"API-Football {path}: {payload['errors']}")
-    return payload.get("response", [])
+def api_get(path: str, token: str, **params) -> dict:
+    for attempt in range(3):
+        response = requests.get(
+            API + path,
+            headers={"X-Auth-Token": token},
+            params=params,
+            timeout=45,
+        )
+        if response.status_code == 429 and attempt < 2:
+            time.sleep(12)
+            continue
+        response.raise_for_status()
+        return response.json()
+    raise RuntimeError(f"football-data.org yanit vermedi: {path}")
 
 
 def normalized(value: str) -> str:
-    value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode()
-    for word in ("fk", "sk", "spor", "sportif", "faaliyetler", "tumosan", "corendon"):
-        value = value.lower().replace(word, " ")
+    value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().lower()
+    replacements = {
+        "olympique de marseille": "marseille",
+        "olympique marseille": "marseille",
+        "basaksehir fk": "istanbul basaksehir",
+        "istanbul basaksehir fk": "istanbul basaksehir",
+        "corum fk": "corum",
+        "erzurumspor fk": "erzurum",
+    }
+    value = replacements.get(value, value)
+    for word in ("fk", "sk", "spor", "sportif", "faaliyetler", "tumosan", "corendon", "arca"):
+        value = value.replace(word, " ")
     return " ".join(value.split())
 
 
@@ -69,159 +88,246 @@ def load_inputs() -> list[dict]:
     return matches
 
 
-def resolve_fixtures(matches: list[dict], key: str) -> None:
-    by_date = {}
-    for match in matches:
-        by_date.setdefault(match["date"][:10], []).append(match)
-    for date, dated_matches in by_date.items():
-        fixtures = api_get("/fixtures", key, date=date, timezone="Europe/Istanbul")
-        for match in dated_matches:
-            candidates = []
-            for item in fixtures:
-                teams = item.get("teams", {})
-                score = (
-                    similarity(match["home"], teams.get("home", {}).get("name", ""))
-                    + similarity(match["away"], teams.get("away", {}).get("name", ""))
-                ) / 2
-                candidates.append((score, item))
-            best_score, best = max(candidates, default=(0, None), key=lambda x: x[0])
-            if best is None or best_score < 0.55:
-                match["api_error"] = "API-Football fixture eslesmesi bulunamadi"
-                match["api_fixture_id"] = None
-            else:
-                match["api_fixture_id"] = best["fixture"]["id"]
-                match["api_match_score"] = round(best_score, 3)
+def fetch_competitions(matches: list[dict], token: str) -> tuple[dict[str, list], dict[str, str]]:
+    codes = sorted({LEAGUE_CODES.get(match["league"].lower()) for match in matches} - {None})
+    data: dict[str, list] = {}
+    errors: dict[str, str] = {}
+    for code in codes:
+        combined = []
+        for season in (2025, 2026):
+            try:
+                payload = api_get(f"/competitions/{code}/matches", token, season=season)
+                combined.extend(payload.get("matches", []))
+            except (requests.RequestException, RuntimeError) as error:
+                errors[f"{code}:{season}"] = str(error)
+            time.sleep(6.2)
+        data[code] = combined
+    return data, errors
 
 
-def median_odds(values: list[float]) -> float | None:
-    return round(statistics.median(values), 3) if values else None
+def find_fixture(match: dict, candidates: list) -> dict | None:
+    target_date = datetime.fromisoformat(match["date"]).astimezone(timezone.utc)
+    ranked = []
+    for item in candidates:
+        try:
+            item_date = datetime.fromisoformat(item["utcDate"].replace("Z", "+00:00"))
+        except (KeyError, ValueError):
+            continue
+        if abs((item_date - target_date).total_seconds()) > 36 * 3600:
+            continue
+        score = (
+            similarity(match["home"], item.get("homeTeam", {}).get("name", ""))
+            + similarity(match["away"], item.get("awayTeam", {}).get("name", ""))
+        ) / 2
+        ranked.append((score, item))
+    best_score, best = max(ranked, default=(0, None), key=lambda entry: entry[0])
+    return best if best is not None and best_score >= 0.55 else None
 
 
-def collect_odds(payload: list) -> tuple[dict, dict[str, list[float]]]:
-    buckets = {
-        "1": [], "X": [], "2": [], "kg_var": [], "kg_yok": [],
-        "o15": [], "u15": [], "o25": [], "u25": [],
-    }
-    correct_scores: dict[str, list[float]] = {}
-    for item in payload:
-        for bookmaker in item.get("bookmakers", []):
-            for bet in bookmaker.get("bets", []):
-                name = bet.get("name", "").lower()
-                for value in bet.get("values", []):
-                    label = str(value.get("value", "")).strip()
-                    try:
-                        odd = float(value.get("odd"))
-                    except (TypeError, ValueError):
-                        continue
-                    low = label.lower()
-                    if "match winner" in name:
-                        key = {"home": "1", "draw": "X", "away": "2", "1": "1", "x": "X", "2": "2"}.get(low)
-                        if key: buckets[key].append(odd)
-                    elif "both teams" in name:
-                        if low in ("yes", "var"): buckets["kg_var"].append(odd)
-                        elif low in ("no", "yok"): buckets["kg_yok"].append(odd)
-                    elif "over/under" in name or "goals over" in name:
-                        compact = low.replace(" ", "")
-                        for line, suffix in (("1.5", "15"), ("2.5", "25")):
-                            if line in compact and compact.startswith("over"): buckets["o" + suffix].append(odd)
-                            if line in compact and compact.startswith("under"): buckets["u" + suffix].append(odd)
-                    elif "correct score" in name:
-                        score = label.replace(":", "-").replace(" ", "")
-                        if "-" in score and all(part.isdigit() for part in score.split("-", 1)):
-                            correct_scores.setdefault(score, []).append(odd)
-    markets = {
-        "1x2": {"1": median_odds(buckets["1"]), "X": median_odds(buckets["X"]), "2": median_odds(buckets["2"])},
-        "btts": {"yes": median_odds(buckets["kg_var"]), "no": median_odds(buckets["kg_yok"])},
-        "over_under": {
-            "1.5": {"over": median_odds(buckets["o15"]), "under": median_odds(buckets["u15"])},
-            "2.5": {"over": median_odds(buckets["o25"]), "under": median_odds(buckets["u25"])},
-        },
-    }
-    return markets, correct_scores
-
-
-def devig(odds: list[float | None]) -> list[float] | None:
-    if any(not odd or odd <= 1 for odd in odds):
+def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
+    teams = {}
+    for item in candidates:
+        for side in ("homeTeam", "awayTeam"):
+            team = item.get(side, {})
+            if team.get("id") and team.get("name"):
+                teams[team["id"]] = team
+    home_score, home_team = max(
+        ((similarity(match["home"], team["name"]), team) for team in teams.values()),
+        default=(0, None),
+        key=lambda entry: entry[0],
+    )
+    away_score, away_team = max(
+        ((similarity(match["away"], team["name"]), team) for team in teams.values()),
+        default=(0, None),
+        key=lambda entry: entry[0],
+    )
+    if home_team is None or away_team is None or home_score < 0.55 or away_score < 0.55:
         return None
-    inverse = [1 / odd for odd in odds]
-    total = sum(inverse)
-    return [value / total for value in inverse]
+    target_date = datetime.fromisoformat(match["date"]).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    return {
+        "id": None,
+        "utcDate": target_date,
+        "status": "COUPON_ONLY",
+        "homeTeam": home_team,
+        "awayTeam": away_team,
+    }
+
+
+def finished_before(candidates: list, fixture: dict) -> list[dict]:
+    cutoff = fixture.get("utcDate", "")
+    result = []
+    for item in candidates:
+        score = item.get("score", {}).get("fullTime", {})
+        if (
+            item.get("status") == "FINISHED"
+            and item.get("utcDate", "") < cutoff
+            and score.get("home") is not None
+            and score.get("away") is not None
+        ):
+            result.append(item)
+    return result
+
+
+def average(values: list[float], fallback: float) -> float:
+    return sum(values) / len(values) if values else fallback
+
+
+def shrink(value: float, sample: int, baseline: float) -> float:
+    weight = sample / (sample + 5)
+    return value * weight + baseline * (1 - weight)
+
+
+def expected_goals(fixture: dict, history: list[dict]) -> tuple[float, float, dict]:
+    league_home = []
+    league_away = []
+    for item in history:
+        score = item["score"]["fullTime"]
+        league_home.append(float(score["home"]))
+        league_away.append(float(score["away"]))
+    home_base = average(league_home, 1.45)
+    away_base = average(league_away, 1.15)
+    home_id = fixture["homeTeam"]["id"]
+    away_id = fixture["awayTeam"]["id"]
+    home_for, home_against, away_for, away_against = [], [], [], []
+    for item in history:
+        score = item["score"]["fullTime"]
+        if item["homeTeam"]["id"] == home_id:
+            home_for.append(float(score["home"]))
+            home_against.append(float(score["away"]))
+        if item["awayTeam"]["id"] == away_id:
+            away_for.append(float(score["away"]))
+            away_against.append(float(score["home"]))
+    home_attack = shrink(average(home_for[-10:], home_base), len(home_for[-10:]), home_base)
+    away_defence = shrink(average(away_against[-10:], home_base), len(away_against[-10:]), home_base)
+    away_attack = shrink(average(away_for[-10:], away_base), len(away_for[-10:]), away_base)
+    home_defence = shrink(average(home_against[-10:], away_base), len(home_against[-10:]), away_base)
+    home_lambda = max(0.2, min(3.8, (home_attack + away_defence) / 2))
+    away_lambda = max(0.2, min(3.8, (away_attack + home_defence) / 2))
+    sample = {
+        "league_matches": len(history),
+        "home_home_matches": len(home_for),
+        "away_away_matches": len(away_for),
+        "expected_home_goals": round(home_lambda, 3),
+        "expected_away_goals": round(away_lambda, 3),
+    }
+    return home_lambda, away_lambda, sample
 
 
 def poisson(lam: float, goals: int) -> float:
     return math.exp(-lam) * lam**goals / math.factorial(goals)
 
 
-def poisson_scores(markets: dict) -> list[tuple[str, float]]:
-    target_1x2 = devig([markets["1x2"][key] for key in ("1", "X", "2")])
-    target_ou = devig([markets["over_under"]["2.5"]["over"], markets["over_under"]["2.5"]["under"]])
-    if not target_1x2:
-        return []
-    best = None
-    for home_i in range(4, 81):
-        home_lam = home_i / 20
-        for away_i in range(4, 81):
-            away_lam = away_i / 20
-            grid = {(h, a): poisson(home_lam, h) * poisson(away_lam, a) for h in range(7) for a in range(7)}
-            outcomes = [sum(p for (h, a), p in grid.items() if h > a), sum(p for (h, a), p in grid.items() if h == a), sum(p for (h, a), p in grid.items() if h < a)]
-            error = sum((outcomes[i] - target_1x2[i]) ** 2 for i in range(3))
-            if target_ou:
-                over = sum(p for (h, a), p in grid.items() if h + a >= 3)
-                error += (over - target_ou[0]) ** 2
-            if best is None or error < best[0]:
-                best = (error, grid)
-    return sorted(((f"{h}-{a}", p) for (h, a), p in best[1].items()), key=lambda x: x[1], reverse=True)[:3]
+def model_distribution(home_lambda: float, away_lambda: float) -> tuple[dict, list[dict], dict]:
+    grid = {
+        (home, away): poisson(home_lambda, home) * poisson(away_lambda, away)
+        for home in range(8) for away in range(8)
+    }
+    total = sum(grid.values())
+    grid = {score: probability / total for score, probability in grid.items()}
+    home_win = sum(p for (h, a), p in grid.items() if h > a)
+    draw = sum(p for (h, a), p in grid.items() if h == a)
+    away_win = sum(p for (h, a), p in grid.items() if h < a)
+    btts_yes = sum(p for (h, a), p in grid.items() if h > 0 and a > 0)
+    over_15 = sum(p for (h, a), p in grid.items() if h + a >= 2)
+    over_25 = sum(p for (h, a), p in grid.items() if h + a >= 3)
+    one_x_two = {"1": round(home_win * 100, 1), "X": round(draw * 100, 1), "2": round(away_win * 100, 1)}
+    markets = {
+        "btts": {"yes": round(btts_yes * 100, 1), "no": round((1 - btts_yes) * 100, 1)},
+        "over_under": {
+            "1.5": {"over": round(over_15 * 100, 1), "under": round((1 - over_15) * 100, 1)},
+            "2.5": {"over": round(over_25 * 100, 1), "under": round((1 - over_25) * 100, 1)},
+        },
+    }
+    scores = sorted(grid.items(), key=lambda entry: entry[1], reverse=True)[:3]
+    predictions = [{"score": f"{h}-{a}", "percentage": round(p * 100, 1)} for (h, a), p in scores]
+    return one_x_two, predictions, markets
 
 
-def score_predictions(markets: dict, correct: dict[str, list[float]]) -> tuple[list[dict], str]:
-    if correct:
-        probabilities = {score: 1 / median_odds(values) for score, values in correct.items()}
-        total = sum(probabilities.values())
-        ranked = sorted(((score, value / total) for score, value in probabilities.items()), key=lambda x: x[1], reverse=True)[:3]
-        source = "correct_score_odds"
-    else:
-        ranked = poisson_scores(markets)
-        source = "poisson_from_market_odds"
-    return ([{"score": score, "percentage": round(probability * 100, 1)} for score, probability in ranked], source)
+def result_symbol(score: str) -> str:
+    home, away = (int(value) for value in score.split("-", 1))
+    return "1" if home > away else "X" if home == away else "2"
+
+
+def alignment(one_x_two: dict, scores: list[dict], narrow_pick: str) -> dict:
+    if not one_x_two or not scores:
+        return {"status": "unavailable"}
+    model_pick = max(one_x_two, key=one_x_two.get)
+    score_results = [result_symbol(item["score"]) for item in scores]
+    matching_scores = sum(result == model_pick for result in score_results)
+    coupon_match = model_pick in narrow_pick
+    status = "aligned" if matching_scores == 3 and coupon_match else "partial" if matching_scores and coupon_match else "divergent"
+    return {
+        "status": status,
+        "model_pick": model_pick,
+        "score_results": score_results,
+        "matching_scores": matching_scores,
+        "coupon_match": coupon_match,
+    }
 
 
 def main() -> None:
-    key = os.getenv("API_FOOTBALL_KEY")
-    if not key:
-        raise SystemExit("API_FOOTBALL_KEY GitHub Secret bulunamadi.")
+    token = os.getenv("FOOTBALL_DATA_TOKEN")
+    if not token:
+        raise SystemExit("FOOTBALL_DATA_TOKEN GitHub Secret bulunamadi.")
     matches = load_inputs()
-    resolve_fixtures(matches, key)
+    competition_data, fetch_errors = fetch_competitions(matches, token)
     for match in matches:
-        fixture_id = match.get("api_fixture_id")
-        if fixture_id:
-            markets, correct = collect_odds(api_get("/odds", key, fixture=fixture_id))
-            scores, source = score_predictions(markets, correct)
-            match["market_odds"] = markets
-            match["score_predictions"] = scores
-            match["score_model"] = source
-        else:
-            match["market_odds"] = {}
-            match["score_predictions"] = []
-            match["score_model"] = "unavailable"
+        code = LEAGUE_CODES.get(match["league"].lower())
+        match["model_1x2"] = {}
+        match["model_score_predictions"] = []
+        match["model_markets"] = {}
+        match["market_odds"] = {}
+        match["market_score_predictions"] = []
+        match["market_status"] = "unavailable_without_odds_provider"
+        match["model_internal_alignment"] = {"status": "unavailable"}
+        if not code:
+            match["data_error"] = "Lig kodu tanimli degil"
+            continue
+        candidates = competition_data.get(code, [])
+        fixture = find_fixture(match, candidates)
+        fixture_match_type = "exact_date_and_teams"
+        if not fixture:
+            fixture = infer_fixture_from_teams(match, candidates)
+            fixture_match_type = "teams_from_competition_history"
+        if not fixture:
+            match["data_error"] = "football-data.org fikstur eslesmesi bulunamadi"
+            continue
+        history = finished_before(candidates, fixture)
+        home_lambda, away_lambda, sample = expected_goals(fixture, history)
+        one_x_two, scores, markets = model_distribution(home_lambda, away_lambda)
+        match["football_data_match_id"] = fixture["id"]
+        match["football_data_status"] = fixture.get("status")
+        match["fixture_match_type"] = fixture_match_type
+        match["model_1x2"] = one_x_two
+        match["model_score_predictions"] = scores
+        match["score_predictions"] = scores
+        match["score_model"] = "poisson_from_football_data_history"
+        match["model_markets"] = markets
+        match["model_sample"] = sample
+        match["model_internal_alignment"] = alignment(one_x_two, scores, match["narrow_pick"])
+
     def columns(field: str) -> int:
         result = 1
         for match in matches:
             result *= sum(symbol in match[field] for symbol in ("1", "X", "2"))
         return result
+
     document = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "timezone": "Europe/Istanbul",
         "count": len(matches),
-        "source": "api_football_odds",
+        "source": "football_data_history_model",
         "wide_columns": columns("wide_pick"),
         "narrow_columns": columns("narrow_pick"),
+        "fetch_errors": fetch_errors,
         "matches": matches,
     }
     for path in OUTPUTS:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"API-Football tamamlandi: {len(matches)} mac, {sum(bool(m['score_predictions']) for m in matches)} skor modeli.")
+    print(f"football-data.org tamamlandi: {len(matches)} mac, {sum(bool(m['model_score_predictions']) for m in matches)} model.")
 
 
 if __name__ == "__main__":
     main()
+

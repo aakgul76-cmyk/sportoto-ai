@@ -7,6 +7,7 @@ on:
       - "data/coupon.csv"
       - "data/predictions.csv"
       - "scripts/fetch_data.py"
+      - ".github/workflows/update-data.yml"
       - "docs/index.html"
   schedule:
     - cron: "0 8,18 * * *"
@@ -34,9 +35,9 @@ jobs:
           cache: pip
       - name: Kutuphaneleri kur
         run: pip install -r requirements.txt
-      - name: API-Football oranlariyla kuponu hazirla
+      - name: Football-Data gecmisinden kupon modelini hazirla
         env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
         run: python scripts/fetch_data.py
       - name: Yeni verileri repository'ye kaydet
         run: |
@@ -52,6 +53,7 @@ jobs:
         with:
           path: docs
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
