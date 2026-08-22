@@ -1,10 +1,14 @@
 {
-  "generated_at": "2026-08-21T16:14:24.948921+00:00",
+  "generated_at": "2026-08-22T11:27:05.005662+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
-  "source": "statistical_model_and_market_odds",
+  "source": "football_data_history_model",
   "wide_columns": 2304,
   "narrow_columns": 192,
+  "fetch_errors": {
+    "TSL:2025": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2025",
+    "TSL:2026": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2026"
+  },
   "matches": [
     {
       "match_no": "1",
@@ -15,17 +19,16 @@
       "away": "Galatasaray",
       "wide_pick": "2",
       "narrow_pick": "2",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "2",
@@ -36,17 +39,16 @@
       "away": "Samsunspor",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "3",
@@ -57,17 +59,16 @@
       "away": "Kasımpaşa",
       "wide_pick": "1X2",
       "narrow_pick": "1X2",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "4",
@@ -78,17 +79,16 @@
       "away": "Tümosan Konyaspor",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "5",
@@ -99,17 +99,16 @@
       "away": "Gaziantep FK",
       "wide_pick": "1X2",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "6",
@@ -120,17 +119,16 @@
       "away": "İstanbul Başakşehir",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "7",
@@ -141,17 +139,16 @@
       "away": "Beşiktaş",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "8",
@@ -162,17 +159,16 @@
       "away": "Gençlerbirliği",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "9",
@@ -183,17 +179,16 @@
       "away": "Amed Sportif Faaliyetler",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "10",
@@ -204,17 +199,16 @@
       "away": "Bayern Münih",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
       "model_1x2": {},
       "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "11",
@@ -225,17 +219,79 @@
       "away": "Strasbourg",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
-      "model_1x2": {},
-      "model_score_predictions": [],
+      "model_1x2": {
+        "1": 41.8,
+        "X": 24.5,
+        "2": 33.8
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.4
+        },
+        {
+          "score": "2-1",
+          "percentage": 8.9
+        },
+        {
+          "score": "1-0",
+          "percentage": 8.2
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 59.2,
+          "no": 40.8
+        },
+        "over_under": {
+          "1.5": {
+            "over": 79.2,
+            "under": 20.8
+          },
+          "2.5": {
+            "over": 56.4,
+            "under": 43.6
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "partial",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "1"
+        ],
+        "matching_scores": 2,
+        "coupon_match": true
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "football_data_match_id": 559715,
+      "football_data_status": "FINISHED",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.4
+        },
+        {
+          "score": "2-1",
+          "percentage": 8.9
+        },
+        {
+          "score": "1-0",
+          "percentage": 8.2
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 305,
+        "home_home_matches": 17,
+        "away_away_matches": 17,
+        "expected_home_goals": 1.562,
+        "expected_away_goals": 1.381
+      }
     },
     {
       "match_no": "12",
@@ -246,17 +302,79 @@
       "away": "Liverpool",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
-      "model_1x2": {},
-      "model_score_predictions": [],
+      "model_1x2": {
+        "1": 44.1,
+        "X": 23.2,
+        "2": 32.7
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 10.3
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.0
+        },
+        {
+          "score": "1-2",
+          "percentage": 7.6
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 63.6,
+          "no": 36.4
+        },
+        "over_under": {
+          "1.5": {
+            "over": 83.1,
+            "under": 16.9
+          },
+          "2.5": {
+            "over": 62.3,
+            "under": 37.7
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "divergent",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "2"
+        ],
+        "matching_scores": 1,
+        "coupon_match": false
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "football_data_match_id": 560550,
+      "football_data_status": "TIMED",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 10.3
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.0
+        },
+        {
+          "score": "1-2",
+          "percentage": 7.6
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 381,
+        "home_home_matches": 19,
+        "away_away_matches": 19,
+        "expected_home_goals": 1.743,
+        "expected_away_goals": 1.473
+      }
     },
     {
       "match_no": "13",
@@ -267,17 +385,79 @@
       "away": "Real Sociedad",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "api_error": "API-Football /fixtures: {'access': 'Your account is suspended, check on https://dashboard.api-football.com.'}",
-      "api_fixture_id": null,
-      "model_1x2": {},
-      "model_score_predictions": [],
+      "model_1x2": {
+        "1": 51.1,
+        "X": 24.4,
+        "2": 24.5
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.6
+        },
+        {
+          "score": "1-0",
+          "percentage": 10.8
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.6
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 53.2,
+          "no": 46.8
+        },
+        "over_under": {
+          "1.5": {
+            "over": 75.7,
+            "under": 24.3
+          },
+          "2.5": {
+            "over": 51.4,
+            "under": 48.6
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "partial",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "1"
+        ],
+        "matching_scores": 2,
+        "coupon_match": true
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "football_data_match_id": 564647,
+      "football_data_status": "FINISHED",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.6
+        },
+        {
+          "score": "1-0",
+          "percentage": 10.8
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.6
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 387,
+        "home_home_matches": 19,
+        "away_away_matches": 19,
+        "expected_home_goals": 1.66,
+        "expected_away_goals": 1.071
+      }
     },
     {
       "match_no": "14",
@@ -288,17 +468,79 @@
       "away": "Villarreal",
       "wide_pick": "1X",
       "narrow_pick": "1",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
-      "model_1x2": {},
-      "model_score_predictions": [],
+      "model_1x2": {
+        "1": 51.1,
+        "X": 24.7,
+        "2": 24.2
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.8
+        },
+        {
+          "score": "1-0",
+          "percentage": 11.3
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.6
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 51.9,
+          "no": 48.1
+        },
+        "over_under": {
+          "1.5": {
+            "over": 74.5,
+            "under": 25.5
+          },
+          "2.5": {
+            "over": 49.7,
+            "under": 50.3
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "partial",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "1"
+        ],
+        "matching_scores": 2,
+        "coupon_match": true
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "football_data_match_id": 564646,
+      "football_data_status": "TIMED",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.8
+        },
+        {
+          "score": "1-0",
+          "percentage": 11.3
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.6
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 388,
+        "home_home_matches": 20,
+        "away_away_matches": 20,
+        "expected_home_goals": 1.627,
+        "expected_away_goals": 1.037
+      }
     },
     {
       "match_no": "15",
@@ -309,17 +551,79 @@
       "away": "Milan",
       "wide_pick": "X2",
       "narrow_pick": "2",
-      "api_error": "API-Football /fixtures: {'plan': 'Free plans do not have access to this date, try from 2026-08-20 to 2026-08-22.'}",
-      "api_fixture_id": null,
-      "model_1x2": {},
-      "model_score_predictions": [],
+      "model_1x2": {
+        "1": 36.0,
+        "X": 26.7,
+        "2": 37.2
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 12.7
+        },
+        {
+          "score": "0-1",
+          "percentage": 10.1
+        },
+        {
+          "score": "1-0",
+          "percentage": 9.9
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 51.8,
+          "no": 48.2
+        },
+        "over_under": {
+          "1.5": {
+            "over": 72.1,
+            "under": 27.9
+          },
+          "2.5": {
+            "over": 46.7,
+            "under": 53.3
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
+      "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "partial",
+        "model_pick": "2",
+        "score_results": [
+          "X",
+          "2",
+          "1"
+        ],
+        "matching_scores": 1,
+        "coupon_match": true
       },
-      "score_predictions": [],
-      "score_model": "unavailable"
+      "football_data_match_id": 558634,
+      "football_data_status": "TIMED",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 12.7
+        },
+        {
+          "score": "0-1",
+          "percentage": 10.1
+        },
+        {
+          "score": "1-0",
+          "percentage": 9.9
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 380,
+        "home_home_matches": 19,
+        "away_away_matches": 19,
+        "expected_home_goals": 1.259,
+        "expected_away_goals": 1.283
+      }
     }
   ]
 }
