@@ -124,6 +124,35 @@ def find_fixture(match: dict, candidates: list) -> dict | None:
     return best if best is not None and best_score >= 0.55 else None
 
 
+def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
+    teams = {}
+    for item in candidates:
+        for side in ("homeTeam", "awayTeam"):
+            team = item.get(side, {})
+            if team.get("id") and team.get("name"):
+                teams[team["id"]] = team
+    home_score, home_team = max(
+        ((similarity(match["home"], team["name"]), team) for team in teams.values()),
+        default=(0, None),
+        key=lambda entry: entry[0],
+    )
+    away_score, away_team = max(
+        ((similarity(match["away"], team["name"]), team) for team in teams.values()),
+        default=(0, None),
+        key=lambda entry: entry[0],
+    )
+    if home_team is None or away_team is None or home_score < 0.55 or away_score < 0.55:
+        return None
+    target_date = datetime.fromisoformat(match["date"]).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+    return {
+        "id": None,
+        "utcDate": target_date,
+        "status": "COUPON_ONLY",
+        "homeTeam": home_team,
+        "awayTeam": away_team,
+    }
+
+
 def finished_before(candidates: list, fixture: dict) -> list[dict]:
     cutoff = fixture.get("utcDate", "")
     result = []
@@ -256,6 +285,10 @@ def main() -> None:
             continue
         candidates = competition_data.get(code, [])
         fixture = find_fixture(match, candidates)
+        fixture_match_type = "exact_date_and_teams"
+        if not fixture:
+            fixture = infer_fixture_from_teams(match, candidates)
+            fixture_match_type = "teams_from_competition_history"
         if not fixture:
             match["data_error"] = "football-data.org fikstur eslesmesi bulunamadi"
             continue
@@ -264,6 +297,7 @@ def main() -> None:
         one_x_two, scores, markets = model_distribution(home_lambda, away_lambda)
         match["football_data_match_id"] = fixture["id"]
         match["football_data_status"] = fixture.get("status")
+        match["fixture_match_type"] = fixture_match_type
         match["model_1x2"] = one_x_two
         match["model_score_predictions"] = scores
         match["score_predictions"] = scores
