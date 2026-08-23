@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-08-22T15:50:17.594416+00:00",
+  "generated_at": "2026-08-23T06:01:29.369592+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "fetch_errors": {
+    "BL1:2026": "HTTPSConnectionPool(host='api.football-data.org', port=443): Max retries exceeded with url: /v4/competitions/BL1/matches?season=2026 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
     "TSL:2025": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2025",
     "TSL:2026": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2026"
   },
@@ -370,7 +371,7 @@
       "model_1x2": {
         "1": 44.2,
         "X": 23.2,
-        "2": 32.7
+        "2": 32.6
       },
       "model_score_predictions": [
         {
@@ -388,8 +389,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 63.6,
-          "no": 36.4
+          "yes": 63.5,
+          "no": 36.5
         },
         "over_under": {
           "1.5": {
@@ -435,11 +436,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 382,
+        "league_matches": 386,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.744,
-        "expected_away_goals": 1.472
+        "expected_home_goals": 1.745,
+        "expected_away_goals": 1.47
       }
     },
     {
@@ -536,7 +537,7 @@
       "wide_pick": "1X",
       "narrow_pick": "1",
       "model_1x2": {
-        "1": 51.1,
+        "1": 51.0,
         "X": 24.7,
         "2": 24.2
       },
@@ -561,8 +562,8 @@
         },
         "over_under": {
           "1.5": {
-            "over": 74.5,
-            "under": 25.5
+            "over": 74.4,
+            "under": 25.6
           },
           "2.5": {
             "over": 49.7,
@@ -603,11 +604,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 388,
+        "league_matches": 391,
         "home_home_matches": 20,
         "away_away_matches": 20,
-        "expected_home_goals": 1.627,
-        "expected_away_goals": 1.037
+        "expected_home_goals": 1.624,
+        "expected_away_goals": 1.038
       }
     },
     {
@@ -687,11 +688,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 380,
+        "league_matches": 384,
         "home_home_matches": 19,
         "away_away_matches": 19,
         "expected_home_goals": 1.259,
-        "expected_away_goals": 1.283
+        "expected_away_goals": 1.284
       }
     }
   ]
