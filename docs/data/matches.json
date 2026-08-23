@@ -1,12 +1,11 @@
 {
-  "generated_at": "2026-08-23T06:01:29.369592+00:00",
+  "generated_at": "2026-08-23T15:52:01.841052+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "fetch_errors": {
-    "BL1:2026": "HTTPSConnectionPool(host='api.football-data.org', port=443): Max retries exceeded with url: /v4/competitions/BL1/matches?season=2026 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
     "TSL:2025": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2025",
     "TSL:2026": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2026"
   },
@@ -369,9 +368,9 @@
       "wide_pick": "X2",
       "narrow_pick": "X2",
       "model_1x2": {
-        "1": 44.2,
-        "X": 23.2,
-        "2": 32.6
+        "1": 44.3,
+        "X": 23.1,
+        "2": 32.5
       },
       "model_score_predictions": [
         {
@@ -389,8 +388,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 63.5,
-          "no": 36.5
+          "yes": 63.6,
+          "no": 36.4
         },
         "over_under": {
           "1.5": {
@@ -418,7 +417,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 560550,
-      "football_data_status": "TIMED",
+      "football_data_status": "IN_PLAY",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -436,11 +435,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 386,
+        "league_matches": 388,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.745,
-        "expected_away_goals": 1.47
+        "expected_home_goals": 1.747,
+        "expected_away_goals": 1.469
       }
     },
     {
@@ -586,7 +585,7 @@
         "coupon_match": true
       },
       "football_data_match_id": 564646,
-      "football_data_status": "TIMED",
+      "football_data_status": "IN_PLAY",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
