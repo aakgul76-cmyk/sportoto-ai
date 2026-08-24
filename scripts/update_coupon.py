@@ -7,10 +7,10 @@ import io
 import re
 import unicodedata
 from datetime import datetime, timedelta
+from html.parser import HTMLParser
 from pathlib import Path
 
 import requests
-from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 COUPON = ROOT / "data/coupon.csv"
@@ -23,6 +23,27 @@ TEAM_NAMES = {
     "paris st germain": "Paris Saint-Germain",
     "atletico madrid": "Atletico Madrid",
 }
+
+class VisibleTextParser(HTMLParser):
+    """Collect visible text without executing page scripts."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.parts: list[str] = []
+        self.hidden_depth = 0
+
+    def handle_starttag(self, tag: str, attrs) -> None:
+        if tag in {"script", "style", "noscript"}:
+            self.hidden_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in {"script", "style", "noscript"} and self.hidden_depth:
+            self.hidden_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if not self.hidden_depth and data.strip():
+            self.parts.append(data)
+
 
 COMPETITIONS = {
     ("bundesliga", "Almanya"): {
@@ -80,7 +101,9 @@ def competition_for(match_no: int, home: str, away: str) -> tuple[str, str]:
 
 
 def extract_matches(html: str, now: datetime | None = None) -> list[dict]:
-    text = BeautifulSoup(html, "html.parser").get_text("\n")
+    parser = VisibleTextParser()
+    parser.feed(html)
+    text = "\n".join(parser.parts)
     if "GÜNCEL BÜLTEN" not in text or "KUPON" not in text:
         raise ValueError("Guncel bulten bolumu kaynak sayfada bulunamadi.")
     section = text.split("GÜNCEL BÜLTEN", 1)[1].split("KUPON", 1)[0]
