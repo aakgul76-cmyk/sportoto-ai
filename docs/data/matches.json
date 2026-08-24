@@ -1,13 +1,23 @@
 {
-  "generated_at": "2026-08-24T07:42:07.199296+00:00",
+  "generated_at": "2026-08-24T07:45:51.855026+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "fetch_errors": {
-    "TSL:2025": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2025",
-    "TSL:2026": "403 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2026"
+    "BL1:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/BL1/matches?season=2025",
+    "BL1:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/BL1/matches?season=2026",
+    "FL1:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/FL1/matches?season=2025",
+    "FL1:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/FL1/matches?season=2026",
+    "PD:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/PD/matches?season=2025",
+    "PD:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/PD/matches?season=2026",
+    "PL:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/PL/matches?season=2025",
+    "PL:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/PL/matches?season=2026",
+    "SA:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/SA/matches?season=2025",
+    "SA:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/SA/matches?season=2026",
+    "TSL:2025": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2025",
+    "TSL:2026": "400 Client Error:  for url: https://api.football-data.org/v4/competitions/TSL/matches?season=2026"
   },
   "matches": [
     {
@@ -199,80 +209,16 @@
       "away": "Bayern Münih",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "model_1x2": {
-        "1": 39.4,
-        "X": 21.4,
-        "2": 39.2
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 8.2
-        },
-        {
-          "score": "2-1",
-          "percentage": 7.7
-        },
-        {
-          "score": "1-2",
-          "percentage": 7.7
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 72.0,
-          "no": 28.0
-        },
-        "over_under": {
-          "1.5": {
-            "over": 89.1,
-            "under": 10.9
-          },
-          "2.5": {
-            "over": 72.7,
-            "under": 27.3
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "2"
-        ],
-        "matching_scores": 1,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "football_data_match_id": null,
-      "football_data_status": "COUPON_ONLY",
-      "fixture_match_type": "teams_from_competition_history",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 8.2
-        },
-        {
-          "score": "2-1",
-          "percentage": 7.7
-        },
-        {
-          "score": "1-2",
-          "percentage": 7.7
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 306,
-        "home_home_matches": 17,
-        "away_away_matches": 17,
-        "expected_home_goals": 1.893,
-        "expected_away_goals": 1.886
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "11",
@@ -283,80 +229,16 @@
       "away": "Strasbourg",
       "wide_pick": "1",
       "narrow_pick": "1",
-      "model_1x2": {
-        "1": 41.8,
-        "X": 24.5,
-        "2": 33.8
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.4
-        },
-        {
-          "score": "2-1",
-          "percentage": 8.9
-        },
-        {
-          "score": "1-0",
-          "percentage": 8.2
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 59.2,
-          "no": 40.8
-        },
-        "over_under": {
-          "1.5": {
-            "over": 79.2,
-            "under": 20.8
-          },
-          "2.5": {
-            "over": 56.4,
-            "under": 43.6
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "partial",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "1"
-        ],
-        "matching_scores": 2,
-        "coupon_match": true
+        "status": "unavailable"
       },
-      "football_data_match_id": 559715,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.4
-        },
-        {
-          "score": "2-1",
-          "percentage": 8.9
-        },
-        {
-          "score": "1-0",
-          "percentage": 8.2
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 305,
-        "home_home_matches": 17,
-        "away_away_matches": 17,
-        "expected_home_goals": 1.562,
-        "expected_away_goals": 1.381
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "12",
@@ -367,80 +249,16 @@
       "away": "Liverpool",
       "wide_pick": "X2",
       "narrow_pick": "X2",
-      "model_1x2": {
-        "1": 44.3,
-        "X": 23.1,
-        "2": 32.5
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 10.3
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.0
-        },
-        {
-          "score": "1-2",
-          "percentage": 7.6
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 63.6,
-          "no": 36.4
-        },
-        "over_under": {
-          "1.5": {
-            "over": 83.1,
-            "under": 16.9
-          },
-          "2.5": {
-            "over": 62.3,
-            "under": 37.7
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "2"
-        ],
-        "matching_scores": 1,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "football_data_match_id": 560550,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 10.3
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.0
-        },
-        {
-          "score": "1-2",
-          "percentage": 7.6
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 388,
-        "home_home_matches": 19,
-        "away_away_matches": 19,
-        "expected_home_goals": 1.747,
-        "expected_away_goals": 1.469
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "13",
@@ -451,80 +269,16 @@
       "away": "Real Sociedad",
       "wide_pick": "1X",
       "narrow_pick": "1X",
-      "model_1x2": {
-        "1": 51.1,
-        "X": 24.4,
-        "2": 24.5
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.6
-        },
-        {
-          "score": "1-0",
-          "percentage": 10.8
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.6
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 53.2,
-          "no": 46.8
-        },
-        "over_under": {
-          "1.5": {
-            "over": 75.7,
-            "under": 24.3
-          },
-          "2.5": {
-            "over": 51.4,
-            "under": 48.6
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "partial",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "1"
-        ],
-        "matching_scores": 2,
-        "coupon_match": true
+        "status": "unavailable"
       },
-      "football_data_match_id": 564647,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.6
-        },
-        {
-          "score": "1-0",
-          "percentage": 10.8
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.6
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 387,
-        "home_home_matches": 19,
-        "away_away_matches": 19,
-        "expected_home_goals": 1.66,
-        "expected_away_goals": 1.071
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "14",
@@ -535,80 +289,16 @@
       "away": "Villarreal",
       "wide_pick": "1X",
       "narrow_pick": "1",
-      "model_1x2": {
-        "1": 51.0,
-        "X": 24.7,
-        "2": 24.2
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.8
-        },
-        {
-          "score": "1-0",
-          "percentage": 11.3
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.6
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 51.9,
-          "no": 48.1
-        },
-        "over_under": {
-          "1.5": {
-            "over": 74.4,
-            "under": 25.6
-          },
-          "2.5": {
-            "over": 49.7,
-            "under": 50.3
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "partial",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "1"
-        ],
-        "matching_scores": 2,
-        "coupon_match": true
+        "status": "unavailable"
       },
-      "football_data_match_id": 564646,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.8
-        },
-        {
-          "score": "1-0",
-          "percentage": 11.3
-        },
-        {
-          "score": "2-1",
-          "percentage": 9.6
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 391,
-        "home_home_matches": 20,
-        "away_away_matches": 20,
-        "expected_home_goals": 1.624,
-        "expected_away_goals": 1.038
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     },
     {
       "match_no": "15",
@@ -619,80 +309,16 @@
       "away": "Milan",
       "wide_pick": "X2",
       "narrow_pick": "2",
-      "model_1x2": {
-        "1": 36.0,
-        "X": 26.7,
-        "2": 37.3
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 12.7
-        },
-        {
-          "score": "0-1",
-          "percentage": 10.1
-        },
-        {
-          "score": "1-0",
-          "percentage": 9.9
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 51.7,
-          "no": 48.3
-        },
-        "over_under": {
-          "1.5": {
-            "over": 72.1,
-            "under": 27.9
-          },
-          "2.5": {
-            "over": 46.7,
-            "under": 53.3
-          }
-        }
-      },
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "partial",
-        "model_pick": "2",
-        "score_results": [
-          "X",
-          "2",
-          "1"
-        ],
-        "matching_scores": 1,
-        "coupon_match": true
+        "status": "unavailable"
       },
-      "football_data_match_id": 558634,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 12.7
-        },
-        {
-          "score": "0-1",
-          "percentage": 10.1
-        },
-        {
-          "score": "1-0",
-          "percentage": 9.9
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 386,
-        "home_home_matches": 19,
-        "away_away_matches": 19,
-        "expected_home_goals": 1.256,
-        "expected_away_goals": 1.284
-      }
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
     }
   ]
 }
