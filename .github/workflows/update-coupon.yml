@@ -1,0 +1,41 @@
+name: Haftalik Spor Toto listesini guncelle
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 12,18 * * 1"
+      timezone: "Europe/Istanbul"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sportoto-provider-api
+  cancel-in-progress: false
+
+jobs:
+  update-weekly-coupon:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository'yi indir
+        uses: actions/checkout@v6
+      - name: Python'u hazirla
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Kutuphaneleri kur
+        run: pip install -r requirements.txt
+      - name: Yeni 15 maclik listeyi dogrula
+        run: python scripts/update_coupon.py
+      - name: Yeni haftanin modellerini uret
+        env:
+          FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+        run: python scripts/fetch_data.py
+      - name: Dogrulanmis listeyi ve modelleri kaydet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data docs/data
+          git diff --cached --quiet || git commit -m "Haftalik Spor Toto listesini otomatik guncelle"
+          git push
