@@ -1,16 +1,16 @@
 match_no,date,league,country,home,away
-1,2026-08-21T21:30:00+03:00,Süper Lig,Türkiye,Erzurumspor FK,Galatasaray
-2,2026-08-22T19:00:00+03:00,Süper Lig,Türkiye,Çaykur Rizespor,Samsunspor
-3,2026-08-22T19:00:00+03:00,Süper Lig,Türkiye,Arca Çorum FK,Kasımpaşa
-4,2026-08-22T21:30:00+03:00,Süper Lig,Türkiye,Fenerbahçe,Tümosan Konyaspor
-5,2026-08-23T19:00:00+03:00,Süper Lig,Türkiye,Eyüpspor,Gaziantep FK
-6,2026-08-23T19:00:00+03:00,Süper Lig,Türkiye,Trabzonspor,İstanbul Başakşehir
-7,2026-08-23T21:30:00+03:00,Süper Lig,Türkiye,Corendon Alanyaspor,Beşiktaş
-8,2026-08-23T21:30:00+03:00,Süper Lig,Türkiye,Göztepe,Gençlerbirliği
-9,2026-08-24T21:30:00+03:00,Süper Lig,Türkiye,Kocaelispor,Amed Sportif Faaliyetler
-10,2026-08-22T21:30:00+03:00,Bundesliga,Almanya,Borussia Dortmund,Bayern Münih
-11,2026-08-21T21:45:00+03:00,Ligue 1,Fransa,Marsilya,Strasbourg
-12,2026-08-23T18:30:00+03:00,Premier League,İngiltere,Newcastle United,Liverpool
-13,2026-08-21T22:00:00+03:00,La Liga,İspanya,Real Betis,Real Sociedad
-14,2026-08-23T18:00:00+03:00,La Liga,İspanya,Atletico Madrid,Villarreal
-15,2026-08-23T21:45:00+03:00,Serie A,İtalya,Torino,Milan
+1,2026-08-28T21:30:00+03:00,Süper Lig,Türkiye,Gençlerbirliği,Erzurumspor FK
+2,2026-08-29T19:00:00+03:00,Süper Lig,Türkiye,Tümosan Konyaspor,Kocaelispor
+3,2026-08-29T21:30:00+03:00,Süper Lig,Türkiye,Galatasaray,Göztepe
+4,2026-08-29T21:30:00+03:00,Süper Lig,Türkiye,Gaziantep FK,Çaykur Rizespor
+5,2026-08-30T19:00:00+03:00,Süper Lig,Türkiye,Eyüpspor,Corendon Alanyaspor
+6,2026-08-30T21:30:00+03:00,Süper Lig,Türkiye,İstanbul Başakşehir,Kasımpaşa
+7,2026-08-30T21:30:00+03:00,Süper Lig,Türkiye,Samsunspor,Fenerbahçe
+8,2026-08-31T21:30:00+03:00,Süper Lig,Türkiye,Amed Sportif Faaliyetler,Trabzonspor
+9,2026-08-31T21:30:00+03:00,Süper Lig,Türkiye,Beşiktaş,Arca Çorum FK
+10,2026-08-29T19:30:00+03:00,Bundesliga,Almanya,Borussia Dortmund,Hamburger SV
+11,2026-08-28T21:45:00+03:00,Ligue 1,Fransa,Lille,Paris Saint-Germain
+12,2026-08-30T21:45:00+03:00,Ligue 1,Fransa,Monaco,Marsilya
+13,2026-08-29T19:30:00+03:00,Premier League,İngiltere,Tottenham Hotspur,Newcastle United
+14,2026-08-29T22:30:00+03:00,La Liga,İspanya,Sevilla,Atletico Madrid
+15,2026-08-30T21:45:00+03:00,Serie A,İtalya,Cagliari,Inter
