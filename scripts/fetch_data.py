@@ -49,6 +49,16 @@ def retry_after_seconds(response: requests.Response) -> float:
         return DEFAULT_RATE_LIMIT_BACKOFF_SECONDS
 
 
+def response_error_detail(response: requests.Response) -> str:
+    """Return a bounded provider error without exposing request credentials."""
+    try:
+        payload = response.json()
+        detail = json.dumps(payload, ensure_ascii=False)
+    except ValueError:
+        detail = response.text.strip() or response.reason or "bos yanit"
+    return detail[:500]
+
+
 def api_get(path: str, token: str, **params) -> dict:
     for attempt in range(3):
         wait_for_api_slot()
@@ -61,7 +71,11 @@ def api_get(path: str, token: str, **params) -> dict:
         if response.status_code == 429 and attempt < 2:
             time.sleep(retry_after_seconds(response))
             continue
-        response.raise_for_status()
+        if not response.ok:
+            detail = response_error_detail(response)
+            raise RuntimeError(
+                f"football-data.org HTTP {response.status_code} {path}: {detail}"
+            )
         return response.json()
     raise RuntimeError(f"football-data.org yanit vermedi: {path}")
 
@@ -332,6 +346,14 @@ def main() -> None:
             result *= sum(symbol in match[field] for symbol in ("1", "X", "2"))
         return result
 
+    model_count = sum(bool(match["model_score_predictions"]) for match in matches)
+    if model_count == 0:
+        print("football-data.org hic model uretemedi. Saglayici hatalari:", flush=True)
+        print(json.dumps(fetch_errors, ensure_ascii=False, indent=2), flush=True)
+        raise SystemExit(
+            "Veri kalite korumasi: 0/15 model uretildi; mevcut yayin korunuyor."
+        )
+
     document = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "timezone": "Europe/Istanbul",
@@ -345,7 +367,7 @@ def main() -> None:
     for path in OUTPUTS:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"football-data.org tamamlandi: {len(matches)} mac, {sum(bool(m['model_score_predictions']) for m in matches)} model.")
+    print(f"football-data.org tamamlandi: {len(matches)} mac, {model_count} model.")
 
 
 if __name__ == "__main__":
