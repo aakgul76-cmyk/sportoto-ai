@@ -18,9 +18,11 @@ permissions:
   pages: write
   id-token: write
 
+# Veri saglayici anahtari repository genelinde ortaktir. Tum dal ve manuel
+# calistirmalari siraya alarak ayni anda API istegi gonderilmesini engelle.
 concurrency:
-  group: sportoto-data-and-pages-${{ github.ref }}
-  cancel-in-progress: true
+  group: sportoto-provider-api
+  cancel-in-progress: false
 
 jobs:
   update-and-build:
