@@ -1,12 +1,11 @@
 {
-  "generated_at": "2026-08-24T08:00:16.073099+00:00",
+  "generated_at": "2026-08-24T08:06:23.669544+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
   "wide_columns": 2304,
   "narrow_columns": 192,
   "fetch_errors": {
-    "SA:2026": "HTTPSConnectionPool(host='api.football-data.org', port=443): Max retries exceeded with url: /v4/competitions/SA/matches?season=2026 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))",
     "TSL:2025": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}",
     "TSL:2026": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}"
   },
@@ -623,7 +622,7 @@
       "model_1x2": {
         "1": 36.0,
         "X": 26.7,
-        "2": 37.2
+        "2": 37.3
       },
       "model_score_predictions": [
         {
@@ -641,8 +640,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 51.8,
-          "no": 48.2
+          "yes": 51.7,
+          "no": 48.3
         },
         "over_under": {
           "1.5": {
@@ -669,9 +668,9 @@
         "matching_scores": 1,
         "coupon_match": true
       },
-      "football_data_match_id": null,
-      "football_data_status": "COUPON_ONLY",
-      "fixture_match_type": "teams_from_competition_history",
+      "football_data_match_id": 558634,
+      "football_data_status": "FINISHED",
+      "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
@@ -688,11 +687,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 380,
+        "league_matches": 386,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.259,
-        "expected_away_goals": 1.283
+        "expected_home_goals": 1.256,
+        "expected_away_goals": 1.284
       }
     }
   ]
