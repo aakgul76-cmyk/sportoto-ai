@@ -131,7 +131,7 @@ def extract_matches(html: str, now: datetime | None = None) -> list[dict]:
         )
         matches.append({
             "match_no": str(match_no),
-            "date": local_date.isoformat() + ":00+03:00",
+            "date": local_date.isoformat() + "+03:00",
             "league": league,
             "country": country,
             "home": home,
