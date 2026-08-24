@@ -73,13 +73,13 @@ COMPETITIONS = {
 
 
 def normalized(value: str) -> str:
-    return " ".join(
+    ascii_value = (
         unicodedata.normalize("NFKD", value)
         .encode("ascii", "ignore")
         .decode()
         .lower()
-        .split()
     )
+    return " ".join(re.sub(r"[^a-z0-9]+", " ", ascii_value).split())
 
 
 def canonical_team(value: str) -> str:
