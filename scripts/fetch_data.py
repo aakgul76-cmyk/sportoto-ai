@@ -19,6 +19,10 @@ COUPON = ROOT / "data/coupon.csv"
 PREDICTIONS = ROOT / "data/predictions.csv"
 OUTPUTS = (ROOT / "data/matches.json", ROOT / "docs/data/matches.json")
 API = "https://api.football-data.org/v4"
+MIN_API_INTERVAL_SECONDS = 6.2  # En fazla 9.67 istek/dakika (10/dakika sinirinin altinda).
+DEFAULT_RATE_LIMIT_BACKOFF_SECONDS = 60.0
+_last_api_request_at = 0.0
+
 LEAGUE_CODES = {
     "süper lig": "TSL",
     "bundesliga": "BL1",
@@ -29,8 +33,25 @@ LEAGUE_CODES = {
 }
 
 
+def wait_for_api_slot() -> None:
+    """Serialize provider calls and keep them below the free-plan minute limit."""
+    global _last_api_request_at
+    elapsed = time.monotonic() - _last_api_request_at
+    if elapsed < MIN_API_INTERVAL_SECONDS:
+        time.sleep(MIN_API_INTERVAL_SECONDS - elapsed)
+    _last_api_request_at = time.monotonic()
+
+
+def retry_after_seconds(response: requests.Response) -> float:
+    try:
+        return max(float(response.headers.get("Retry-After", "")), MIN_API_INTERVAL_SECONDS)
+    except (TypeError, ValueError):
+        return DEFAULT_RATE_LIMIT_BACKOFF_SECONDS
+
+
 def api_get(path: str, token: str, **params) -> dict:
     for attempt in range(3):
+        wait_for_api_slot()
         response = requests.get(
             API + path,
             headers={"X-Auth-Token": token},
@@ -38,7 +59,7 @@ def api_get(path: str, token: str, **params) -> dict:
             timeout=45,
         )
         if response.status_code == 429 and attempt < 2:
-            time.sleep(12)
+            time.sleep(retry_after_seconds(response))
             continue
         response.raise_for_status()
         return response.json()
@@ -100,7 +121,6 @@ def fetch_competitions(matches: list[dict], token: str) -> tuple[dict[str, list]
                 combined.extend(payload.get("matches", []))
             except (requests.RequestException, RuntimeError) as error:
                 errors[f"{code}:{season}"] = str(error)
-            time.sleep(6.2)
         data[code] = combined
     return data, errors
 
