@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25T06:04:33.793274+00:00",
+  "generated_at": "2026-08-25T17:06:07.539690+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -284,37 +284,37 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 30.7,
-        "X": 26.7,
-        "2": 42.7
+        "1": 30.3,
+        "X": 26.0,
+        "2": 43.7
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.7
+          "percentage": 12.4
         },
         {
           "score": "0-1",
-          "percentage": 11.2
+          "percentage": 10.7
         },
         {
-          "score": "1-0",
-          "percentage": 9.2
+          "score": "1-2",
+          "percentage": 9.0
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 50.6,
-          "no": 49.4
+          "yes": 52.5,
+          "no": 47.5
         },
         "over_under": {
           "1.5": {
-            "over": 71.4,
-            "under": 28.6
+            "over": 73.4,
+            "under": 26.6
           },
           "2.5": {
-            "over": 45.8,
-            "under": 54.2
+            "over": 48.4,
+            "under": 51.6
           }
         }
       },
@@ -327,9 +327,9 @@
         "score_results": [
           "X",
           "2",
-          "1"
+          "2"
         ],
-        "matching_scores": 1,
+        "matching_scores": 2,
         "coupon_match": false
       },
       "football_data_match_id": 559702,
@@ -338,24 +338,24 @@
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.7
+          "percentage": 12.4
         },
         {
           "score": "0-1",
-          "percentage": 11.2
+          "percentage": 10.7
         },
         {
-          "score": "1-0",
-          "percentage": 9.2
+          "score": "1-2",
+          "percentage": 9.0
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
         "league_matches": 314,
         "home_home_matches": 17,
-        "away_away_matches": 17,
-        "expected_home_goals": 1.128,
-        "expected_away_goals": 1.381
+        "away_away_matches": 18,
+        "expected_home_goals": 1.161,
+        "expected_away_goals": 1.447
       }
     },
     {
