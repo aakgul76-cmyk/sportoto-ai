@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T08:26:36.702311+00:00",
+  "generated_at": "2026-08-25T06:04:33.793274+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -452,7 +452,7 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 36.0,
+        "1": 35.9,
         "X": 25.5,
         "2": 38.5
       },
@@ -477,8 +477,8 @@
         },
         "over_under": {
           "1.5": {
-            "over": 76.0,
-            "under": 24.0
+            "over": 76.1,
+            "under": 23.9
           },
           "2.5": {
             "over": 51.9,
@@ -519,11 +519,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 389,
+        "league_matches": 390,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.347,
-        "expected_away_goals": 1.403
+        "expected_home_goals": 1.348,
+        "expected_away_goals": 1.404
       }
     },
     {
@@ -556,8 +556,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.4,
-          "no": 47.6
+          "yes": 52.3,
+          "no": 47.7
         },
         "over_under": {
           "1.5": {
@@ -565,8 +565,8 @@
             "under": 26.2
           },
           "2.5": {
-            "over": 48.9,
-            "under": 51.1
+            "over": 48.8,
+            "under": 51.2
           }
         }
       },
@@ -603,11 +603,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 394,
+        "league_matches": 396,
         "home_home_matches": 20,
         "away_away_matches": 19,
-        "expected_home_goals": 1.523,
-        "expected_away_goals": 1.108
+        "expected_home_goals": 1.521,
+        "expected_away_goals": 1.107
       }
     },
     {
