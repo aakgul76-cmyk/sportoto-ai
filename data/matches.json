@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T21:22:14.638196+00:00",
+  "generated_at": "2026-08-28T21:59:40.482818+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -454,7 +454,7 @@
       "model_1x2": {
         "1": 35.9,
         "X": 25.5,
-        "2": 38.6
+        "2": 38.5
       },
       "model_score_predictions": [
         {
@@ -472,8 +472,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 55.9,
-          "no": 44.1
+          "yes": 55.8,
+          "no": 44.2
         },
         "over_under": {
           "1.5": {
@@ -519,11 +519,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 391,
+        "league_matches": 390,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.347,
-        "expected_away_goals": 1.407
+        "expected_home_goals": 1.348,
+        "expected_away_goals": 1.404
       }
     },
     {
@@ -556,8 +556,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.4,
-          "no": 47.6
+          "yes": 52.3,
+          "no": 47.7
         },
         "over_under": {
           "1.5": {
@@ -603,11 +603,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 401,
+        "league_matches": 402,
         "home_home_matches": 20,
         "away_away_matches": 19,
-        "expected_home_goals": 1.523,
-        "expected_away_goals": 1.107
+        "expected_home_goals": 1.522,
+        "expected_away_goals": 1.106
       }
     },
     {
