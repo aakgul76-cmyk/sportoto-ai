@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-28T01:02:26.059158+00:00",
+  "generated_at": "2026-08-28T21:22:14.638196+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -200,8 +200,8 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 54.5,
-        "X": 21.5,
+        "1": 54.6,
+        "X": 21.4,
         "2": 24.0
       },
       "model_score_predictions": [
@@ -229,8 +229,8 @@
             "under": 15.7
           },
           "2.5": {
-            "over": 64.2,
-            "under": 35.8
+            "over": 64.3,
+            "under": 35.7
           }
         }
       },
@@ -267,11 +267,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 306,
+        "league_matches": 307,
         "home_home_matches": 17,
         "away_away_matches": 17,
-        "expected_home_goals": 2.026,
-        "expected_away_goals": 1.286
+        "expected_home_goals": 2.029,
+        "expected_away_goals": 1.285
       }
     },
     {
@@ -333,7 +333,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 559702,
-      "football_data_status": "TIMED",
+      "football_data_status": "FINISHED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -388,8 +388,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 55.6,
-          "no": 44.4
+          "yes": 55.7,
+          "no": 44.3
         },
         "over_under": {
           "1.5": {
@@ -435,11 +435,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 314,
+        "league_matches": 315,
         "home_home_matches": 17,
         "away_away_matches": 17,
         "expected_home_goals": 1.761,
-        "expected_away_goals": 1.114
+        "expected_away_goals": 1.115
       }
     },
     {
@@ -454,7 +454,7 @@
       "model_1x2": {
         "1": 35.9,
         "X": 25.5,
-        "2": 38.5
+        "2": 38.6
       },
       "model_score_predictions": [
         {
@@ -472,8 +472,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 55.8,
-          "no": 44.2
+          "yes": 55.9,
+          "no": 44.1
         },
         "over_under": {
           "1.5": {
@@ -519,11 +519,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 390,
+        "league_matches": 391,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.348,
-        "expected_away_goals": 1.404
+        "expected_home_goals": 1.347,
+        "expected_away_goals": 1.407
       }
     },
     {
@@ -556,8 +556,8 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.3,
-          "no": 47.7
+          "yes": 52.4,
+          "no": 47.6
         },
         "over_under": {
           "1.5": {
@@ -603,10 +603,10 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 400,
+        "league_matches": 401,
         "home_home_matches": 20,
         "away_away_matches": 19,
-        "expected_home_goals": 1.522,
+        "expected_home_goals": 1.523,
         "expected_away_goals": 1.107
       }
     },
