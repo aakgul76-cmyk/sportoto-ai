@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T05:05:08.098303+00:00",
+  "generated_at": "2026-08-29T15:06:41.952820+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -481,8 +481,8 @@
             "under": 23.9
           },
           "2.5": {
-            "over": 51.9,
-            "under": 48.1
+            "over": 52.0,
+            "under": 48.0
           }
         }
       },
@@ -519,10 +519,10 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 391,
+        "league_matches": 392,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.347,
+        "expected_home_goals": 1.348,
         "expected_away_goals": 1.407
       }
     },
