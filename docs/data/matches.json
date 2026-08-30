@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-29T15:06:41.952820+00:00",
+  "generated_at": "2026-08-30T05:05:07.841483+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model",
@@ -200,9 +200,9 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 54.6,
+        "1": 54.7,
         "X": 21.4,
-        "2": 24.0
+        "2": 23.9
       },
       "model_score_predictions": [
         {
@@ -229,8 +229,8 @@
             "under": 15.7
           },
           "2.5": {
-            "over": 64.3,
-            "under": 35.7
+            "over": 64.4,
+            "under": 35.6
           }
         }
       },
@@ -249,7 +249,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 565781,
-      "football_data_status": "TIMED",
+      "football_data_status": "FINISHED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -267,10 +267,10 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 307,
+        "league_matches": 312,
         "home_home_matches": 17,
         "away_away_matches": 17,
-        "expected_home_goals": 2.029,
+        "expected_home_goals": 2.033,
         "expected_away_goals": 1.285
       }
     },
@@ -368,9 +368,9 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 52.5,
+        "1": 52.4,
         "X": 23.5,
-        "2": 24.0
+        "2": 24.1
       },
       "model_score_predictions": [
         {
@@ -393,12 +393,12 @@
         },
         "over_under": {
           "1.5": {
-            "over": 78.1,
-            "under": 21.9
+            "over": 78.2,
+            "under": 21.8
           },
           "2.5": {
-            "over": 54.8,
-            "under": 45.2
+            "over": 54.9,
+            "under": 45.1
           }
         }
       },
@@ -435,11 +435,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 315,
+        "league_matches": 320,
         "home_home_matches": 17,
         "away_away_matches": 17,
-        "expected_home_goals": 1.761,
-        "expected_away_goals": 1.115
+        "expected_home_goals": 1.76,
+        "expected_away_goals": 1.118
       }
     },
     {
@@ -452,7 +452,7 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 35.9,
+        "1": 35.8,
         "X": 25.5,
         "2": 38.6
       },
@@ -481,8 +481,8 @@
             "under": 23.9
           },
           "2.5": {
-            "over": 52.0,
-            "under": 48.0
+            "over": 51.9,
+            "under": 48.1
           }
         }
       },
@@ -501,7 +501,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 560558,
-      "football_data_status": "TIMED",
+      "football_data_status": "FINISHED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -519,10 +519,10 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 392,
+        "league_matches": 394,
         "home_home_matches": 19,
         "away_away_matches": 19,
-        "expected_home_goals": 1.348,
+        "expected_home_goals": 1.346,
         "expected_away_goals": 1.407
       }
     },
@@ -536,14 +536,14 @@
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {
-        "1": 46.8,
-        "X": 25.6,
+        "1": 46.9,
+        "X": 25.5,
         "2": 27.6
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.2
+          "percentage": 12.1
         },
         {
           "score": "1-0",
@@ -556,17 +556,17 @@
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.3,
-          "no": 47.7
+          "yes": 52.4,
+          "no": 47.6
         },
         "over_under": {
           "1.5": {
-            "over": 73.8,
-            "under": 26.2
+            "over": 73.9,
+            "under": 26.1
           },
           "2.5": {
-            "over": 48.9,
-            "under": 51.1
+            "over": 49.0,
+            "under": 51.0
           }
         }
       },
@@ -585,12 +585,12 @@
         "coupon_match": false
       },
       "football_data_match_id": 564649,
-      "football_data_status": "TIMED",
+      "football_data_status": "FINISHED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.2
+          "percentage": 12.1
         },
         {
           "score": "1-0",
@@ -603,11 +603,11 @@
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 402,
+        "league_matches": 404,
         "home_home_matches": 20,
         "away_away_matches": 19,
-        "expected_home_goals": 1.522,
-        "expected_away_goals": 1.106
+        "expected_home_goals": 1.526,
+        "expected_away_goals": 1.107
       }
     },
     {
