@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-08-31T05:05:26.481040+00:00",
+  "generated_at": "2026-08-31T22:27:17.720784+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
-  "source": "football_data_history_model",
+  "source": "football_data_history_model+narrow_first_no_triples_policy",
   "wide_columns": 0,
   "narrow_columns": 0,
   "fetch_errors": {
@@ -28,7 +28,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "1",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "2",
@@ -48,7 +75,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "2",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "3",
@@ -68,7 +122,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "3",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "4",
@@ -88,7 +169,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "4",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "5",
@@ -108,7 +216,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "5",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "6",
@@ -128,7 +263,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "6",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "7",
@@ -148,7 +310,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "7",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "8",
@@ -168,7 +357,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "8",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "9",
@@ -188,7 +404,34 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "9",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "10",
@@ -197,8 +440,8 @@
       "country": "Almanya",
       "home": "Borussia Dortmund",
       "away": "Hamburger SV",
-      "wide_pick": "",
-      "narrow_pick": "",
+      "wide_pick": "12",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 54.7,
         "X": 21.4,
@@ -272,7 +515,64 @@
         "away_away_matches": 17,
         "expected_home_goals": 2.033,
         "expected_away_goals": 1.285
-      }
+      },
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "10",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "1",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "1",
+            "percentage": 54.7
+          },
+          {
+            "symbol": "2",
+            "percentage": 23.9
+          },
+          {
+            "symbol": "X",
+            "percentage": 21.4
+          }
+        ],
+        "top_margin_pct": 30.8,
+        "third_probability_pct": 21.4,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 2.9,
+        "confidence_class": "C"
+      },
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "11",
@@ -281,8 +581,8 @@
       "country": "Fransa",
       "home": "Lille",
       "away": "Paris Saint-Germain",
-      "wide_pick": "",
-      "narrow_pick": "",
+      "wide_pick": "12",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 30.3,
         "X": 26.0,
@@ -356,7 +656,65 @@
         "away_away_matches": 18,
         "expected_home_goals": 1.161,
         "expected_away_goals": 1.447
-      }
+      },
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "11",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "2",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "2",
+            "percentage": 43.7
+          },
+          {
+            "symbol": "1",
+            "percentage": 30.3
+          },
+          {
+            "symbol": "X",
+            "percentage": 26.0
+          }
+        ],
+        "top_margin_pct": 13.4,
+        "third_probability_pct": 26.0,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 7.2,
+        "confidence_class": "C"
+      },
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "12",
@@ -365,8 +723,8 @@
       "country": "Fransa",
       "home": "Monaco",
       "away": "Marsilya",
-      "wide_pick": "",
-      "narrow_pick": "",
+      "wide_pick": "12",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 52.5,
         "X": 23.5,
@@ -440,7 +798,64 @@
         "away_away_matches": 17,
         "expected_home_goals": 1.763,
         "expected_away_goals": 1.117
-      }
+      },
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "12",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "1",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "1",
+            "percentage": 52.5
+          },
+          {
+            "symbol": "2",
+            "percentage": 24.1
+          },
+          {
+            "symbol": "X",
+            "percentage": 23.5
+          }
+        ],
+        "top_margin_pct": 28.4,
+        "third_probability_pct": 23.5,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 3.6,
+        "confidence_class": "C"
+      },
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "13",
@@ -449,8 +864,8 @@
       "country": "İngiltere",
       "home": "Tottenham Hotspur",
       "away": "Newcastle United",
-      "wide_pick": "",
-      "narrow_pick": "",
+      "wide_pick": "12",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 35.8,
         "X": 25.5,
@@ -524,7 +939,65 @@
         "away_away_matches": 19,
         "expected_home_goals": 1.346,
         "expected_away_goals": 1.407
-      }
+      },
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "13",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "2",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "2",
+            "percentage": 38.6
+          },
+          {
+            "symbol": "1",
+            "percentage": 35.8
+          },
+          {
+            "symbol": "X",
+            "percentage": 25.5
+          }
+        ],
+        "top_margin_pct": 2.8,
+        "third_probability_pct": 25.5,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 9.6,
+        "confidence_class": "D"
+      },
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "14",
@@ -533,8 +1006,8 @@
       "country": "İspanya",
       "home": "Sevilla",
       "away": "Atletico Madrid",
-      "wide_pick": "",
-      "narrow_pick": "",
+      "wide_pick": "12",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 46.9,
         "X": 25.5,
@@ -608,7 +1081,64 @@
         "away_away_matches": 19,
         "expected_home_goals": 1.526,
         "expected_away_goals": 1.107
-      }
+      },
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "14",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "1",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "1",
+            "percentage": 46.9
+          },
+          {
+            "symbol": "2",
+            "percentage": 27.6
+          },
+          {
+            "symbol": "X",
+            "percentage": 25.5
+          }
+        ],
+        "top_margin_pct": 19.3,
+        "third_probability_pct": 25.5,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 5.9,
+        "confidence_class": "C"
+      },
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "15",
@@ -628,7 +1158,88 @@
       "model_internal_alignment": {
         "status": "unavailable"
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi"
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "manual_narrow_pick": "",
+      "manual_wide_pick": "",
+      "external_consensus": {
+        "match_no": "15",
+        "sportoto_1_pct": "",
+        "sportoto_x_pct": "",
+        "sportoto_2_pct": "",
+        "nesine_1_pct": "",
+        "nesine_x_pct": "",
+        "nesine_2_pct": "",
+        "bilyoner_1_pct": "",
+        "bilyoner_x_pct": "",
+        "bilyoner_2_pct": "",
+        "misli_1_pct": "",
+        "misli_x_pct": "",
+        "misli_2_pct": "",
+        "hedef15_1_pct": "",
+        "hedef15_x_pct": "",
+        "hedef15_2_pct": "",
+        "site_pick": "",
+        "site_note": ""
+      },
+      "decision": {
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "wide_pick_origin": "from_narrow_primary"
     }
-  ]
+  ],
+  "narrow_strategy": {
+    "field": "narrow_pick",
+    "role": "primary_real_money_coupon",
+    "policy": "narrow_first_no_triples_v3",
+    "target_doubles": 7,
+    "max_doubles": 8,
+    "single_count": 0,
+    "double_count": 5,
+    "manual_count": 0,
+    "columns": 0,
+    "warnings": [
+      "Model/konsensüs olmayan maçlarda manuel dar tercih gerekiyor."
+    ]
+  },
+  "wide_strategy": {
+    "field": "wide_pick",
+    "role": "secondary_virtual_control_coupon",
+    "policy": "narrow_first_no_triples_v3",
+    "target_doubles": 11,
+    "single_count": 0,
+    "double_count": 5,
+    "manual_count": 0,
+    "columns": 0,
+    "warnings": [
+      "Model/konsensüs olmayan maçlarda manuel geniş tercih gerekiyor."
+    ]
+  },
+  "primary_coupon": "narrow",
+  "secondary_coupon": "wide_virtual",
+  "decision_policy": {
+    "name": "narrow_first_no_triples_v3",
+    "primary_coupon": "narrow_real_money",
+    "secondary_coupon": "wide_virtual_plus_probability",
+    "allowed_picks": [
+      "1",
+      "12",
+      "1X",
+      "2",
+      "X",
+      "X2"
+    ],
+    "forbidden_picks": [
+      "1X2"
+    ],
+    "narrow_target": "7-8 doubles = 128-256 columns; real-money primary coupon",
+    "wide_target": "narrow coupon + extra probabilities; target 11 doubles + 4 singles = 2048 columns",
+    "principles": [
+      "Önce gerçek oynanacak dar kupon üretilir.",
+      "Geniş kupon dar kuponun üzerine sanal +ihtimal kontrolüdür.",
+      "1X2 kullanılmaz.",
+      "Tahmin siteleri kopya için değil konsensüs/tuzak favori için kullanılır.",
+      "Türkiye erken sezonunda büyük takım dışı %50-58 favoriler tek geçilmez."
+    ]
+  }
 }
