@@ -6,9 +6,12 @@ on:
     paths:
       - "data/coupon.csv"
       - "data/predictions.csv"
+      - "data/consensus.csv"
       - "scripts/fetch_data.py"
+      - "scripts/apply_decision_policy.py"
       - ".github/workflows/update-data.yml"
       - "docs/index.html"
+      - "docs/DECISION_POLICY.md"
   schedule:
     # Sabah degerlendirmesi her gun calisir: pazartesi eski kupon, sali yeni kupon.
     - cron: "0 8 * * *"
@@ -46,7 +49,9 @@ jobs:
       - name: Football-Data gecmisinden kupon modelini hazirla
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
-        run: python scripts/fetch_data.py
+        run: |
+          python scripts/fetch_data.py
+          python scripts/apply_decision_policy.py
       - name: Yeni verileri repository'ye kaydet
         run: |
           git config user.name "github-actions[bot]"
