@@ -7,21 +7,24 @@
   <style>
     :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
     body { margin: 0; background: #07140f; color: #edf7f1; }
-    main { width: min(960px, calc(100% - 32px)); margin: 48px auto; }
+    main { width: min(1040px, calc(100% - 32px)); margin: 48px auto; }
     header { margin-bottom: 28px; }
     h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 3.5rem); }
     .accent { color: #5ee28c; }
-    #status { color: #a9bdb1; }
+    #status, #policy { color: #a9bdb1; line-height: 1.5; }
     .grid { display: grid; gap: 14px; }
     article { background: #10241a; border: 1px solid #254735; border-radius: 16px; padding: 18px; }
     .teams { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.1rem; font-weight: 700; }
     .versus { color: #5ee28c; font-size: .8rem; }
     .meta { margin-top: 12px; color: #a9bdb1; font-size: .9rem; }
-    .picks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .pick { border-radius: 999px; padding: 7px 11px; font-size: .86rem; font-weight: 700; }
+    .picks, .metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pick, .metric { border-radius: 999px; padding: 7px 11px; font-size: .86rem; font-weight: 700; }
     .wide { background: #1d4f35; color: #a8f0c1; }
     .narrow { background: #3b3320; color: #ffe08a; }
+    .model { background: #17324a; color: #9fd3ff; }
+    .risk { background: #4a1f1f; color: #ffb5b5; }
     .match-no { color: #5ee28c; margin-right: 8px; }
+    .reason { margin-top: 12px; color: #d2e6da; font-size: .92rem; line-height: 1.45; }
     .empty { text-align: center; padding: 48px 20px; color: #a9bdb1; }
   </style>
 </head>
@@ -30,6 +33,7 @@
     <header>
       <h1>Spor Toto <span class="accent">Analiz</span></h1>
       <div id="status">Veriler yükleniyor…</div>
+      <div id="policy"></div>
     </header>
     <section id="matches" class="grid"></section>
   </main>
@@ -37,9 +41,11 @@
     const escapeHtml = (value) => String(value ?? "-").replace(/[&<>'"]/g, char => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;"
     })[char]);
+    const pct = (obj, key) => obj && obj[key] !== undefined ? `${obj[key]}%` : "-";
 
     async function loadMatches() {
       const status = document.querySelector("#status");
+      const policy = document.querySelector("#policy");
       const container = document.querySelector("#matches");
       try {
         const response = await fetch("data/matches.json", { cache: "no-store" });
@@ -48,28 +54,41 @@
         status.textContent = data.generated_at
           ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Geniş: ${data.wide_columns ?? "-"} kolon · Dar: ${data.narrow_columns ?? "-"} kolon`
           : "Henüz API verisi alınmadı.";
+        policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Geniş hedef: ${data.decision_policy?.wide_target ?? "-"} · Dar hedef: ${data.decision_policy?.narrow_target ?? "-"}`;
 
-        if (!data.matches.length) {
+        if (!data.matches?.length) {
           container.innerHTML = '<div class="empty">İlk GitHub Actions çalışmasından sonra maçlar burada görünecek.</div>';
           return;
         }
 
-        container.innerHTML = data.matches.map(match => `
+        container.innerHTML = data.matches.map(match => {
+          const decision = match.decision || {};
+          const model = match.model_1x2 || {};
+          const riskReason = decision.favorite_risk_reason || decision.reason || "-";
+          return `
           <article>
             <div class="teams">
-              <span><b class="match-no">${escapeHtml(match.fixture_id)}.</b>${escapeHtml(match.home)}</span>
+              <span><b class="match-no">${escapeHtml(match.match_no || match.fixture_id)}.</b>${escapeHtml(match.home)}</span>
               <span class="versus">VS</span>
               <span>${escapeHtml(match.away)}</span>
             </div>
             <div class="meta">
-              ${escapeHtml(match.league)} ·
-              ${new Date(match.date).toLocaleString("tr-TR", { timeZone: data.timezone })}
+              ${escapeHtml(match.league)} · ${new Date(match.date).toLocaleString("tr-TR", { timeZone: data.timezone })}
             </div>
             <div class="picks">
-              <span class="pick wide">Geniş kupon: ${escapeHtml(match.wide_pick || "-")}</span>
-              <span class="pick narrow">Dar kupon: ${escapeHtml(match.narrow_pick || "-")}</span>
+              <span class="pick wide">Geniş: ${escapeHtml(match.wide_pick || "-")}</span>
+              <span class="pick narrow">Dar: ${escapeHtml(match.narrow_pick || "-")}</span>
+              <span class="pick model">Model: 1 ${escapeHtml(pct(model, "1"))} · X ${escapeHtml(pct(model, "X"))} · 2 ${escapeHtml(pct(model, "2"))}</span>
             </div>
-          </article>`).join("");
+            <div class="metrics">
+              <span class="metric model">Tek adayı: ${escapeHtml(decision.model_single || "-")}</span>
+              <span class="metric model">Çift adayı: ${escapeHtml(decision.model_double || "-")}</span>
+              <span class="metric risk">Sürpriz: ${escapeHtml(decision.surprise_score ?? "-")}</span>
+              <span class="metric risk">Güven: ${escapeHtml(decision.confidence_class || "-")}</span>
+            </div>
+            <div class="reason">Favori risk nedeni: ${escapeHtml(riskReason)}</div>
+          </article>`;
+        }).join("");
       } catch (error) {
         status.textContent = "Veri yüklenemedi.";
         container.innerHTML = `<div class="empty">${escapeHtml(error.message)}</div>`;
