@@ -25,6 +25,7 @@
     .risk { background: #4a1f1f; color: #ffb5b5; }
     .match-no { color: #5ee28c; margin-right: 8px; }
     .reason { margin-top: 12px; color: #d2e6da; font-size: .92rem; line-height: 1.45; }
+    .origin { margin-top: 8px; color: #a9bdb1; font-size: .82rem; }
     .empty { text-align: center; padding: 48px 20px; color: #a9bdb1; }
   </style>
 </head>
@@ -52,9 +53,9 @@
         if (!response.ok) throw new Error("Veri dosyası okunamadı");
         const data = await response.json();
         status.textContent = data.generated_at
-          ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Geniş: ${data.wide_columns ?? "-"} kolon · Dar: ${data.narrow_columns ?? "-"} kolon`
+          ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Dar gerçek: ${data.narrow_columns ?? "-"} kolon · Geniş sanal: ${data.wide_columns ?? "-"} kolon`
           : "Henüz API verisi alınmadı.";
-        policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Geniş hedef: ${data.decision_policy?.wide_target ?? "-"} · Dar hedef: ${data.decision_policy?.narrow_target ?? "-"}`;
+        policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Öncelik: Dar kupon · Geniş rolü: sanal +ihtimal kontrolü`;
 
         if (!data.matches?.length) {
           container.innerHTML = '<div class="empty">İlk GitHub Actions çalışmasından sonra maçlar burada görünecek.</div>';
@@ -76,8 +77,8 @@
               ${escapeHtml(match.league)} · ${new Date(match.date).toLocaleString("tr-TR", { timeZone: data.timezone })}
             </div>
             <div class="picks">
-              <span class="pick wide">Geniş: ${escapeHtml(match.wide_pick || "-")}</span>
-              <span class="pick narrow">Dar: ${escapeHtml(match.narrow_pick || "-")}</span>
+              <span class="pick narrow">Dar gerçek: ${escapeHtml(match.narrow_pick || "-")}</span>
+              <span class="pick wide">Geniş sanal: ${escapeHtml(match.wide_pick || "-")}</span>
               <span class="pick model">Model: 1 ${escapeHtml(pct(model, "1"))} · X ${escapeHtml(pct(model, "X"))} · 2 ${escapeHtml(pct(model, "2"))}</span>
             </div>
             <div class="metrics">
@@ -87,6 +88,7 @@
               <span class="metric risk">Güven: ${escapeHtml(decision.confidence_class || "-")}</span>
             </div>
             <div class="reason">Favori risk nedeni: ${escapeHtml(riskReason)}</div>
+            <div class="origin">Dar kaynak: ${escapeHtml(match.narrow_pick_origin || (match.manual_narrow_pick ? "manual" : "-"))} · Geniş kaynak: ${escapeHtml(match.wide_pick_origin || "-")}</div>
           </article>`;
         }).join("");
       } catch (error) {
