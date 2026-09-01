@@ -1,13 +1,17 @@
 {
-  "generated_at": "2026-09-01T19:48:12.534671+00:00",
+  "generated_at": "2026-09-01T19:57:49.080234+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
-  "source": "football_data_history_model+narrow_first_no_triples_policy",
+  "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
   "wide_columns": 0,
   "narrow_columns": 0,
   "fetch_errors": {
     "TSL:2025": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}",
-    "TSL:2026": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}"
+    "TSL:2026": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}",
+    "fixtures:2026-09-05": "API-Football /fixtures: {\"token\": \"Error/Missing application key. Go to https://www.api-football.com/documentation-v3 to learn how to get your API application key.\"}",
+    "fixtures:2026-09-06": "API-Football /fixtures: {\"token\": \"Error/Missing application key. Go to https://www.api-football.com/documentation-v3 to learn how to get your API application key.\"}",
+    "fixtures:2026-09-04": "API-Football /fixtures: {\"token\": \"Error/Missing application key. Go to https://www.api-football.com/documentation-v3 to learn how to get your API application key.\"}",
+    "fixtures:2026-09-07": "API-Football /fixtures: {\"token\": \"Error/Missing application key. Go to https://www.api-football.com/documentation-v3 to learn how to get your API application key.\"}"
   },
   "matches": [
     {
