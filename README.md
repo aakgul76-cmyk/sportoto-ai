@@ -5,7 +5,7 @@ Bu proje haftalık Spor Toto 15 maç listesini alır, GitHub Actions ile veri ü
 Ana çalışma mantığı üç parçadır:
 
 1. **Liste/veri üretimi:** Resmî Spor Toto bülteni veya yedek kaynak üzerinden 15 maçlık kupon listesi oluşturulur.
-2. **Tahmin ve risk üretimi:** API-Football oran verisi ve/veya football-data.org geçmiş maç verisinden basit model üretilir; tahmin sitesi/oynanma yüzdesi verileri varsa konsensüs ve tuzak favori sinyali olarak kullanılır.
+2. **Tahmin ve risk üretimi:** API-Football oran/fixture verisi ve/veya football-data.org geçmiş maç verisinden basit model üretilir; tahmin sitesi/oynanma yüzdesi verileri varsa konsensüs ve tuzak favori sinyali olarak kullanılır.
 3. **Dar kupon öncelikli karar politikası:** Önce gerçek oynanacak dar kupon, sonra onun üzerine sanal geniş kontrol kuponu üretilir.
 
 > Not: Bu proje kesin sonuç tahmini üretmez. Amaç karar disiplinini, kolon verimliliğini ve hafta sonu kalibrasyonunu iyileştirmektir.
@@ -96,6 +96,8 @@ API_FOOTBALL_KEY
 ```
 
 Değer: API-Football / API-Sports anahtarı.
+
+API-Football Free planinda dogrudan `date` ile ileriki gun fiksturleri bazen kapali olabilir. Bu durumda model, eski calisan yontemi de kullanir: ilgili `league + season` fikstur havuzunu cekip kupondaki takimlari ve tarihleri bu havuzdan eslestirir.
 
 GitHub Pages için:
 
