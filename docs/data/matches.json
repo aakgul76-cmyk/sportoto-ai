@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T15:10:14.306771+00:00",
+  "generated_at": "2026-09-01T19:48:12.534671+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model+narrow_first_no_triples_policy",
@@ -12,11 +12,11 @@
   "matches": [
     {
       "match_no": "1",
-      "date": "2026-08-28T21:30:00+03:00",
+      "date": "2026-09-05T17:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Gençlerbirliği",
-      "away": "Erzurumspor FK",
+      "home": "Erzurumspor FK",
+      "away": "Tümosan Konyaspor",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -59,11 +59,11 @@
     },
     {
       "match_no": "2",
-      "date": "2026-08-29T19:00:00+03:00",
+      "date": "2026-09-06T17:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Tümosan Konyaspor",
-      "away": "Kocaelispor",
+      "home": "Kasımpaşa",
+      "away": "Amed Sportif Faaliyetler",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -106,11 +106,11 @@
     },
     {
       "match_no": "3",
-      "date": "2026-08-29T21:30:00+03:00",
+      "date": "2026-09-06T17:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Galatasaray",
-      "away": "Göztepe",
+      "home": "Arca Çorum FK",
+      "away": "Eyüpspor",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -153,11 +153,11 @@
     },
     {
       "match_no": "4",
-      "date": "2026-08-29T21:30:00+03:00",
+      "date": "2026-09-05T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Gaziantep FK",
-      "away": "Çaykur Rizespor",
+      "home": "Fenerbahçe",
+      "away": "Beşiktaş",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -200,11 +200,11 @@
     },
     {
       "match_no": "5",
-      "date": "2026-08-30T19:00:00+03:00",
+      "date": "2026-09-04T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Eyüpspor",
-      "away": "Corendon Alanyaspor",
+      "home": "İstanbul Başakşehir",
+      "away": "Galatasaray",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -247,11 +247,11 @@
     },
     {
       "match_no": "6",
-      "date": "2026-08-30T21:30:00+03:00",
+      "date": "2026-09-06T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "İstanbul Başakşehir",
-      "away": "Kasımpaşa",
+      "home": "Kocaelispor",
+      "away": "Samsunspor",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -294,11 +294,11 @@
     },
     {
       "match_no": "7",
-      "date": "2026-08-30T21:30:00+03:00",
+      "date": "2026-09-06T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Samsunspor",
-      "away": "Fenerbahçe",
+      "home": "Trabzonspor",
+      "away": "Gençlerbirliği",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -341,11 +341,11 @@
     },
     {
       "match_no": "8",
-      "date": "2026-08-31T21:30:00+03:00",
+      "date": "2026-09-07T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Amed Sportif Faaliyetler",
-      "away": "Trabzonspor",
+      "home": "Çaykur Rizespor",
+      "away": "Corendon Alanyaspor",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -388,11 +388,11 @@
     },
     {
       "match_no": "9",
-      "date": "2026-08-31T21:30:00+03:00",
+      "date": "2026-09-07T20:00:00+03:00",
       "league": "Süper Lig",
       "country": "Türkiye",
-      "home": "Beşiktaş",
-      "away": "Arca Çorum FK",
+      "home": "Göztepe",
+      "away": "Gaziantep FK",
       "wide_pick": "",
       "narrow_pick": "",
       "model_1x2": {},
@@ -435,45 +435,45 @@
     },
     {
       "match_no": "10",
-      "date": "2026-08-29T19:30:00+03:00",
-      "league": "Bundesliga",
-      "country": "Almanya",
-      "home": "Borussia Dortmund",
-      "away": "Hamburger SV",
+      "date": "2026-09-06T16:00:00+03:00",
+      "league": "Premier League",
+      "country": "İngiltere",
+      "home": "Everton",
+      "away": "Manchester United",
       "wide_pick": "12",
       "narrow_pick": "12",
       "model_1x2": {
-        "1": 54.7,
-        "X": 21.4,
-        "2": 23.9
+        "1": 38.7,
+        "X": 25.9,
+        "2": 35.4
       },
       "model_score_predictions": [
         {
-          "score": "2-1",
-          "percentage": 9.6
-        },
-        {
           "score": "1-1",
-          "percentage": 9.5
+          "percentage": 12.3
         },
         {
-          "score": "2-0",
-          "percentage": 7.5
+          "score": "1-0",
+          "percentage": 9.4
+        },
+        {
+          "score": "0-1",
+          "percentage": 8.9
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 62.8,
-          "no": 37.2
+          "yes": 54.6,
+          "no": 45.4
         },
         "over_under": {
           "1.5": {
-            "over": 84.3,
-            "under": 15.7
+            "over": 74.9,
+            "under": 25.1
           },
           "2.5": {
-            "over": 64.4,
-            "under": 35.6
+            "over": 50.4,
+            "under": 49.6
           }
         }
       },
@@ -484,37 +484,37 @@
         "status": "divergent",
         "model_pick": "1",
         "score_results": [
-          "1",
           "X",
-          "1"
+          "1",
+          "2"
         ],
-        "matching_scores": 2,
+        "matching_scores": 1,
         "coupon_match": false
       },
-      "football_data_match_id": 565781,
-      "football_data_status": "FINISHED",
+      "football_data_match_id": 560567,
+      "football_data_status": "TIMED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
-          "score": "2-1",
-          "percentage": 9.6
-        },
-        {
           "score": "1-1",
-          "percentage": 9.5
+          "percentage": 12.3
         },
         {
-          "score": "2-0",
-          "percentage": 7.5
+          "score": "1-0",
+          "percentage": 9.4
+        },
+        {
+          "score": "0-1",
+          "percentage": 8.9
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 312,
-        "home_home_matches": 17,
-        "away_away_matches": 17,
-        "expected_home_goals": 2.033,
-        "expected_away_goals": 1.285
+        "league_matches": 400,
+        "home_home_matches": 20,
+        "away_away_matches": 20,
+        "expected_home_goals": 1.381,
+        "expected_away_goals": 1.308
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -547,74 +547,75 @@
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 54.7
+            "percentage": 38.7
           },
           {
             "symbol": "2",
-            "percentage": 23.9
+            "percentage": 35.4
           },
           {
             "symbol": "X",
-            "percentage": 21.4
+            "percentage": 25.9
           }
         ],
-        "top_margin_pct": 30.8,
-        "third_probability_pct": 21.4,
+        "top_margin_pct": 3.3,
+        "third_probability_pct": 25.9,
         "single_forbidden": true,
         "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok."
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
         ],
         "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
         "trap_favorite_alarm": false,
         "trap_favorite_reason": "",
         "consensus_1x2": {},
-        "surprise_score": 2.9,
-        "confidence_class": "C"
+        "surprise_score": 9.5,
+        "confidence_class": "D"
       },
       "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "11",
-      "date": "2026-08-28T21:45:00+03:00",
-      "league": "Ligue 1",
-      "country": "Fransa",
-      "home": "Lille",
-      "away": "Paris Saint-Germain",
+      "date": "2026-09-06T18:30:00+03:00",
+      "league": "Premier League",
+      "country": "İngiltere",
+      "home": "Arsenal",
+      "away": "Chelsea",
       "wide_pick": "12",
       "narrow_pick": "12",
       "model_1x2": {
-        "1": 30.3,
-        "X": 26.0,
-        "2": 43.7
+        "1": 50.0,
+        "X": 23.9,
+        "2": 26.2
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.4
+          "percentage": 11.2
         },
         {
-          "score": "0-1",
-          "percentage": 10.7
+          "score": "2-1",
+          "percentage": 9.6
         },
         {
-          "score": "1-2",
-          "percentage": 9.0
+          "score": "1-0",
+          "percentage": 9.5
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.5,
-          "no": 47.5
+          "yes": 56.7,
+          "no": 43.3
         },
         "over_under": {
           "1.5": {
-            "over": 73.4,
-            "under": 26.6
+            "over": 78.4,
+            "under": 21.6
           },
           "2.5": {
-            "over": 48.4,
-            "under": 51.6
+            "over": 55.1,
+            "under": 44.9
           }
         }
       },
@@ -623,39 +624,39 @@
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
         "status": "divergent",
-        "model_pick": "2",
+        "model_pick": "1",
         "score_results": [
           "X",
-          "2",
-          "2"
+          "1",
+          "1"
         ],
         "matching_scores": 2,
         "coupon_match": false
       },
-      "football_data_match_id": 559702,
-      "football_data_status": "FINISHED",
+      "football_data_match_id": 560570,
+      "football_data_status": "TIMED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.4
+          "percentage": 11.2
         },
         {
-          "score": "0-1",
-          "percentage": 10.7
+          "score": "2-1",
+          "percentage": 9.6
         },
         {
-          "score": "1-2",
-          "percentage": 9.0
+          "score": "1-0",
+          "percentage": 9.5
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 314,
-        "home_home_matches": 17,
-        "away_away_matches": 18,
-        "expected_home_goals": 1.161,
-        "expected_away_goals": 1.447
+        "league_matches": 400,
+        "home_home_matches": 20,
+        "away_away_matches": 20,
+        "expected_home_goals": 1.714,
+        "expected_away_goals": 1.175
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -683,34 +684,33 @@
         "status": "ready",
         "policy": "narrow_first_no_triples_v3",
         "distribution_source": "model",
-        "model_single": "2",
+        "model_single": "1",
         "model_double": "12",
         "ranked_outcomes": [
           {
-            "symbol": "2",
-            "percentage": 43.7
+            "symbol": "1",
+            "percentage": 50.0
           },
           {
-            "symbol": "1",
-            "percentage": 30.3
+            "symbol": "2",
+            "percentage": 26.2
           },
           {
             "symbol": "X",
-            "percentage": 26.0
+            "percentage": 23.9
           }
         ],
-        "top_margin_pct": 13.4,
-        "third_probability_pct": 26.0,
+        "top_margin_pct": 23.8,
+        "third_probability_pct": 23.9,
         "single_forbidden": true,
         "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok.",
-          "İlk iki ihtimal farkı 15 puanın altında."
+          "Favori %58 altında; tek için ayrışma yok."
         ],
         "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
         "trap_favorite_alarm": false,
         "trap_favorite_reason": "",
         "consensus_1x2": {},
-        "surprise_score": 7.2,
+        "surprise_score": 4.7,
         "confidence_class": "C"
       },
       "narrow_pick_origin": "auto_primary_double",
@@ -718,45 +718,45 @@
     },
     {
       "match_no": "12",
-      "date": "2026-08-30T21:45:00+03:00",
-      "league": "Ligue 1",
-      "country": "Fransa",
-      "home": "Monaco",
-      "away": "Marsilya",
+      "date": "2026-09-05T17:15:00+03:00",
+      "league": "La Liga",
+      "country": "İspanya",
+      "home": "Athletic Bilbao",
+      "away": "Atletico Madrid",
       "wide_pick": "12",
       "narrow_pick": "12",
       "model_1x2": {
-        "1": 52.5,
-        "X": 23.5,
-        "2": 24.1
+        "1": 44.1,
+        "X": 24.8,
+        "2": 31.1
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 11.1
+          "percentage": 11.7
         },
         {
           "score": "1-0",
-          "percentage": 9.9
+          "percentage": 9.2
         },
         {
           "score": "2-1",
-          "percentage": 9.7
+          "percentage": 9.1
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 55.7,
-          "no": 44.3
+          "yes": 56.9,
+          "no": 43.1
         },
         "over_under": {
           "1.5": {
-            "over": 78.2,
-            "under": 21.8
+            "over": 77.5,
+            "under": 22.5
           },
           "2.5": {
-            "over": 54.9,
-            "under": 45.1
+            "over": 53.9,
+            "under": 46.1
           }
         }
       },
@@ -774,30 +774,30 @@
         "matching_scores": 2,
         "coupon_match": false
       },
-      "football_data_match_id": 559703,
-      "football_data_status": "FINISHED",
+      "football_data_match_id": 564663,
+      "football_data_status": "TIMED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 11.1
+          "percentage": 11.7
         },
         {
           "score": "1-0",
-          "percentage": 9.9
+          "percentage": 9.2
         },
         {
           "score": "2-1",
-          "percentage": 9.7
+          "percentage": 9.1
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 322,
-        "home_home_matches": 17,
-        "away_away_matches": 17,
-        "expected_home_goals": 1.763,
-        "expected_away_goals": 1.117
+        "league_matches": 410,
+        "home_home_matches": 20,
+        "away_away_matches": 20,
+        "expected_home_goals": 1.563,
+        "expected_away_goals": 1.275
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -830,28 +830,29 @@
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 52.5
+            "percentage": 44.1
           },
           {
             "symbol": "2",
-            "percentage": 24.1
+            "percentage": 31.1
           },
           {
             "symbol": "X",
-            "percentage": 23.5
+            "percentage": 24.8
           }
         ],
-        "top_margin_pct": 28.4,
-        "third_probability_pct": 23.5,
+        "top_margin_pct": 13.0,
+        "third_probability_pct": 24.8,
         "single_forbidden": true,
         "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok."
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
         ],
         "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
         "trap_favorite_alarm": false,
         "trap_favorite_reason": "",
         "consensus_1x2": {},
-        "surprise_score": 3.6,
+        "surprise_score": 7.2,
         "confidence_class": "C"
       },
       "narrow_pick_origin": "auto_primary_double",
@@ -859,87 +860,23 @@
     },
     {
       "match_no": "13",
-      "date": "2026-08-29T19:30:00+03:00",
-      "league": "Premier League",
-      "country": "İngiltere",
-      "home": "Tottenham Hotspur",
-      "away": "Newcastle United",
-      "wide_pick": "12",
-      "narrow_pick": "12",
-      "model_1x2": {
-        "1": 35.8,
-        "X": 25.5,
-        "2": 38.6
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 12.1
-        },
-        {
-          "score": "0-1",
-          "percentage": 9.0
-        },
-        {
-          "score": "1-0",
-          "percentage": 8.6
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 55.9,
-          "no": 44.1
-        },
-        "over_under": {
-          "1.5": {
-            "over": 76.1,
-            "under": 23.9
-          },
-          "2.5": {
-            "over": 51.9,
-            "under": 48.1
-          }
-        }
-      },
+      "date": "2026-09-05T19:00:00+03:00",
+      "league": "Serie A",
+      "country": "İtalya",
+      "home": "Inter",
+      "away": "Napoli",
+      "wide_pick": "",
+      "narrow_pick": "",
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "2",
-        "score_results": [
-          "X",
-          "2",
-          "1"
-        ],
-        "matching_scores": 1,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "football_data_match_id": 560558,
-      "football_data_status": "FINISHED",
-      "fixture_match_type": "exact_date_and_teams",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 12.1
-        },
-        {
-          "score": "0-1",
-          "percentage": 9.0
-        },
-        {
-          "score": "1-0",
-          "percentage": 8.6
-        }
-      ],
-      "score_model": "poisson_from_football_data_history",
-      "model_sample": {
-        "league_matches": 394,
-        "home_home_matches": 19,
-        "away_away_matches": 19,
-        "expected_home_goals": 1.346,
-        "expected_away_goals": 1.407
-      },
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -963,83 +900,52 @@
         "site_note": ""
       },
       "decision": {
-        "status": "ready",
-        "policy": "narrow_first_no_triples_v3",
-        "distribution_source": "model",
-        "model_single": "2",
-        "model_double": "12",
-        "ranked_outcomes": [
-          {
-            "symbol": "2",
-            "percentage": 38.6
-          },
-          {
-            "symbol": "1",
-            "percentage": 35.8
-          },
-          {
-            "symbol": "X",
-            "percentage": 25.5
-          }
-        ],
-        "top_margin_pct": 2.8,
-        "third_probability_pct": 25.5,
-        "single_forbidden": true,
-        "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok.",
-          "İlk iki ihtimal farkı 15 puanın altında."
-        ],
-        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
-        "trap_favorite_alarm": false,
-        "trap_favorite_reason": "",
-        "consensus_1x2": {},
-        "surprise_score": 9.6,
-        "confidence_class": "D"
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
-      "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "14",
-      "date": "2026-08-29T22:30:00+03:00",
-      "league": "La Liga",
-      "country": "İspanya",
-      "home": "Sevilla",
-      "away": "Atletico Madrid",
-      "wide_pick": "12",
-      "narrow_pick": "12",
+      "date": "2026-09-05T21:45:00+03:00",
+      "league": "Serie A",
+      "country": "İtalya",
+      "home": "Roma",
+      "away": "Atalanta",
+      "wide_pick": "1X",
+      "narrow_pick": "1X",
       "model_1x2": {
-        "1": 46.9,
-        "X": 25.5,
-        "2": 27.6
+        "1": 49.8,
+        "X": 25.1,
+        "2": 25.1
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.1
+          "percentage": 11.9
         },
         {
           "score": "1-0",
-          "percentage": 11.0
+          "percentage": 11.3
         },
         {
           "score": "2-1",
-          "percentage": 9.3
+          "percentage": 9.5
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 52.4,
-          "no": 47.6
+          "yes": 51.8,
+          "no": 48.2
         },
         "over_under": {
           "1.5": {
-            "over": 73.9,
-            "under": 26.1
+            "over": 74.1,
+            "under": 25.9
           },
           "2.5": {
-            "over": 49.0,
-            "under": 51.0
+            "over": 49.2,
+            "under": 50.8
           }
         }
       },
@@ -1057,30 +963,30 @@
         "matching_scores": 2,
         "coupon_match": false
       },
-      "football_data_match_id": 564649,
-      "football_data_status": "FINISHED",
+      "football_data_match_id": 558611,
+      "football_data_status": "TIMED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 12.1
+          "percentage": 11.9
         },
         {
           "score": "1-0",
-          "percentage": 11.0
+          "percentage": 11.3
         },
         {
           "score": "2-1",
-          "percentage": 9.3
+          "percentage": 9.5
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 404,
+        "league_matches": 400,
         "home_home_matches": 20,
         "away_away_matches": 19,
-        "expected_home_goals": 1.526,
-        "expected_away_goals": 1.107
+        "expected_home_goals": 1.59,
+        "expected_away_goals": 1.052
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1109,23 +1015,23 @@
         "policy": "narrow_first_no_triples_v3",
         "distribution_source": "model",
         "model_single": "1",
-        "model_double": "12",
+        "model_double": "1X",
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 46.9
-          },
-          {
-            "symbol": "2",
-            "percentage": 27.6
+            "percentage": 49.8
           },
           {
             "symbol": "X",
-            "percentage": 25.5
+            "percentage": 25.1
+          },
+          {
+            "symbol": "2",
+            "percentage": 25.1
           }
         ],
-        "top_margin_pct": 19.3,
-        "third_probability_pct": 25.5,
+        "top_margin_pct": 24.7,
+        "third_probability_pct": 25.1,
         "single_forbidden": true,
         "single_forbidden_reasons": [
           "Favori %58 altında; tek için ayrışma yok."
@@ -1134,7 +1040,7 @@
         "trap_favorite_alarm": false,
         "trap_favorite_reason": "",
         "consensus_1x2": {},
-        "surprise_score": 5.9,
+        "surprise_score": 4.6,
         "confidence_class": "C"
       },
       "narrow_pick_origin": "auto_primary_double",
@@ -1142,23 +1048,87 @@
     },
     {
       "match_no": "15",
-      "date": "2026-08-30T21:45:00+03:00",
+      "date": "2026-09-06T21:45:00+03:00",
       "league": "Serie A",
       "country": "İtalya",
-      "home": "Cagliari",
-      "away": "Inter",
-      "wide_pick": "",
-      "narrow_pick": "",
-      "model_1x2": {},
-      "model_score_predictions": [],
-      "model_markets": {},
+      "home": "Juventus",
+      "away": "Milan",
+      "wide_pick": "12",
+      "narrow_pick": "12",
+      "model_1x2": {
+        "1": 40.2,
+        "X": 27.9,
+        "2": 31.9
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 13.1
+        },
+        {
+          "score": "1-0",
+          "percentage": 12.1
+        },
+        {
+          "score": "0-1",
+          "percentage": 10.4
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 47.4,
+          "no": 52.6
+        },
+        "over_under": {
+          "1.5": {
+            "over": 67.9,
+            "under": 32.1
+          },
+          "2.5": {
+            "over": 41.5,
+            "under": 58.5
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "divergent",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "2"
+        ],
+        "matching_scores": 1,
+        "coupon_match": false
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "football_data_match_id": 558618,
+      "football_data_status": "TIMED",
+      "fixture_match_type": "exact_date_and_teams",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 13.1
+        },
+        {
+          "score": "1-0",
+          "percentage": 12.1
+        },
+        {
+          "score": "0-1",
+          "percentage": 10.4
+        }
+      ],
+      "score_model": "poisson_from_football_data_history",
+      "model_sample": {
+        "league_matches": 400,
+        "home_home_matches": 20,
+        "away_away_matches": 20,
+        "expected_home_goals": 1.257,
+        "expected_away_goals": 1.086
+      },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -1182,9 +1152,40 @@
         "site_note": ""
       },
       "decision": {
-        "status": "unavailable",
-        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "1",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "1",
+            "percentage": 40.2
+          },
+          {
+            "symbol": "2",
+            "percentage": 31.9
+          },
+          {
+            "symbol": "X",
+            "percentage": 27.9
+          }
+        ],
+        "top_margin_pct": 8.3,
+        "third_probability_pct": 27.9,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 8.6,
+        "confidence_class": "D"
       },
+      "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     }
   ],
