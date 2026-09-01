@@ -23,7 +23,9 @@ FOOTBALL_DATA_API = "https://api.football-data.org/v4"
 API_FOOTBALL_API = "https://v3.football.api-sports.io"
 MIN_API_INTERVAL_SECONDS = 6.2  # En fazla 9.67 istek/dakika (10/dakika sinirinin altinda).
 DEFAULT_RATE_LIMIT_BACKOFF_SECONDS = 60.0
+API_FOOTBALL_MIN_DAILY_REMAINING = 10
 _last_api_request_at = 0.0
+_api_football_disabled_reason: str | None = None
 
 LEAGUE_CODES = {
     "süper lig": "TSL",
@@ -83,6 +85,10 @@ def football_data_get(path: str, token: str, **params) -> dict:
 
 
 def api_football_get(path: str, key: str, **params) -> list:
+    global _api_football_disabled_reason
+    if _api_football_disabled_reason:
+        raise RuntimeError(_api_football_disabled_reason)
+
     for attempt in range(3):
         wait_for_api_slot()
         response = requests.get(
@@ -103,6 +109,16 @@ def api_football_get(path: str, key: str, **params) -> list:
         if payload.get("errors"):
             detail = json.dumps(payload["errors"], ensure_ascii=False)
             raise RuntimeError(f"API-Football {path}: {detail[:500]}")
+        daily_remaining = response.headers.get("x-ratelimit-requests-remaining")
+        try:
+            if daily_remaining is not None and int(daily_remaining) <= API_FOOTBALL_MIN_DAILY_REMAINING:
+                _api_football_disabled_reason = (
+                    "API-Football gunluk kota korumasi: "
+                    f"kalan istek {daily_remaining}; yeni istekler durduruldu."
+                )
+                raise RuntimeError(_api_football_disabled_reason)
+        except ValueError:
+            pass
         return payload.get("response", [])
     raise RuntimeError(f"API-Football yanit vermedi: {path}")
 

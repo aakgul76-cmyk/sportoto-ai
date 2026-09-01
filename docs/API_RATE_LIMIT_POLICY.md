@@ -15,6 +15,7 @@ Last updated: 2026-08-24
 3. HTTP 429 responses honor the provider's `Retry-After` header. If it is absent or invalid, the workflow waits 60 seconds before retrying.
 4. A repository-wide GitHub Actions concurrency group queues scheduled, manual, branch, and main runs. Provider workflows cannot run concurrently.
 5. A request has a 45-second timeout and at most three attempts.
+6. API-Football response headers are checked for the daily remaining quota. If the remaining daily quota falls to 10 or lower, the run stops sending new API-Football requests.
 
 ## API-Football reactivation
 
