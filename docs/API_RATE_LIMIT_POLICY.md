@@ -11,7 +11,7 @@ Last updated: 2026-08-24
 ## Safeguards
 
 1. Every provider request passes through one centralized limiter.
-2. Requests are spaced by at least 6.2 seconds. This is at most about 9.67 requests per minute, below a 10 requests/minute free-plan limit.
+2. Requests are spaced by at least 10 seconds. This is at most 6 requests per minute, safely below a 10 requests/minute free-plan limit.
 3. HTTP 429 responses honor the provider's `Retry-After` header. If it is absent or invalid, the workflow waits 60 seconds before retrying.
 4. A repository-wide GitHub Actions concurrency group queues scheduled, manual, branch, and main runs. Provider workflows cannot run concurrently.
 5. A request has a 45-second timeout and at most three attempts.
