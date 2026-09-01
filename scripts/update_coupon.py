@@ -6,7 +6,7 @@ import csv
 import io
 import re
 import unicodedata
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 COUPON = ROOT / "data/coupon.csv"
 PREDICTIONS = ROOT / "data/predictions.csv"
 OFFICIAL_SOURCE_URL = "https://www.sportoto.gov.tr/spor-toto-listeler"
+OFFICIAL_API_URL = "https://webapi.sportoto.gov.tr/"
 FALLBACK_SOURCE_URL = "https://sportotoformul15.com/"
 DATE_RE = re.compile(r"^(\d{2}\.\d{2}\.\d{4})\s+(\d{2}:\d{2})$")
 MATCH_RE = re.compile(r"^(.+?)\s+vs\s+(.+?)$", re.IGNORECASE)
@@ -187,6 +188,99 @@ def extract_official_matches(html: str, now: datetime | None = None) -> list[dic
     return validate_matches(matches, now)
 
 
+def extract_official_api_matches(payload: dict, now: datetime | None = None) -> list[dict]:
+    """Convert the official site's GameMatch API response to coupon rows."""
+
+    if not payload.get("isSucceed"):
+        raise ValueError(payload.get("message") or "Resmi API mac listesini dondurmedi.")
+    objects = payload.get("object")
+    if not isinstance(objects, list):
+        raise ValueError("Resmi API mac listesi beklenen bicimde degil.")
+
+    turkey_tz = timezone(timedelta(hours=3))
+    matches = []
+    for match_no, item in enumerate(objects, start=1):
+        match = item.get("match") or {}
+        home_data = match.get("homeTeam") or {}
+        away_data = match.get("awayTeam") or {}
+        home = canonical_team(home_data.get("name", ""))
+        away = canonical_team(away_data.get("name", ""))
+        date_text = match.get("date")
+        if not home or not away or not date_text:
+            raise ValueError(f"Resmi API {match_no}. mac icin eksik veri dondurdu.")
+
+        local_date = datetime.fromisoformat(date_text.replace("Z", "+00:00"))
+        if local_date.tzinfo is None:
+            local_date = local_date.replace(tzinfo=turkey_tz)
+        else:
+            local_date = local_date.astimezone(turkey_tz)
+        league, country = competition_for(match_no, home, away)
+        matches.append({
+            "match_no": str(match_no),
+            "date": local_date.isoformat(),
+            "league": league,
+            "country": country,
+            "home": home,
+            "away": away,
+        })
+
+    return validate_matches(matches, now)
+
+
+def fetch_official_api_matches(
+    headers: dict[str, str], now: datetime | None = None
+) -> list[dict]:
+    """Fetch the newest valid published coupon from Spor Toto's public web API."""
+
+    years_response = requests.get(
+        OFFICIAL_API_URL + "api/GameRound/GetGameRoundYears",
+        headers=headers,
+        timeout=45,
+    )
+    years_response.raise_for_status()
+    years_payload = years_response.json()
+    if not years_payload.get("isSucceed"):
+        raise ValueError(years_payload.get("message") or "Sezon listesi alinamadi.")
+    years = years_payload.get("object") or []
+
+    errors = []
+    for year_item in years[:2]:
+        year = year_item.get("year")
+        if not year:
+            continue
+        rounds_response = requests.get(
+            OFFICIAL_API_URL + "api/GameRound",
+            params={"year": year, "isPublished": "true"},
+            headers=headers,
+            timeout=45,
+        )
+        rounds_response.raise_for_status()
+        rounds_payload = rounds_response.json()
+        rounds = rounds_payload.get("object") or []
+        rounds.sort(key=lambda row: row.get("roundCloseDate") or "", reverse=True)
+
+        for game_round in rounds:
+            round_id = game_round.get("id")
+            if round_id is None:
+                continue
+            matches_response = requests.get(
+                OFFICIAL_API_URL + "api/GameMatch/GetGameMatches/",
+                params={"gameRoundId": round_id},
+                headers=headers,
+                timeout=45,
+            )
+            matches_response.raise_for_status()
+            try:
+                matches = extract_official_api_matches(matches_response.json(), now)
+                print(f"Resmi Spor Toto haftasi: {year} {game_round.get('name', round_id)}")
+                return matches
+            except (TypeError, ValueError) as error:
+                errors.append(f"{year} {game_round.get('name', round_id)}: {error}")
+
+    detail = "; ".join(errors[:4]) or "yayinlanmis hafta bulunamadi"
+    raise ValueError(f"Resmi API'de gecerli yeni kupon bulunamadi ({detail}).")
+
+
 def extract_matches(html: str, now: datetime | None = None) -> list[dict]:
     parser = VisibleTextParser()
     parser.feed(html)
@@ -239,16 +333,21 @@ def csv_text(rows: list[dict], fields: list[str]) -> str:
 def main() -> None:
     headers = {"User-Agent": "sportoto-ai/1.0 (+GitHub Actions weekly bulletin update)"}
     try:
-        response = requests.get(OFFICIAL_SOURCE_URL, headers=headers, timeout=45)
-        response.raise_for_status()
-        matches = extract_official_matches(response.text)
-        source = OFFICIAL_SOURCE_URL
-    except (requests.RequestException, ValueError) as official_error:
-        print(f"Resmi Spor Toto kaynagi kullanilamadi: {official_error}")
-        response = requests.get(FALLBACK_SOURCE_URL, headers=headers, timeout=45)
-        response.raise_for_status()
-        matches = extract_matches(response.text)
-        source = FALLBACK_SOURCE_URL
+        matches = fetch_official_api_matches(headers)
+        source = OFFICIAL_API_URL
+    except (requests.RequestException, TypeError, ValueError) as api_error:
+        print(f"Resmi Spor Toto API kullanilamadi: {api_error}")
+        try:
+            response = requests.get(OFFICIAL_SOURCE_URL, headers=headers, timeout=45)
+            response.raise_for_status()
+            matches = extract_official_matches(response.text)
+            source = OFFICIAL_SOURCE_URL
+        except (requests.RequestException, ValueError) as official_error:
+            print(f"Resmi Spor Toto sayfasi kullanilamadi: {official_error}")
+            response = requests.get(FALLBACK_SOURCE_URL, headers=headers, timeout=45)
+            response.raise_for_status()
+            matches = extract_matches(response.text)
+            source = FALLBACK_SOURCE_URL
     print(f"Liste kaynagi: {source}")
 
     coupon_text = csv_text(
