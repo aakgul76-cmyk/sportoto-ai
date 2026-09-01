@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T22:27:17.720784+00:00",
+  "generated_at": "2026-09-01T05:08:05.929846+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "football_data_history_model+narrow_first_no_triples_policy",
@@ -775,7 +775,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 559703,
-      "football_data_status": "IN_PLAY",
+      "football_data_status": "FINISHED",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
