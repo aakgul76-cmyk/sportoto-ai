@@ -46,9 +46,10 @@ jobs:
           cache: pip
       - name: Kutuphaneleri kur
         run: pip install -r requirements.txt
-      - name: Football-Data gecmisinden kupon modelini hazirla
+      - name: Saglayici verileriyle kupon modelini hazirla
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: |
           python scripts/fetch_data.py
           python scripts/apply_decision_policy.py

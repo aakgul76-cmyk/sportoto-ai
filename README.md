@@ -5,7 +5,7 @@ Bu proje haftalık Spor Toto 15 maç listesini alır, GitHub Actions ile veri ü
 Ana çalışma mantığı üç parçadır:
 
 1. **Liste/veri üretimi:** Resmî Spor Toto bülteni veya yedek kaynak üzerinden 15 maçlık kupon listesi oluşturulur.
-2. **Tahmin ve risk üretimi:** football-data.org geçmiş maç verisinden basit Poisson modeli üretilir; tahmin sitesi/oynanma yüzdesi verileri varsa konsensüs ve tuzak favori sinyali olarak kullanılır.
+2. **Tahmin ve risk üretimi:** API-Football oran verisi ve/veya football-data.org geçmiş maç verisinden basit model üretilir; tahmin sitesi/oynanma yüzdesi verileri varsa konsensüs ve tuzak favori sinyali olarak kullanılır.
 3. **Dar kupon öncelikli karar politikası:** Önce gerçek oynanacak dar kupon, sonra onun üzerine sanal geniş kontrol kuponu üretilir.
 
 > Not: Bu proje kesin sonuç tahmini üretmez. Amaç karar disiplinini, kolon verimliliğini ve hafta sonu kalibrasyonunu iyileştirmektir.
@@ -61,7 +61,7 @@ sportoto-ai/
 ├── .github/workflows/update-coupon.yml  # Haftalık Spor Toto listesini yeniler
 ├── .github/workflows/update-data.yml    # Model verisini ve JSON çıktısını üretir
 ├── scripts/update_coupon.py             # 15 maçlık kupon listesini oluşturur
-├── scripts/fetch_data.py                # Football-data geçmişinden model üretir
+├── scripts/fetch_data.py                # API-Football / football-data verisinden model üretir
 ├── scripts/apply_decision_policy.py     # Dar öncelikli, üçlüsüz kupon politikasını uygular
 ├── scripts/reset_consensus.py           # Yeni haftada konsensüs şablonunu sıfırlar
 ├── data/coupon.csv                      # Bağlayıcı 15 maç listesi
@@ -89,6 +89,14 @@ FOOTBALL_DATA_TOKEN
 
 Değer: football-data.org API anahtarı.
 
+API-Football yeniden aktifse ikinci secret'ı ekleyin:
+
+```text
+API_FOOTBALL_KEY
+```
+
+Değer: API-Football / API-Sports anahtarı.
+
 GitHub Pages için:
 
 ```text
@@ -104,6 +112,7 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 $env:FOOTBALL_DATA_TOKEN="ANAHTARINIZ"
+$env:API_FOOTBALL_KEY="ANAHTARINIZ"
 python scripts/update_coupon.py
 python scripts/reset_consensus.py
 python scripts/fetch_data.py

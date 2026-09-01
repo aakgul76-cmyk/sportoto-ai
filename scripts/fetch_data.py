@@ -1,4 +1,4 @@
-"""Build Spor Toto model predictions from football-data.org match history."""
+"""Build Spor Toto model predictions from provider data."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ import csv
 import json
 import math
 import os
+import statistics
 import time
 import unicodedata
 from datetime import datetime, timezone
@@ -18,7 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 COUPON = ROOT / "data/coupon.csv"
 PREDICTIONS = ROOT / "data/predictions.csv"
 OUTPUTS = (ROOT / "data/matches.json", ROOT / "docs/data/matches.json")
-API = "https://api.football-data.org/v4"
+FOOTBALL_DATA_API = "https://api.football-data.org/v4"
+API_FOOTBALL_API = "https://v3.football.api-sports.io"
 MIN_API_INTERVAL_SECONDS = 6.2  # En fazla 9.67 istek/dakika (10/dakika sinirinin altinda).
 DEFAULT_RATE_LIMIT_BACKOFF_SECONDS = 60.0
 _last_api_request_at = 0.0
@@ -59,11 +61,11 @@ def response_error_detail(response: requests.Response) -> str:
     return detail[:500]
 
 
-def api_get(path: str, token: str, **params) -> dict:
+def football_data_get(path: str, token: str, **params) -> dict:
     for attempt in range(3):
         wait_for_api_slot()
         response = requests.get(
-            API + path,
+            FOOTBALL_DATA_API + path,
             headers={"X-Auth-Token": token},
             params=params,
             timeout=45,
@@ -78,6 +80,31 @@ def api_get(path: str, token: str, **params) -> dict:
             )
         return response.json()
     raise RuntimeError(f"football-data.org yanit vermedi: {path}")
+
+
+def api_football_get(path: str, key: str, **params) -> list:
+    for attempt in range(3):
+        wait_for_api_slot()
+        response = requests.get(
+            API_FOOTBALL_API + path,
+            headers={"x-apisports-key": key},
+            params=params,
+            timeout=45,
+        )
+        if response.status_code == 429 and attempt < 2:
+            time.sleep(retry_after_seconds(response))
+            continue
+        if not response.ok:
+            detail = response_error_detail(response)
+            raise RuntimeError(
+                f"API-Football HTTP {response.status_code} {path}: {detail}"
+            )
+        payload = response.json()
+        if payload.get("errors"):
+            detail = json.dumps(payload["errors"], ensure_ascii=False)
+            raise RuntimeError(f"API-Football {path}: {detail[:500]}")
+        return payload.get("response", [])
+    raise RuntimeError(f"API-Football yanit vermedi: {path}")
 
 
 def normalized(value: str) -> str:
@@ -131,7 +158,7 @@ def fetch_competitions(matches: list[dict], token: str) -> tuple[dict[str, list]
         combined = []
         for season in (2025, 2026):
             try:
-                payload = api_get(f"/competitions/{code}/matches", token, season=season)
+                payload = football_data_get(f"/competitions/{code}/matches", token, season=season)
                 combined.extend(payload.get("matches", []))
             except (requests.RequestException, RuntimeError) as error:
                 errors[f"{code}:{season}"] = str(error)
@@ -185,6 +212,159 @@ def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
         "homeTeam": home_team,
         "awayTeam": away_team,
     }
+
+
+def resolve_api_football_fixtures(matches: list[dict], key: str) -> dict[str, str]:
+    errors: dict[str, str] = {}
+    by_date: dict[str, list[dict]] = {}
+    for match in matches:
+        by_date.setdefault(match["date"][:10], []).append(match)
+
+    for date, dated_matches in by_date.items():
+        try:
+            fixtures = api_football_get("/fixtures", key, date=date, timezone="Europe/Istanbul")
+        except (requests.RequestException, RuntimeError) as error:
+            errors[f"fixtures:{date}"] = str(error)
+            continue
+
+        for match in dated_matches:
+            ranked = []
+            for item in fixtures:
+                teams = item.get("teams", {})
+                score = (
+                    similarity(match["home"], teams.get("home", {}).get("name", ""))
+                    + similarity(match["away"], teams.get("away", {}).get("name", ""))
+                ) / 2
+                ranked.append((score, item))
+            best_score, best = max(ranked, default=(0, None), key=lambda entry: entry[0])
+            if best is None or best_score < 0.55:
+                match["api_football_error"] = "API-Football fixture eslesmesi bulunamadi"
+                match["api_football_fixture_id"] = None
+            else:
+                match["api_football_fixture_id"] = best["fixture"]["id"]
+                match["api_football_match_score"] = round(best_score, 3)
+    return errors
+
+
+def median_odds(values: list[float]) -> float | None:
+    return round(statistics.median(values), 3) if values else None
+
+
+def collect_api_football_odds(payload: list) -> tuple[dict, dict[str, list[float]]]:
+    buckets = {
+        "1": [], "X": [], "2": [], "kg_var": [], "kg_yok": [],
+        "o15": [], "u15": [], "o25": [], "u25": [],
+    }
+    correct_scores: dict[str, list[float]] = {}
+    for item in payload:
+        for bookmaker in item.get("bookmakers", []):
+            for bet in bookmaker.get("bets", []):
+                name = bet.get("name", "").lower()
+                for value in bet.get("values", []):
+                    label = str(value.get("value", "")).strip()
+                    try:
+                        odd = float(value.get("odd"))
+                    except (TypeError, ValueError):
+                        continue
+                    low = label.lower()
+                    if "match winner" in name:
+                        key = {"home": "1", "draw": "X", "away": "2", "1": "1", "x": "X", "2": "2"}.get(low)
+                        if key:
+                            buckets[key].append(odd)
+                    elif "both teams" in name:
+                        if low in ("yes", "var"):
+                            buckets["kg_var"].append(odd)
+                        elif low in ("no", "yok"):
+                            buckets["kg_yok"].append(odd)
+                    elif "over/under" in name or "goals over" in name:
+                        compact = low.replace(" ", "")
+                        for line, suffix in (("1.5", "15"), ("2.5", "25")):
+                            if line in compact and compact.startswith("over"):
+                                buckets["o" + suffix].append(odd)
+                            if line in compact and compact.startswith("under"):
+                                buckets["u" + suffix].append(odd)
+                    elif "correct score" in name:
+                        score = label.replace(":", "-").replace(" ", "")
+                        if "-" in score and all(part.isdigit() for part in score.split("-", 1)):
+                            correct_scores.setdefault(score, []).append(odd)
+    markets = {
+        "1x2": {"1": median_odds(buckets["1"]), "X": median_odds(buckets["X"]), "2": median_odds(buckets["2"])},
+        "btts": {"yes": median_odds(buckets["kg_var"]), "no": median_odds(buckets["kg_yok"])},
+        "over_under": {
+            "1.5": {"over": median_odds(buckets["o15"]), "under": median_odds(buckets["u15"])},
+            "2.5": {"over": median_odds(buckets["o25"]), "under": median_odds(buckets["u25"])},
+        },
+    }
+    return markets, correct_scores
+
+
+def devig(odds: list[float | None]) -> list[float] | None:
+    if any(not odd or odd <= 1 for odd in odds):
+        return None
+    inverse = [1 / odd for odd in odds]
+    total = sum(inverse)
+    return [value / total for value in inverse]
+
+
+def odds_distribution(markets: dict) -> dict:
+    probabilities = devig([markets["1x2"][key] for key in ("1", "X", "2")])
+    if not probabilities:
+        return {}
+    return {
+        symbol: round(probability * 100, 1)
+        for symbol, probability in zip(("1", "X", "2"), probabilities)
+    }
+
+
+def poisson_scores_from_market(markets: dict) -> list[tuple[str, float]]:
+    target_1x2 = devig([markets["1x2"][key] for key in ("1", "X", "2")])
+    target_ou = devig([markets["over_under"]["2.5"]["over"], markets["over_under"]["2.5"]["under"]])
+    if not target_1x2:
+        return []
+    best = None
+    for home_i in range(4, 81):
+        home_lam = home_i / 20
+        for away_i in range(4, 81):
+            away_lam = away_i / 20
+            grid = {
+                (home, away): poisson(home_lam, home) * poisson(away_lam, away)
+                for home in range(7) for away in range(7)
+            }
+            outcomes = [
+                sum(p for (home, away), p in grid.items() if home > away),
+                sum(p for (home, away), p in grid.items() if home == away),
+                sum(p for (home, away), p in grid.items() if home < away),
+            ]
+            error = sum((outcomes[index] - target_1x2[index]) ** 2 for index in range(3))
+            if target_ou:
+                over = sum(p for (home, away), p in grid.items() if home + away >= 3)
+                error += (over - target_ou[0]) ** 2
+            if best is None or error < best[0]:
+                best = (error, grid)
+    return sorted(
+        ((f"{home}-{away}", probability) for (home, away), probability in best[1].items()),
+        key=lambda entry: entry[1],
+        reverse=True,
+    )[:3]
+
+
+def market_score_predictions(markets: dict, correct: dict[str, list[float]]) -> tuple[list[dict], str]:
+    if correct:
+        probabilities = {score: 1 / median_odds(values) for score, values in correct.items()}
+        total = sum(probabilities.values())
+        ranked = sorted(
+            ((score, value / total) for score, value in probabilities.items()),
+            key=lambda entry: entry[1],
+            reverse=True,
+        )[:3]
+        source = "api_football_correct_score_odds"
+    else:
+        ranked = poisson_scores_from_market(markets)
+        source = "api_football_poisson_from_market_odds"
+    return (
+        [{"score": score, "percentage": round(probability * 100, 1)} for score, probability in ranked],
+        source,
+    )
 
 
 def finished_before(candidates: list, fixture: dict) -> list[dict]:
@@ -301,10 +481,23 @@ def alignment(one_x_two: dict, scores: list[dict], narrow_pick: str) -> dict:
 
 def main() -> None:
     token = os.getenv("FOOTBALL_DATA_TOKEN")
-    if not token:
-        raise SystemExit("FOOTBALL_DATA_TOKEN GitHub Secret bulunamadi.")
+    api_football_key = os.getenv("API_FOOTBALL_KEY")
+    if not token and not api_football_key:
+        raise SystemExit("FOOTBALL_DATA_TOKEN veya API_FOOTBALL_KEY GitHub Secret bulunamadi.")
     matches = load_inputs()
-    competition_data, fetch_errors = fetch_competitions(matches, token)
+    competition_data: dict[str, list] = {}
+    fetch_errors: dict[str, str] = {}
+    if token:
+        competition_data, fetch_errors = fetch_competitions(matches, token)
+    else:
+        fetch_errors["football-data.org"] = "FOOTBALL_DATA_TOKEN yok; football-data modeli atlandi."
+
+    if api_football_key:
+        api_football_errors = resolve_api_football_fixtures(matches, api_football_key)
+        fetch_errors.update(api_football_errors)
+    else:
+        fetch_errors["API-Football"] = "API_FOOTBALL_KEY yok; oran/fixture sağlayıcısı atlandi."
+
     for match in matches:
         code = LEAGUE_CODES.get(match["league"].lower())
         match["model_1x2"] = {}
@@ -314,31 +507,56 @@ def main() -> None:
         match["market_score_predictions"] = []
         match["market_status"] = "unavailable_without_odds_provider"
         match["model_internal_alignment"] = {"status": "unavailable"}
-        if not code:
+        if code and competition_data:
+            candidates = competition_data.get(code, [])
+            fixture = find_fixture(match, candidates)
+            fixture_match_type = "exact_date_and_teams"
+            if not fixture:
+                fixture = infer_fixture_from_teams(match, candidates)
+                fixture_match_type = "teams_from_competition_history"
+            if fixture:
+                history = finished_before(candidates, fixture)
+                home_lambda, away_lambda, sample = expected_goals(fixture, history)
+                one_x_two, scores, markets = model_distribution(home_lambda, away_lambda)
+                match["football_data_match_id"] = fixture["id"]
+                match["football_data_status"] = fixture.get("status")
+                match["fixture_match_type"] = fixture_match_type
+                match["model_1x2"] = one_x_two
+                match["model_score_predictions"] = scores
+                match["score_predictions"] = scores
+                match["score_model"] = "poisson_from_football_data_history"
+                match["model_markets"] = markets
+                match["model_sample"] = sample
+                match["model_internal_alignment"] = alignment(one_x_two, scores, match["narrow_pick"])
+            else:
+                match["data_error"] = "football-data.org fikstur eslesmesi bulunamadi"
+        elif not code:
             match["data_error"] = "Lig kodu tanimli degil"
-            continue
-        candidates = competition_data.get(code, [])
-        fixture = find_fixture(match, candidates)
-        fixture_match_type = "exact_date_and_teams"
-        if not fixture:
-            fixture = infer_fixture_from_teams(match, candidates)
-            fixture_match_type = "teams_from_competition_history"
-        if not fixture:
-            match["data_error"] = "football-data.org fikstur eslesmesi bulunamadi"
-            continue
-        history = finished_before(candidates, fixture)
-        home_lambda, away_lambda, sample = expected_goals(fixture, history)
-        one_x_two, scores, markets = model_distribution(home_lambda, away_lambda)
-        match["football_data_match_id"] = fixture["id"]
-        match["football_data_status"] = fixture.get("status")
-        match["fixture_match_type"] = fixture_match_type
-        match["model_1x2"] = one_x_two
-        match["model_score_predictions"] = scores
-        match["score_predictions"] = scores
-        match["score_model"] = "poisson_from_football_data_history"
-        match["model_markets"] = markets
-        match["model_sample"] = sample
-        match["model_internal_alignment"] = alignment(one_x_two, scores, match["narrow_pick"])
+
+        fixture_id = match.get("api_football_fixture_id")
+        if api_football_key and fixture_id:
+            try:
+                markets, correct = collect_api_football_odds(api_football_get("/odds", api_football_key, fixture=fixture_id))
+            except (requests.RequestException, RuntimeError) as error:
+                match["api_football_error"] = str(error)
+                markets, correct = {}, {}
+            if markets:
+                odds_1x2 = odds_distribution(markets)
+                scores, source = market_score_predictions(markets, correct)
+                match["market_odds"] = markets
+                match["market_1x2"] = odds_1x2
+                match["market_score_predictions"] = scores
+                match["market_status"] = "ready" if odds_1x2 else "odds_without_1x2"
+                if odds_1x2:
+                    # API-Football restore edildiginde piyasa olasiligini karar politikasina
+                    # besle; football-data.org TSL 403 gibi bosluklari kapatir.
+                    match["model_1x2"] = odds_1x2
+                    match["model_score_predictions"] = scores
+                    match["score_predictions"] = scores
+                    match["score_model"] = source
+                    match["model_markets"] = markets
+                    match["model_internal_alignment"] = alignment(odds_1x2, scores, match["narrow_pick"])
+                    match.pop("data_error", None)
 
     def columns(field: str) -> int:
         result = 1
@@ -348,7 +566,7 @@ def main() -> None:
 
     model_count = sum(bool(match["model_score_predictions"]) for match in matches)
     if model_count == 0:
-        print("football-data.org hic model uretemedi. Saglayici hatalari:", flush=True)
+        print("Hic model uretilemedi. Saglayici hatalari:", flush=True)
         print(json.dumps(fetch_errors, ensure_ascii=False, indent=2), flush=True)
         raise SystemExit(
             "Veri kalite korumasi: 0/15 model uretildi; mevcut yayin korunuyor."
@@ -358,7 +576,7 @@ def main() -> None:
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "timezone": "Europe/Istanbul",
         "count": len(matches),
-        "source": "football_data_history_model",
+        "source": "api_football_market_odds_plus_football_data_history",
         "wide_columns": columns("wide_pick"),
         "narrow_columns": columns("narrow_pick"),
         "fetch_errors": fetch_errors,
@@ -367,7 +585,7 @@ def main() -> None:
     for path in OUTPUTS:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"football-data.org tamamlandi: {len(matches)} mac, {model_count} model.")
+    print(f"Veri modeli tamamlandi: {len(matches)} mac, {model_count} model.")
 
 
 if __name__ == "__main__":

@@ -4,9 +4,9 @@ Last updated: 2026-08-24
 
 ## Current state
 
-- API-Football requests are disabled while the API-Football account is suspended.
-- The active workflow uses football-data.org through `FOOTBALL_DATA_TOKEN`.
-- No GitHub Actions workflow reads or sends `API_FOOTBALL_KEY`.
+- API-Football requests are enabled again after the account suspension was lifted.
+- The active workflow can use API-Football through `API_FOOTBALL_KEY`.
+- The active workflow can also use football-data.org through `FOOTBALL_DATA_TOKEN`.
 
 ## Safeguards
 
@@ -18,4 +18,4 @@ Last updated: 2026-08-24
 
 ## API-Football reactivation
 
-API-Football must not be re-enabled until support confirms that the account is active. If it is restored later, its requests must use the same centralized limiter and must not bypass the repository-wide workflow queue.
+API-Football is re-enabled only through the shared provider limiter and the repository-wide workflow queue. If suspension or 429 errors return, remove or rotate `API_FOOTBALL_KEY` and let the workflow fall back to the remaining provider data.
