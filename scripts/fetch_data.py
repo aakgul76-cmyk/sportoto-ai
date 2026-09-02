@@ -6,6 +6,7 @@ import csv
 import json
 import math
 import os
+import re
 import statistics
 import time
 import unicodedata
@@ -248,6 +249,12 @@ def api_football_season(match: dict) -> int:
     return match_date.year if match_date.month >= 7 else match_date.year - 1
 
 
+def latest_allowed_api_football_season(error: Exception) -> int | None:
+    """Extract the newest season offered by an API-Football plan error."""
+    match = re.search(r"try from\s+(\d{4})\s+to\s+(\d{4})", str(error), re.IGNORECASE)
+    return int(match.group(2)) if match else None
+
+
 def api_football_fixture_as_match(item: dict) -> dict | None:
     fixture = item.get("fixture", {})
     teams = item.get("teams", {})
@@ -288,9 +295,12 @@ def assign_api_football_fixture(match: dict, item: dict, score: float, source: s
     match["api_football_fixture_source"] = source
 
 
-def fetch_api_football_season_fixtures(matches: list[dict], key: str) -> tuple[dict[str, list], dict[str, str]]:
+def fetch_api_football_season_fixtures(
+    matches: list[dict], key: str
+) -> tuple[dict[str, list], dict[str, int], dict[str, str]]:
     errors: dict[str, str] = {}
     data: dict[str, list] = {}
+    source_seasons: dict[str, int] = {}
     league_requests = sorted(
         {
             (api_football_league_id(match), api_football_season(match), match["league"].lower())
@@ -299,6 +309,7 @@ def fetch_api_football_season_fixtures(matches: list[dict], key: str) -> tuple[d
         }
     )
     for league_id, season, league_name in league_requests:
+        requested_season = season
         try:
             fixtures = api_football_get(
                 "/fixtures",
@@ -309,16 +320,32 @@ def fetch_api_football_season_fixtures(matches: list[dict], key: str) -> tuple[d
             )
         except (requests.RequestException, RuntimeError) as error:
             errors[f"api_football_season:{league_name}:{season}"] = str(error)
-            continue
+            fallback_season = latest_allowed_api_football_season(error)
+            if fallback_season is None or fallback_season == season:
+                continue
+            try:
+                fixtures = api_football_get(
+                    "/fixtures",
+                    key,
+                    league=league_id,
+                    season=fallback_season,
+                    timezone="Europe/Istanbul",
+                )
+                season = fallback_season
+            except (requests.RequestException, RuntimeError) as fallback_error:
+                errors[f"api_football_season:{league_name}:{fallback_season}"] = str(fallback_error)
+                continue
         converted = [
             converted
             for item in fixtures
             if (converted := api_football_fixture_as_match(item)) is not None
         ]
-        data[f"{league_id}:{season}"] = converted
+        target_key = f"{league_id}:{requested_season}"
+        data[target_key] = converted
+        source_seasons[target_key] = season
 
         for match in matches:
-            if api_football_league_id(match) != league_id or api_football_season(match) != season:
+            if api_football_league_id(match) != league_id or api_football_season(match) != requested_season:
                 continue
             ranked = [
                 (api_football_fixture_score(match, item), item)
@@ -328,10 +355,12 @@ def fetch_api_football_season_fixtures(matches: list[dict], key: str) -> tuple[d
             best_score, best = max(ranked, default=(0, None), key=lambda entry: entry[0])
             if best is not None and best_score >= 0.55 and not match.get("api_football_fixture_id"):
                 assign_api_football_fixture(match, best, best_score, "league_season")
-    return data, errors
+    return data, source_seasons, errors
 
 
-def resolve_api_football_fixtures(matches: list[dict], key: str) -> tuple[dict[str, str], dict[str, list]]:
+def resolve_api_football_fixtures(
+    matches: list[dict], key: str
+) -> tuple[dict[str, str], dict[str, list], dict[str, int]]:
     errors: dict[str, str] = {}
     by_date: dict[str, list[dict]] = {}
     for match in matches:
@@ -353,9 +382,9 @@ def resolve_api_football_fixtures(matches: list[dict], key: str) -> tuple[dict[s
             else:
                 assign_api_football_fixture(match, best, best_score, "date")
 
-    season_data, season_errors = fetch_api_football_season_fixtures(matches, key)
+    season_data, source_seasons, season_errors = fetch_api_football_season_fixtures(matches, key)
     errors.update(season_errors)
-    return errors, season_data
+    return errors, season_data, source_seasons
 
 
 def median_odds(values: list[float]) -> float | None:
@@ -599,6 +628,7 @@ def main() -> None:
     matches = load_inputs()
     competition_data: dict[str, list] = {}
     api_football_season_data: dict[str, list] = {}
+    api_football_source_seasons: dict[str, int] = {}
     fetch_errors: dict[str, str] = {}
     if token:
         competition_data, fetch_errors = fetch_competitions(matches, token)
@@ -606,7 +636,11 @@ def main() -> None:
         fetch_errors["football-data.org"] = "FOOTBALL_DATA_TOKEN yok; football-data modeli atlandi."
 
     if api_football_key:
-        api_football_errors, api_football_season_data = resolve_api_football_fixtures(matches, api_football_key)
+        (
+            api_football_errors,
+            api_football_season_data,
+            api_football_source_seasons,
+        ) = resolve_api_football_fixtures(matches, api_football_key)
         fetch_errors.update(api_football_errors)
     else:
         fetch_errors["API-Football"] = "API_FOOTBALL_KEY yok; oran/fixture sağlayıcısı atlandi."
@@ -649,7 +683,9 @@ def main() -> None:
         if not match["model_1x2"] and api_football_season_data:
             league_id = api_football_league_id(match)
             season = api_football_season(match)
-            candidates = api_football_season_data.get(f"{league_id}:{season}", [])
+            season_key = f"{league_id}:{season}"
+            candidates = api_football_season_data.get(season_key, [])
+            source_season = api_football_source_seasons.get(season_key, season)
             fixture = find_fixture(match, candidates)
             fixture_match_type = "api_football_exact_date_and_teams"
             if not fixture:
@@ -667,7 +703,16 @@ def main() -> None:
                 match["score_predictions"] = scores
                 match["score_model"] = "poisson_from_api_football_season_history"
                 match["model_markets"] = markets
-                match["model_sample"] = sample | {"provider": "api_football"}
+                match["model_sample"] = sample | {
+                    "provider": "api_football",
+                    "source_season": source_season,
+                    "target_season": season,
+                }
+                if source_season != season:
+                    match["model_warning"] = (
+                        f"API-Football Free plan nedeniyle {source_season} sezonu "
+                        "tarihsel yedek veri olarak kullanildi; güncel form değildir."
+                    )
                 match["model_internal_alignment"] = alignment(one_x_two, scores, match["narrow_pick"])
                 match.pop("data_error", None)
 
@@ -728,4 +773,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

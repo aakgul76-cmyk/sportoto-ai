@@ -16,7 +16,7 @@ Last updated: 2026-08-24
 4. A repository-wide GitHub Actions concurrency group queues scheduled, manual, branch, and main runs. Provider workflows cannot run concurrently.
 5. A request has a 45-second timeout and at most three attempts.
 6. API-Football response headers are checked for the daily remaining quota. If the remaining daily quota falls to 10 or lower, the run stops sending new API-Football requests.
-7. If API-Football blocks a future `date` fixture query on the Free plan, the workflow falls back to the older `league + season` fixture lookup and filters the coupon match from that season data.
+7. If API-Football blocks a future `date` fixture query on the Free plan, the workflow falls back to the older `league + season` fixture lookup. If the current season is also restricted, the newest season explicitly offered in the provider error is used only as a labelled historical baseline.
 
 ## API-Football reactivation
 
