@@ -138,8 +138,9 @@ def normalized(value: str) -> str:
     replacements = {
         "olympique de marseille": "marseille",
         "olympique marseille": "marseille",
-        "basaksehir fk": "istanbul basaksehir",
-        "istanbul basaksehir fk": "istanbul basaksehir",
+        "basaksehir fk": "basaksehir",
+        "istanbul basaksehir": "basaksehir",
+        "istanbul basaksehir fk": "basaksehir",
         "caykur rizespor": "rize",
         "corum fk": "corum",
         "erzurumspor fk": "erzurum",
