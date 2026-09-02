@@ -97,7 +97,7 @@ API_FOOTBALL_KEY
 
 Değer: API-Football / API-Sports anahtarı.
 
-API-Football Free planinda dogrudan `date` ile ileriki gun fiksturleri bazen kapali olabilir. Bu durumda model once ilgili `league + season` fikstur havuzunu dener. Plan güncel sezonu da kapatirsa API hata mesajindaki en yeni izinli sezon, yalnızca tarihsel model yedeği olarak kullanılır ve çıktı güncel form olmadığı uyarısıyla etiketlenir.
+API-Football Free planinda dogrudan `date` ile ileriki gun fiksturleri bazen kapali olabilir. Bu durumda model once ilgili `league + season` fikstur havuzunu dener. Plan güncel sezonu da kapatirsa API hata mesajindaki en yeni izinli sezon, yalnızca tarihsel model yedeği olarak kullanılır ve çıktı güncel form olmadığı uyarısıyla etiketlenir. Tarihsel takım eşleştirmesi sıkı benzerlik eşiğiyle yapılır ve kullanılan takım adları `model_team_mapping` alanında denetlenebilir.
 
 GitHub Pages için:
 

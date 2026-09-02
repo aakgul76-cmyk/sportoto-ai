@@ -140,6 +140,7 @@ def normalized(value: str) -> str:
         "olympique marseille": "marseille",
         "basaksehir fk": "istanbul basaksehir",
         "istanbul basaksehir fk": "istanbul basaksehir",
+        "caykur rizespor": "rize",
         "corum fk": "corum",
         "erzurumspor fk": "erzurum",
     }
@@ -228,7 +229,9 @@ def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
         default=(0, None),
         key=lambda entry: entry[0],
     )
-    if home_team is None or away_team is None or home_score < 0.55 or away_score < 0.55:
+    # This branch has no date/fixture confirmation, so a permissive fuzzy match
+    # can silently map a promoted team to a similarly named top-flight team.
+    if home_team is None or away_team is None or home_score < 0.80 or away_score < 0.80:
         return None
     target_date = datetime.fromisoformat(match["date"]).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
     return {
@@ -237,6 +240,10 @@ def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
         "status": "COUPON_ONLY",
         "homeTeam": home_team,
         "awayTeam": away_team,
+        "teamMatchScores": {
+            "home": round(home_score, 3),
+            "away": round(away_score, 3),
+        },
     }
 
 
@@ -707,6 +714,14 @@ def main() -> None:
                     "provider": "api_football",
                     "source_season": source_season,
                     "target_season": season,
+                }
+                match["model_team_mapping"] = {
+                    "coupon_home": match["home"],
+                    "history_home": fixture["homeTeam"]["name"],
+                    "home_similarity": fixture.get("teamMatchScores", {}).get("home", 1.0),
+                    "coupon_away": match["away"],
+                    "history_away": fixture["awayTeam"]["name"],
+                    "away_similarity": fixture.get("teamMatchScores", {}).get("away", 1.0),
                 }
                 if source_season != season:
                     match["model_warning"] = (
