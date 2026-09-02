@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T05:47:32.609911+00:00",
+  "generated_at": "2026-09-02T05:53:34.258522+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -119,86 +119,18 @@
       "country": "Türkiye",
       "home": "Arca Çorum FK",
       "away": "Eyüpspor",
-      "wide_pick": "12",
-      "narrow_pick": "12",
-      "model_1x2": {
-        "1": 38.6,
-        "X": 27.6,
-        "2": 33.9
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 13.0
-        },
-        {
-          "score": "1-0",
-          "percentage": 11.3
-        },
-        {
-          "score": "0-1",
-          "percentage": 10.4
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 49.0,
-          "no": 51.0
-        },
-        "over_under": {
-          "1.5": {
-            "over": 69.4,
-            "under": 30.6
-          },
-          "2.5": {
-            "over": 43.3,
-            "under": 56.7
-          }
-        }
-      },
+      "wide_pick": "",
+      "narrow_pick": "",
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "1",
-        "score_results": [
-          "X",
-          "1",
-          "2"
-        ],
-        "matching_scores": 1,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "api_football_history_match_id": null,
-      "api_football_history_status": "COUPON_ONLY",
-      "fixture_match_type": "api_football_teams_from_season_history",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 13.0
-        },
-        {
-          "score": "1-0",
-          "percentage": 11.3
-        },
-        {
-          "score": "0-1",
-          "percentage": 10.4
-        }
-      ],
-      "score_model": "poisson_from_api_football_season_history",
-      "model_sample": {
-        "league_matches": 342,
-        "home_home_matches": 18,
-        "away_away_matches": 18,
-        "expected_home_goals": 1.254,
-        "expected_away_goals": 1.156,
-        "provider": "api_football",
-        "source_season": 2024,
-        "target_season": 2026
-      },
-      "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -222,40 +154,9 @@
         "site_note": ""
       },
       "decision": {
-        "status": "ready",
-        "policy": "narrow_first_no_triples_v3",
-        "distribution_source": "model",
-        "model_single": "1",
-        "model_double": "12",
-        "ranked_outcomes": [
-          {
-            "symbol": "1",
-            "percentage": 38.6
-          },
-          {
-            "symbol": "2",
-            "percentage": 33.9
-          },
-          {
-            "symbol": "X",
-            "percentage": 27.6
-          }
-        ],
-        "top_margin_pct": 4.7,
-        "third_probability_pct": 27.6,
-        "single_forbidden": true,
-        "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok.",
-          "İlk iki ihtimal farkı 15 puanın altında."
-        ],
-        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
-        "trap_favorite_alarm": false,
-        "trap_favorite_reason": "",
-        "consensus_1x2": {},
-        "surprise_score": 9.4,
-        "confidence_class": "D"
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
-      "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -344,6 +245,14 @@
         "source_season": 2024,
         "target_season": 2026
       },
+      "model_team_mapping": {
+        "coupon_home": "Fenerbahçe",
+        "history_home": "Fenerbahçe",
+        "home_similarity": 1.0,
+        "coupon_away": "Beşiktaş",
+        "history_away": "Beşiktaş",
+        "away_similarity": 1.0
+      },
       "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -411,86 +320,18 @@
       "country": "Türkiye",
       "home": "İstanbul Başakşehir",
       "away": "Galatasaray",
-      "wide_pick": "12",
-      "narrow_pick": "12",
-      "model_1x2": {
-        "1": 31.8,
-        "X": 24.5,
-        "2": 43.7
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.4
-        },
-        {
-          "score": "1-2",
-          "percentage": 9.1
-        },
-        {
-          "score": "0-1",
-          "percentage": 8.7
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 58.3,
-          "no": 41.7
-        },
-        "over_under": {
-          "1.5": {
-            "over": 78.7,
-            "under": 21.3
-          },
-          "2.5": {
-            "over": 55.6,
-            "under": 44.4
-          }
-        }
-      },
+      "wide_pick": "",
+      "narrow_pick": "",
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "2",
-        "score_results": [
-          "X",
-          "2",
-          "2"
-        ],
-        "matching_scores": 2,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "api_football_history_match_id": null,
-      "api_football_history_status": "COUPON_ONLY",
-      "fixture_match_type": "api_football_teams_from_season_history",
-      "score_predictions": [
-        {
-          "score": "1-1",
-          "percentage": 11.4
-        },
-        {
-          "score": "1-2",
-          "percentage": 9.1
-        },
-        {
-          "score": "0-1",
-          "percentage": 8.7
-        }
-      ],
-      "score_model": "poisson_from_api_football_season_history",
-      "model_sample": {
-        "league_matches": 342,
-        "home_home_matches": 18,
-        "away_away_matches": 18,
-        "expected_home_goals": 1.32,
-        "expected_away_goals": 1.59,
-        "provider": "api_football",
-        "source_season": 2024,
-        "target_season": 2026
-      },
-      "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -514,40 +355,9 @@
         "site_note": ""
       },
       "decision": {
-        "status": "ready",
-        "policy": "narrow_first_no_triples_v3",
-        "distribution_source": "model",
-        "model_single": "2",
-        "model_double": "12",
-        "ranked_outcomes": [
-          {
-            "symbol": "2",
-            "percentage": 43.7
-          },
-          {
-            "symbol": "1",
-            "percentage": 31.8
-          },
-          {
-            "symbol": "X",
-            "percentage": 24.5
-          }
-        ],
-        "top_margin_pct": 11.9,
-        "third_probability_pct": 24.5,
-        "single_forbidden": true,
-        "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok.",
-          "İlk iki ihtimal farkı 15 puanın altında."
-        ],
-        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
-        "trap_favorite_alarm": false,
-        "trap_favorite_reason": "",
-        "consensus_1x2": {},
-        "surprise_score": 7.4,
-        "confidence_class": "C"
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
-      "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -557,86 +367,18 @@
       "country": "Türkiye",
       "home": "Kocaelispor",
       "away": "Samsunspor",
-      "wide_pick": "1X",
-      "narrow_pick": "1",
-      "model_1x2": {
-        "1": 52.1,
-        "X": 25.5,
-        "2": 22.4
-      },
-      "model_score_predictions": [
-        {
-          "score": "1-0",
-          "percentage": 13.1
-        },
-        {
-          "score": "1-1",
-          "percentage": 12.1
-        },
-        {
-          "score": "2-0",
-          "percentage": 10.1
-        }
-      ],
-      "model_markets": {
-        "btts": {
-          "yes": 47.5,
-          "no": 52.5
-        },
-        "over_under": {
-          "1.5": {
-            "over": 70.8,
-            "under": 29.2
-          },
-          "2.5": {
-            "over": 45.0,
-            "under": 55.0
-          }
-        }
-      },
+      "wide_pick": "",
+      "narrow_pick": "",
+      "model_1x2": {},
+      "model_score_predictions": [],
+      "model_markets": {},
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "divergent",
-        "model_pick": "1",
-        "score_results": [
-          "1",
-          "X",
-          "1"
-        ],
-        "matching_scores": 2,
-        "coupon_match": false
+        "status": "unavailable"
       },
-      "api_football_history_match_id": null,
-      "api_football_history_status": "COUPON_ONLY",
-      "fixture_match_type": "api_football_teams_from_season_history",
-      "score_predictions": [
-        {
-          "score": "1-0",
-          "percentage": 13.1
-        },
-        {
-          "score": "1-1",
-          "percentage": 12.1
-        },
-        {
-          "score": "2-0",
-          "percentage": 10.1
-        }
-      ],
-      "score_model": "poisson_from_api_football_season_history",
-      "model_sample": {
-        "league_matches": 342,
-        "home_home_matches": 18,
-        "away_away_matches": 18,
-        "expected_home_goals": 1.554,
-        "expected_away_goals": 0.923,
-        "provider": "api_football",
-        "source_season": 2024,
-        "target_season": 2026
-      },
-      "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
+      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -660,41 +402,10 @@
         "site_note": ""
       },
       "decision": {
-        "status": "ready",
-        "policy": "narrow_first_no_triples_v3",
-        "distribution_source": "model",
-        "model_single": "1",
-        "model_double": "1X",
-        "ranked_outcomes": [
-          {
-            "symbol": "1",
-            "percentage": 52.1
-          },
-          {
-            "symbol": "X",
-            "percentage": 25.5
-          },
-          {
-            "symbol": "2",
-            "percentage": 22.4
-          }
-        ],
-        "top_margin_pct": 26.6,
-        "third_probability_pct": 22.4,
-        "single_forbidden": true,
-        "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok.",
-          "Türkiye erken sezon + büyük takım dışı %50-58 favori; tek yasak."
-        ],
-        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
-        "trap_favorite_alarm": false,
-        "trap_favorite_reason": "",
-        "consensus_1x2": {},
-        "surprise_score": 3.9,
-        "confidence_class": "C"
+        "status": "unavailable",
+        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
-      "narrow_pick_origin": "auto_primary_single",
-      "wide_pick_origin": "narrow_plus_sanal_extra"
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "7",
@@ -750,18 +461,94 @@
       "country": "Türkiye",
       "home": "Çaykur Rizespor",
       "away": "Corendon Alanyaspor",
-      "wide_pick": "",
-      "narrow_pick": "",
-      "model_1x2": {},
-      "model_score_predictions": [],
-      "model_markets": {},
+      "wide_pick": "12",
+      "narrow_pick": "1",
+      "model_1x2": {
+        "1": 52.1,
+        "X": 22.5,
+        "2": 25.4
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 10.2
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.7
+        },
+        {
+          "score": "1-0",
+          "percentage": 8.1
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 60.7,
+          "no": 39.3
+        },
+        "over_under": {
+          "1.5": {
+            "over": 82.1,
+            "under": 17.9
+          },
+          "2.5": {
+            "over": 60.8,
+            "under": 39.2
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "divergent",
+        "model_pick": "1",
+        "score_results": [
+          "X",
+          "1",
+          "1"
+        ],
+        "matching_scores": 2,
+        "coupon_match": false
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "api_football_history_match_id": null,
+      "api_football_history_status": "COUPON_ONLY",
+      "fixture_match_type": "api_football_teams_from_season_history",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 10.2
+        },
+        {
+          "score": "2-1",
+          "percentage": 9.7
+        },
+        {
+          "score": "1-0",
+          "percentage": 8.1
+        }
+      ],
+      "score_model": "poisson_from_api_football_season_history",
+      "model_sample": {
+        "league_matches": 342,
+        "home_home_matches": 18,
+        "away_away_matches": 18,
+        "expected_home_goals": 1.887,
+        "expected_away_goals": 1.256,
+        "provider": "api_football",
+        "source_season": 2024,
+        "target_season": 2026
+      },
+      "model_team_mapping": {
+        "coupon_home": "Çaykur Rizespor",
+        "history_home": "Rizespor",
+        "home_similarity": 1.0,
+        "coupon_away": "Corendon Alanyaspor",
+        "history_away": "Alanyaspor",
+        "away_similarity": 1.0
+      },
+      "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -785,10 +572,41 @@
         "site_note": ""
       },
       "decision": {
-        "status": "unavailable",
-        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "1",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "1",
+            "percentage": 52.1
+          },
+          {
+            "symbol": "2",
+            "percentage": 25.4
+          },
+          {
+            "symbol": "X",
+            "percentage": 22.5
+          }
+        ],
+        "top_margin_pct": 26.7,
+        "third_probability_pct": 22.5,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok.",
+          "Türkiye erken sezon + büyük takım dışı %50-58 favori; tek yasak."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 3.9,
+        "confidence_class": "C"
       },
-      "wide_pick_origin": "from_narrow_primary"
+      "narrow_pick_origin": "auto_primary_single",
+      "wide_pick_origin": "narrow_plus_sanal_extra"
     },
     {
       "match_no": "9",
@@ -875,6 +693,14 @@
         "provider": "api_football",
         "source_season": 2024,
         "target_season": 2026
+      },
+      "model_team_mapping": {
+        "coupon_home": "Göztepe",
+        "history_home": "Göztepe",
+        "home_similarity": 1.0,
+        "coupon_away": "Gaziantep FK",
+        "history_away": "Gaziantep FK",
+        "away_similarity": 1.0
       },
       "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
       "manual_narrow_pick": "",
@@ -1085,7 +911,7 @@
       "home": "Arsenal",
       "away": "Chelsea",
       "wide_pick": "12",
-      "narrow_pick": "1",
+      "narrow_pick": "12",
       "model_1x2": {
         "1": 50.0,
         "X": 23.9,
@@ -1215,8 +1041,8 @@
         "surprise_score": 4.7,
         "confidence_class": "C"
       },
-      "narrow_pick_origin": "auto_primary_single",
-      "wide_pick_origin": "narrow_plus_sanal_extra"
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "12",
@@ -1446,6 +1272,14 @@
         "source_season": 2024,
         "target_season": 2026
       },
+      "model_team_mapping": {
+        "coupon_home": "Inter",
+        "history_home": "Inter",
+        "home_similarity": 1.0,
+        "coupon_away": "Napoli",
+        "history_away": "Napoli",
+        "away_similarity": 1.0
+      },
       "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1514,7 +1348,7 @@
       "home": "Roma",
       "away": "Atalanta",
       "wide_pick": "1X",
-      "narrow_pick": "1",
+      "narrow_pick": "1X",
       "model_1x2": {
         "1": 49.8,
         "X": 25.1,
@@ -1644,8 +1478,8 @@
         "surprise_score": 4.6,
         "confidence_class": "C"
       },
-      "narrow_pick_origin": "auto_primary_single",
-      "wide_pick_origin": "narrow_plus_sanal_extra"
+      "narrow_pick_origin": "auto_primary_double",
+      "wide_pick_origin": "from_narrow_primary"
     },
     {
       "match_no": "15",
@@ -1796,12 +1630,12 @@
     "policy": "narrow_first_no_triples_v3",
     "target_doubles": 7,
     "max_doubles": 8,
-    "single_count": 3,
+    "single_count": 1,
     "double_count": 8,
     "manual_count": 0,
     "columns": 0,
     "warnings": [
-      "Zorunlu çift sinyali 11, dar kapasite 8; en riskliler çiftlendi.",
+      "Zorunlu çift sinyali 9, dar kapasite 8; en riskliler çiftlendi.",
       "Model/konsensüs olmayan maçlarda manuel dar tercih gerekiyor."
     ]
   },
@@ -1811,7 +1645,7 @@
     "policy": "narrow_first_no_triples_v3",
     "target_doubles": 11,
     "single_count": 0,
-    "double_count": 11,
+    "double_count": 9,
     "manual_count": 0,
     "columns": 0,
     "warnings": [
