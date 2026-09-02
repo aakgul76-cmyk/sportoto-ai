@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T20:47:07.617125+00:00",
+  "generated_at": "2026-09-02T05:09:23.363739+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -8,10 +8,10 @@
   "fetch_errors": {
     "TSL:2025": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}",
     "TSL:2026": "football-data.org HTTP 403 /competitions/TSL/matches: {\"message\": \"The resource you are looking for is restricted and apparently not within your permissions. Please check your subscription.\", \"errorCode\": 403}",
-    "fixtures:2026-09-05": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-08-31 to 2026-09-02.\"}",
-    "fixtures:2026-09-06": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-08-31 to 2026-09-02.\"}",
-    "fixtures:2026-09-04": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-08-31 to 2026-09-02.\"}",
-    "fixtures:2026-09-07": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-08-31 to 2026-09-02.\"}",
+    "fixtures:2026-09-05": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-09-01 to 2026-09-03.\"}",
+    "fixtures:2026-09-06": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-09-01 to 2026-09-03.\"}",
+    "fixtures:2026-09-04": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-09-01 to 2026-09-03.\"}",
+    "fixtures:2026-09-07": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this date, try from 2026-09-01 to 2026-09-03.\"}",
     "api_football_season:premier league:2026": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this season, try from 2022 to 2024.\"}",
     "api_football_season:serie a:2026": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this season, try from 2022 to 2024.\"}",
     "api_football_season:la liga:2026": "API-Football /fixtures: {\"plan\": \"Free plans do not have access to this season, try from 2022 to 2024.\"}",
