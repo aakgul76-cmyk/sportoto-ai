@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-02T05:53:34.258522+00:00",
+  "generated_at": "2026-09-02T05:58:11.939259+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -320,18 +320,94 @@
       "country": "Türkiye",
       "home": "İstanbul Başakşehir",
       "away": "Galatasaray",
-      "wide_pick": "",
-      "narrow_pick": "",
-      "model_1x2": {},
-      "model_score_predictions": [],
-      "model_markets": {},
+      "wide_pick": "12",
+      "narrow_pick": "12",
+      "model_1x2": {
+        "1": 31.8,
+        "X": 24.5,
+        "2": 43.7
+      },
+      "model_score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.4
+        },
+        {
+          "score": "1-2",
+          "percentage": 9.1
+        },
+        {
+          "score": "0-1",
+          "percentage": 8.7
+        }
+      ],
+      "model_markets": {
+        "btts": {
+          "yes": 58.3,
+          "no": 41.7
+        },
+        "over_under": {
+          "1.5": {
+            "over": 78.7,
+            "under": 21.3
+          },
+          "2.5": {
+            "over": 55.6,
+            "under": 44.4
+          }
+        }
+      },
       "market_odds": {},
       "market_score_predictions": [],
       "market_status": "unavailable_without_odds_provider",
       "model_internal_alignment": {
-        "status": "unavailable"
+        "status": "divergent",
+        "model_pick": "2",
+        "score_results": [
+          "X",
+          "2",
+          "2"
+        ],
+        "matching_scores": 2,
+        "coupon_match": false
       },
-      "data_error": "football-data.org fikstur eslesmesi bulunamadi",
+      "api_football_history_match_id": null,
+      "api_football_history_status": "COUPON_ONLY",
+      "fixture_match_type": "api_football_teams_from_season_history",
+      "score_predictions": [
+        {
+          "score": "1-1",
+          "percentage": 11.4
+        },
+        {
+          "score": "1-2",
+          "percentage": 9.1
+        },
+        {
+          "score": "0-1",
+          "percentage": 8.7
+        }
+      ],
+      "score_model": "poisson_from_api_football_season_history",
+      "model_sample": {
+        "league_matches": 342,
+        "home_home_matches": 18,
+        "away_away_matches": 18,
+        "expected_home_goals": 1.32,
+        "expected_away_goals": 1.59,
+        "provider": "api_football",
+        "source_season": 2024,
+        "target_season": 2026
+      },
+      "model_team_mapping": {
+        "coupon_home": "İstanbul Başakşehir",
+        "history_home": "Başakşehir",
+        "home_similarity": 1.0,
+        "coupon_away": "Galatasaray",
+        "history_away": "Galatasaray",
+        "away_similarity": 1.0
+      },
+      "model_warning": "API-Football Free plan nedeniyle 2024 sezonu tarihsel yedek veri olarak kullanildi; güncel form değildir.",
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
       "external_consensus": {
@@ -355,9 +431,40 @@
         "site_note": ""
       },
       "decision": {
-        "status": "unavailable",
-        "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+        "status": "ready",
+        "policy": "narrow_first_no_triples_v3",
+        "distribution_source": "model",
+        "model_single": "2",
+        "model_double": "12",
+        "ranked_outcomes": [
+          {
+            "symbol": "2",
+            "percentage": 43.7
+          },
+          {
+            "symbol": "1",
+            "percentage": 31.8
+          },
+          {
+            "symbol": "X",
+            "percentage": 24.5
+          }
+        ],
+        "top_margin_pct": 11.9,
+        "third_probability_pct": 24.5,
+        "single_forbidden": true,
+        "single_forbidden_reasons": [
+          "Favori %58 altında; tek için ayrışma yok.",
+          "İlk iki ihtimal farkı 15 puanın altında."
+        ],
+        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "trap_favorite_alarm": false,
+        "trap_favorite_reason": "",
+        "consensus_1x2": {},
+        "surprise_score": 7.4,
+        "confidence_class": "C"
       },
+      "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -1348,7 +1455,7 @@
       "home": "Roma",
       "away": "Atalanta",
       "wide_pick": "1X",
-      "narrow_pick": "1X",
+      "narrow_pick": "1",
       "model_1x2": {
         "1": 49.8,
         "X": 25.1,
@@ -1478,8 +1585,8 @@
         "surprise_score": 4.6,
         "confidence_class": "C"
       },
-      "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "narrow_pick_origin": "auto_primary_single",
+      "wide_pick_origin": "narrow_plus_sanal_extra"
     },
     {
       "match_no": "15",
@@ -1630,12 +1737,12 @@
     "policy": "narrow_first_no_triples_v3",
     "target_doubles": 7,
     "max_doubles": 8,
-    "single_count": 1,
+    "single_count": 2,
     "double_count": 8,
     "manual_count": 0,
     "columns": 0,
     "warnings": [
-      "Zorunlu çift sinyali 9, dar kapasite 8; en riskliler çiftlendi.",
+      "Zorunlu çift sinyali 10, dar kapasite 8; en riskliler çiftlendi.",
       "Model/konsensüs olmayan maçlarda manuel dar tercih gerekiyor."
     ]
   },
@@ -1645,7 +1752,7 @@
     "policy": "narrow_first_no_triples_v3",
     "target_doubles": 11,
     "single_count": 0,
-    "double_count": 9,
+    "double_count": 10,
     "manual_count": 0,
     "columns": 0,
     "warnings": [
