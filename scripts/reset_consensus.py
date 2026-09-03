@@ -13,6 +13,10 @@ FIELDS = [
     "bilyoner_1_pct", "bilyoner_x_pct", "bilyoner_2_pct",
     "misli_1_pct", "misli_x_pct", "misli_2_pct",
     "hedef15_1_pct", "hedef15_x_pct", "hedef15_2_pct",
+    "model_a_name", "model_a_1_pct", "model_a_x_pct", "model_a_2_pct",
+    "model_b_name", "model_b_1_pct", "model_b_x_pct", "model_b_2_pct",
+    "model_c_name", "model_c_1_pct", "model_c_x_pct", "model_c_2_pct",
+    "source_updated_at",
     "site_pick", "site_note",
 ]
 

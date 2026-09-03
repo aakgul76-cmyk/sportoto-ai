@@ -65,6 +65,8 @@
         container.innerHTML = data.matches.map(match => {
           const decision = match.decision || {};
           const model = match.model_1x2 || {};
+          const h2h = match.model_sample?.h2h || {};
+          const form = match.model_sample?.recent_form || {};
           const riskReason = decision.favorite_risk_reason || decision.reason || "-";
           return `
           <article>
@@ -88,7 +90,9 @@
               <span class="metric risk">Güven: ${escapeHtml(decision.confidence_class || "-")}</span>
             </div>
             <div class="reason">Favori risk nedeni: ${escapeHtml(riskReason)}</div>
+            <div class="origin">Form (son 5): ev ${escapeHtml(form.home?.points ?? "-")} puan · deplasman ${escapeHtml(form.away?.points ?? "-")} puan · H2H: ${escapeHtml(h2h.matches ?? 0)} maç (${escapeHtml(h2h.home_side_wins ?? 0)}-${escapeHtml(h2h.draws ?? 0)}-${escapeHtml(h2h.away_side_wins ?? 0)})</div>
             <div class="origin">Dar kaynak: ${escapeHtml(match.narrow_pick_origin || (match.manual_narrow_pick ? "manual" : "-"))} · Geniş kaynak: ${escapeHtml(match.wide_pick_origin || "-")}</div>
+            <div class="origin">Genişe ekleme nedeni: ${escapeHtml(match.wide_extra_reason || "-")}</div>
           </article>`;
         }).join("");
       } catch (error) {

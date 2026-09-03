@@ -5,7 +5,7 @@ Bu proje haftalık Spor Toto 15 maç listesini alır, GitHub Actions ile veri ü
 Ana çalışma mantığı üç parçadır:
 
 1. **Liste/veri üretimi:** Resmî Spor Toto bülteni veya yedek kaynak üzerinden 15 maçlık kupon listesi oluşturulur.
-2. **Tahmin ve risk üretimi:** API-Football oran/fixture verisi ve/veya football-data.org geçmiş maç verisinden basit model üretilir; tahmin sitesi/oynanma yüzdesi verileri varsa konsensüs ve tuzak favori sinyali olarak kullanılır.
+2. **Tahmin ve risk üretimi:** API-Football oran/fixture verisi ve/veya football-data.org geçmiş maç verisinden model üretilir; son 5 form ve en fazla son 10 H2H her hafta yeniden hesaplanır. Tahmin sitesi/oynanma yüzdesi verileri konsensüs, model ayrışması ve tuzak favori sinyali olarak kullanılır.
 3. **Dar kupon öncelikli karar politikası:** Önce gerçek oynanacak dar kupon, sonra onun üzerine sanal geniş kontrol kuponu üretilir.
 
 > Not: Bu proje kesin sonuç tahmini üretmez. Amaç karar disiplinini, kolon verimliliğini ve hafta sonu kalibrasyonunu iyileştirmektir.
@@ -52,7 +52,11 @@ Ayrıntılı karar dosyası: [`docs/DECISION_POLICY.md`](docs/DECISION_POLICY.md
 
 `data/consensus.csv` dosyası isteğe bağlıdır. Bu dosyaya Spor Toto, Nesine, Bilyoner, Misli, Hedef15 veya benzer kaynaklardan 1-X-2 yüzdeleri girilebilir.
 
-Bu veriler maç sonucunu kopyalamak için değil; konsensüs, tuzak favori, düşük yüzdeli ters taraf ve kolon dağılımı sinyali için kullanılır.
+Bu veriler maç sonucunu kopyalamak için değil; konsensüs, tuzak favori, düşük yüzdeli ters taraf ve kolon dağılımı sinyali için kullanılır. Bayi oynanma yüzdeleri tek bir kitle sinyali kabul edilir. `model_a`, `model_b` ve `model_c` alanları farklı bağımsız tahmin modelleri için ayrılmıştır; adları ve veri tarihi de CSV'ye yazılır. Bağımsız modeller ana olasılığa en fazla %25 ağırlıkla katılır.
+
+## Haftalık form ve H2H
+
+Model her çalıştığında yalnızca maç tarihinden önceki karşılaşmaları kullanarak son 5 formu, iç/dış saha örneklemini ve iki takım arasındaki en fazla son 10 maçı yeniden hesaplar. Bu özetler her maçın `model_sample.recent_form` ve `model_sample.h2h` alanlarında yayımlanır. Ağustos-eylül döneminde H2H etkisi düşürülür; güncel kadro ve formun önüne geçirilmez.
 
 ## Dosya yapısı
 
@@ -97,7 +101,7 @@ API_FOOTBALL_KEY
 
 Değer: API-Football / API-Sports anahtarı.
 
-API-Football Free planinda dogrudan `date` ile ileriki gun fiksturleri bazen kapali olabilir. Bu durumda model once ilgili `league + season` fikstur havuzunu dener. Plan güncel sezonu da kapatirsa API hata mesajindaki en yeni izinli sezon, yalnızca tarihsel model yedeği olarak kullanılır ve çıktı güncel form olmadığı uyarısıyla etiketlenir. Tarihsel takım eşleştirmesi sıkı benzerlik eşiğiyle yapılır ve kullanılan takım adları `model_team_mapping` alanında denetlenebilir.
+API-Football Free planinda dogrudan `date` ile ileriki gun fiksturleri bazen kapali olabilir. Bu durumda model, eski calisan yontemi de kullanir: ilgili `league + season` fikstur havuzunu cekip kupondaki takimlari ve tarihleri bu havuzdan eslestirir.
 
 GitHub Pages için:
 
@@ -123,7 +127,8 @@ python scripts/apply_decision_policy.py
 
 ## Haftalık çalışma döngüsü
 
-- **Salı, çarşamba, perşembe, cuma:** yeni haftanın kuponları analiz edilir.
+- **Salı:** geçen hafta sonuçlarıyla takım notları, son form ve H2H güncellenir; ilk dar taslak çıkarılır.
+- **Çarşamba, perşembe:** tahmin sitesi/model konsensüsü, oynanma yüzdeleri, oran, kadro ve haberlerle dar taslak kalibre edilir.
 - **Cuma:** önce gerçek oynanacak dar kupon, sonra sanal geniş kontrol kuponu belirlenir.
 - **Cumartesi, pazar, pazartesi:** yeni tahmin üretilmez; cuma günü oynanan dar kupon ve sanal geniş kupon takip edilir.
 - **Salı:** yeni haftanın kuponu alınır ve döngü yeniden başlar.

@@ -85,7 +85,29 @@ Bu veriler şu amaçlarla kullanılır:
 
 Bu bilgiler `data/consensus.csv` dosyasına girilebilir. Dosya boş kalırsa algoritma yalnızca model ve manuel tercihleri kullanır.
 
-## 7. Her maç için zorunlu karar soruları
+Kaynaklar iki ayrı grupta değerlendirilir:
+
+| Grup | Kullanım | Karara etkisi |
+|---|---|---|
+| Spor Toto/Nesine/Bilyoner/Misli oynanma yüzdeleri | Kitle davranışı, tuzak favori ve düşük yüzdeli değer sinyali | Ana olasılığa doğrudan oy çokluğu olarak eklenmez |
+| Hedef15 ve diğer bağımsız tahmin modelleri | Bağımsız model konsensüsü | Bir kaynak varsa en fazla %15, iki veya daha fazla kaynak varsa en fazla %25 |
+
+Aynı resmî oynanma dağılımını tekrar eden bayi siteleri bağımsız dört model sayılmaz. Tahmin sitesi verisinin tarihi ve kaynağı kaydedilir; eski haftaya ait veri yeni kupona taşınmaz. Yorum metinleri yalnızca gerekçesi doğrulanabiliyorsa (kadro, ceza, form, fikstür yoğunluğu gibi) karar notuna girer.
+
+## 7. Form, H2H ve takım analizi
+
+Her yeni haftada, kupondaki Süper Lig ve Avrupa takımları için maç tarihinden önce oynanmış verilerle şu özet yeniden hesaplanır:
+
+- takımın son 5 maç formu,
+- ev sahibinin iç saha ve deplasman takımının dış saha performansı,
+- iki takım arasındaki en fazla son 10 maç,
+- H2H galibiyet/beraberlik/mağlubiyet ve gol dağılımı,
+- sakatlık, ceza, rotasyon, teknik direktör ve fikstür yoğunluğu,
+- önceki haftanın takım gözlemlerinin yeni sonuçlarla doğrulanıp doğrulanmadığı.
+
+H2H tek başına seçim yaptırmaz. İlk 5-6 haftada transfer ve teknik ekip değişiklikleri nedeniyle düşük ağırlıkta kullanılır; güncel form, kadro ve piyasa sinyaliyle aynı yöndeyse güçlenir. Sistem geçmiş maçları yalnızca hedef maçtan önceki tarihten alır; gelecekteki sonuçların modele sızmasına izin verilmez.
+
+## 8. Her maç için zorunlu karar soruları
 
 Her maçta şu sorular cevaplanmalıdır:
 
@@ -94,15 +116,29 @@ Her maçta şu sorular cevaplanmalıdır:
 3. Düşük yüzdeli ama yaşatılması gereken taraf var mı?
 4. Favori neden puan kaybeder?
 5. Geniş sanal kuponda dar kupona hangi ek ihtimal eklenmeli?
+6. Bağımsız modeller ana modelle aynı yönde mi, yoksa anlamlı biçimde ayrışıyor mu?
+7. Son 5 maç ve H2H aynı sinyali mi veriyor; H2H güncel kadroyu temsil edecek kadar anlamlı mı?
 
-## 8. Haftalık çalışma döngüsü
+## 9. Dar kupondan geniş kupona geçiş
 
-- Salı, çarşamba, perşembe ve cuma: yeni haftanın kuponu analiz edilir.
+Sıra değiştirilemez:
+
+1. Önce 128-256 kolonluk gerçek dar kupon kurulur.
+2. Dar kupondaki hiçbir işaret geniş kuponda silinmez.
+3. Genişe eklenecek ikinci işaret; risk puanı, bağımsız model ayrışması, tuzak favori, son form ve H2H gerekçelerinden en az biriyle açıklanır.
+4. Geniş kupon 11 çift + 4 tek = 2.048 kolon hedefinde sanal kontrol kuponu olarak tamamlanır.
+5. Üçlü `1X2` hiçbir aşamada kullanılmaz.
+
+## 10. Haftalık çalışma döngüsü
+
+- Pazartesi: resmî yeni liste geldiyse yalnızca liste doğrulanır; eski haftanın verisi yeni hafta gibi kullanılmaz.
+- Salı: son hafta sonuçları işlenir; takım notları, son 5 form ve H2H özeti yenilenir; ilk dar taslak üretilir.
+- Çarşamba ve perşembe: bağımsız tahmin modelleri, oynanma yüzdeleri, oran hareketi, kadro ve haberlerle dar kupon yeniden kalibre edilir.
 - Cuma: önce gerçek dar kupon, sonra sanal geniş kupon kesinleştirilir.
 - Cumartesi, pazar ve pazartesi: yeni tahmin üretilmez; cuma günü oynanan dar kupon ve sanal geniş kupon takip edilir.
 - Salı: yeni kupon haftası başlar.
 
-## 9. Kalibrasyon ölçümü
+## 11. Kalibrasyon ölçümü
 
 Hafta sonunda başarı şu sırayla ölçülür:
 
@@ -114,5 +150,7 @@ Hafta sonunda başarı şu sırayla ölçülür:
 6. Türkiye / Avrupa ayrı performans.
 7. Tuzak favori başarı/hata tablosu.
 8. Kolon verimliliği.
+9. Bağımsız model konsensüsünün katkısı ve yanılttığı maçlar.
+10. H2H/form katkısı; eski H2H'nin yanıltıcı olduğu maçlar.
 
 Sonradan yapılan tahmin revizyonları başarı hesabına katılmaz. Cuma günü oynanan dar kupon gerçek referans, geniş kupon sanal/model referansı olarak ayrı değerlendirilir.

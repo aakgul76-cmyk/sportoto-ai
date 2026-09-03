@@ -6,7 +6,6 @@ import csv
 import json
 import math
 import os
-import re
 import statistics
 import time
 import unicodedata
@@ -138,10 +137,8 @@ def normalized(value: str) -> str:
     replacements = {
         "olympique de marseille": "marseille",
         "olympique marseille": "marseille",
-        "basaksehir fk": "basaksehir",
-        "istanbul basaksehir": "basaksehir",
-        "istanbul basaksehir fk": "basaksehir",
-        "caykur rizespor": "rize",
+        "basaksehir fk": "istanbul basaksehir",
+        "istanbul basaksehir fk": "istanbul basaksehir",
         "corum fk": "corum",
         "erzurumspor fk": "erzurum",
     }
@@ -230,9 +227,7 @@ def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
         default=(0, None),
         key=lambda entry: entry[0],
     )
-    # This branch has no date/fixture confirmation, so a permissive fuzzy match
-    # can silently map a promoted team to a similarly named top-flight team.
-    if home_team is None or away_team is None or home_score < 0.80 or away_score < 0.80:
+    if home_team is None or away_team is None or home_score < 0.55 or away_score < 0.55:
         return None
     target_date = datetime.fromisoformat(match["date"]).astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
     return {
@@ -241,10 +236,6 @@ def infer_fixture_from_teams(match: dict, candidates: list) -> dict | None:
         "status": "COUPON_ONLY",
         "homeTeam": home_team,
         "awayTeam": away_team,
-        "teamMatchScores": {
-            "home": round(home_score, 3),
-            "away": round(away_score, 3),
-        },
     }
 
 
@@ -255,12 +246,6 @@ def api_football_league_id(match: dict) -> int | None:
 def api_football_season(match: dict) -> int:
     match_date = datetime.fromisoformat(match["date"]).date()
     return match_date.year if match_date.month >= 7 else match_date.year - 1
-
-
-def latest_allowed_api_football_season(error: Exception) -> int | None:
-    """Extract the newest season offered by an API-Football plan error."""
-    match = re.search(r"try from\s+(\d{4})\s+to\s+(\d{4})", str(error), re.IGNORECASE)
-    return int(match.group(2)) if match else None
 
 
 def api_football_fixture_as_match(item: dict) -> dict | None:
@@ -303,12 +288,9 @@ def assign_api_football_fixture(match: dict, item: dict, score: float, source: s
     match["api_football_fixture_source"] = source
 
 
-def fetch_api_football_season_fixtures(
-    matches: list[dict], key: str
-) -> tuple[dict[str, list], dict[str, int], dict[str, str]]:
+def fetch_api_football_season_fixtures(matches: list[dict], key: str) -> tuple[dict[str, list], dict[str, str]]:
     errors: dict[str, str] = {}
     data: dict[str, list] = {}
-    source_seasons: dict[str, int] = {}
     league_requests = sorted(
         {
             (api_football_league_id(match), api_football_season(match), match["league"].lower())
@@ -317,43 +299,27 @@ def fetch_api_football_season_fixtures(
         }
     )
     for league_id, season, league_name in league_requests:
-        requested_season = season
-        try:
-            fixtures = api_football_get(
-                "/fixtures",
-                key,
-                league=league_id,
-                season=season,
-                timezone="Europe/Istanbul",
-            )
-        except (requests.RequestException, RuntimeError) as error:
-            errors[f"api_football_season:{league_name}:{season}"] = str(error)
-            fallback_season = latest_allowed_api_football_season(error)
-            if fallback_season is None or fallback_season == season:
-                continue
+        fixtures = []
+        for history_season in (season - 1, season):
             try:
-                fixtures = api_football_get(
+                fixtures.extend(api_football_get(
                     "/fixtures",
                     key,
                     league=league_id,
-                    season=fallback_season,
+                    season=history_season,
                     timezone="Europe/Istanbul",
-                )
-                season = fallback_season
-            except (requests.RequestException, RuntimeError) as fallback_error:
-                errors[f"api_football_season:{league_name}:{fallback_season}"] = str(fallback_error)
-                continue
+                ))
+            except (requests.RequestException, RuntimeError) as error:
+                errors[f"api_football_season:{league_name}:{history_season}"] = str(error)
         converted = [
             converted
             for item in fixtures
             if (converted := api_football_fixture_as_match(item)) is not None
         ]
-        target_key = f"{league_id}:{requested_season}"
-        data[target_key] = converted
-        source_seasons[target_key] = season
+        data[f"{league_id}:{season}"] = converted
 
         for match in matches:
-            if api_football_league_id(match) != league_id or api_football_season(match) != requested_season:
+            if api_football_league_id(match) != league_id or api_football_season(match) != season:
                 continue
             ranked = [
                 (api_football_fixture_score(match, item), item)
@@ -363,12 +329,10 @@ def fetch_api_football_season_fixtures(
             best_score, best = max(ranked, default=(0, None), key=lambda entry: entry[0])
             if best is not None and best_score >= 0.55 and not match.get("api_football_fixture_id"):
                 assign_api_football_fixture(match, best, best_score, "league_season")
-    return data, source_seasons, errors
+    return data, errors
 
 
-def resolve_api_football_fixtures(
-    matches: list[dict], key: str
-) -> tuple[dict[str, str], dict[str, list], dict[str, int]]:
+def resolve_api_football_fixtures(matches: list[dict], key: str) -> tuple[dict[str, str], dict[str, list]]:
     errors: dict[str, str] = {}
     by_date: dict[str, list[dict]] = {}
     for match in matches:
@@ -390,9 +354,9 @@ def resolve_api_football_fixtures(
             else:
                 assign_api_football_fixture(match, best, best_score, "date")
 
-    season_data, source_seasons, season_errors = fetch_api_football_season_fixtures(matches, key)
+    season_data, season_errors = fetch_api_football_season_fixtures(matches, key)
     errors.update(season_errors)
-    return errors, season_data, source_seasons
+    return errors, season_data
 
 
 def median_odds(values: list[float]) -> float | None:
@@ -540,6 +504,81 @@ def shrink(value: float, sample: int, baseline: float) -> float:
     return value * weight + baseline * (1 - weight)
 
 
+def team_recent_form(history: list[dict], team_id: int, limit: int = 5) -> dict:
+    games = [
+        item for item in history
+        if team_id in {item.get("homeTeam", {}).get("id"), item.get("awayTeam", {}).get("id")}
+    ]
+    games = sorted(games, key=lambda item: item.get("utcDate", ""))[-limit:]
+    points = goals_for = goals_against = wins = draws = losses = 0
+    for item in games:
+        score = item["score"]["fullTime"]
+        at_home = item["homeTeam"]["id"] == team_id
+        scored = int(score["home"] if at_home else score["away"])
+        conceded = int(score["away"] if at_home else score["home"])
+        goals_for += scored
+        goals_against += conceded
+        if scored > conceded:
+            wins += 1
+            points += 3
+        elif scored == conceded:
+            draws += 1
+            points += 1
+        else:
+            losses += 1
+    return {
+        "matches": len(games),
+        "wins": wins,
+        "draws": draws,
+        "losses": losses,
+        "points": points,
+        "points_per_match": round(points / len(games), 2) if games else None,
+        "goals_for": goals_for,
+        "goals_against": goals_against,
+    }
+
+
+def h2h_summary(history: list[dict], home_id: int, away_id: int, limit: int = 10) -> dict:
+    meetings = [
+        item for item in history
+        if {item.get("homeTeam", {}).get("id"), item.get("awayTeam", {}).get("id")} == {home_id, away_id}
+    ]
+    meetings = sorted(meetings, key=lambda item: item.get("utcDate", ""))[-limit:]
+    home_side_wins = draws = away_side_wins = home_side_goals = away_side_goals = 0
+    results = []
+    for item in meetings:
+        score = item["score"]["fullTime"]
+        fixture_home_is_home_side = item["homeTeam"]["id"] == home_id
+        home_goals = int(score["home"] if fixture_home_is_home_side else score["away"])
+        away_goals = int(score["away"] if fixture_home_is_home_side else score["home"])
+        home_side_goals += home_goals
+        away_side_goals += away_goals
+        if home_goals > away_goals:
+            home_side_wins += 1
+            symbol = "1"
+        elif home_goals == away_goals:
+            draws += 1
+            symbol = "X"
+        else:
+            away_side_wins += 1
+            symbol = "2"
+        results.append({"date": item.get("utcDate", "")[:10], "result": symbol, "score": f"{home_goals}-{away_goals}"})
+    count = len(meetings)
+    home_points = home_side_wins * 3 + draws
+    away_points = away_side_wins * 3 + draws
+    return {
+        "matches": count,
+        "home_side_wins": home_side_wins,
+        "draws": draws,
+        "away_side_wins": away_side_wins,
+        "home_side_goals": home_side_goals,
+        "away_side_goals": away_side_goals,
+        "home_points_per_match": round(home_points / count, 2) if count else None,
+        "away_points_per_match": round(away_points / count, 2) if count else None,
+        "recent_meetings": results,
+    }
+
+
 def expected_goals(fixture: dict, history: list[dict]) -> tuple[float, float, dict]:
     league_home = []
     league_away = []
@@ -566,12 +605,41 @@ def expected_goals(fixture: dict, history: list[dict]) -> tuple[float, float, di
     home_defence = shrink(average(home_against[-10:], away_base), len(home_against[-10:]), away_base)
     home_lambda = max(0.2, min(3.8, (home_attack + away_defence) / 2))
     away_lambda = max(0.2, min(3.8, (away_attack + home_defence) / 2))
+    home_form = team_recent_form(history, home_id)
+    away_form = team_recent_form(history, away_id)
+    h2h = h2h_summary(history, home_id, away_id)
+
+    # Form her hafta yeniden hesaplanır. H2H kalıcı bir kader gibi kullanılmaz:
+    # ağustos/eylülde kadrolar ve teknik ekipler hızlı değiştiği için ağırlığı yarıya iner.
+    try:
+        fixture_month = datetime.fromisoformat(fixture.get("utcDate", "").replace("Z", "+00:00")).month
+    except ValueError:
+        fixture_month = 0
+    early_season = fixture_month in {8, 9}
+    form_weight = 0.08
+    h2h_weight = 0.05 if early_season else 0.10
+    if home_form["matches"] and away_form["matches"]:
+        form_edge = ((home_form["points_per_match"] or 0) - (away_form["points_per_match"] or 0)) / 3
+        home_lambda *= 1 + form_weight * form_edge
+        away_lambda *= 1 - form_weight * form_edge
+    if h2h["matches"]:
+        h2h_edge = ((h2h["home_points_per_match"] or 0) - (h2h["away_points_per_match"] or 0)) / 3
+        home_lambda *= 1 + h2h_weight * h2h_edge
+        away_lambda *= 1 - h2h_weight * h2h_edge
+    home_lambda = max(0.2, min(3.8, home_lambda))
+    away_lambda = max(0.2, min(3.8, away_lambda))
     sample = {
         "league_matches": len(history),
         "home_home_matches": len(home_for),
         "away_away_matches": len(away_for),
         "expected_home_goals": round(home_lambda, 3),
         "expected_away_goals": round(away_lambda, 3),
+        "recent_form": {"home": home_form, "away": away_form},
+        "h2h": h2h,
+        "form_weight": form_weight,
+        "h2h_weight": h2h_weight,
+        "early_season_reduced_h2h": early_season,
+        "analysis_refreshed_at": datetime.now(timezone.utc).isoformat(),
     }
     return home_lambda, away_lambda, sample
 
@@ -636,7 +704,6 @@ def main() -> None:
     matches = load_inputs()
     competition_data: dict[str, list] = {}
     api_football_season_data: dict[str, list] = {}
-    api_football_source_seasons: dict[str, int] = {}
     fetch_errors: dict[str, str] = {}
     if token:
         competition_data, fetch_errors = fetch_competitions(matches, token)
@@ -644,11 +711,7 @@ def main() -> None:
         fetch_errors["football-data.org"] = "FOOTBALL_DATA_TOKEN yok; football-data modeli atlandi."
 
     if api_football_key:
-        (
-            api_football_errors,
-            api_football_season_data,
-            api_football_source_seasons,
-        ) = resolve_api_football_fixtures(matches, api_football_key)
+        api_football_errors, api_football_season_data = resolve_api_football_fixtures(matches, api_football_key)
         fetch_errors.update(api_football_errors)
     else:
         fetch_errors["API-Football"] = "API_FOOTBALL_KEY yok; oran/fixture sağlayıcısı atlandi."
@@ -691,9 +754,7 @@ def main() -> None:
         if not match["model_1x2"] and api_football_season_data:
             league_id = api_football_league_id(match)
             season = api_football_season(match)
-            season_key = f"{league_id}:{season}"
-            candidates = api_football_season_data.get(season_key, [])
-            source_season = api_football_source_seasons.get(season_key, season)
+            candidates = api_football_season_data.get(f"{league_id}:{season}", [])
             fixture = find_fixture(match, candidates)
             fixture_match_type = "api_football_exact_date_and_teams"
             if not fixture:
@@ -711,24 +772,7 @@ def main() -> None:
                 match["score_predictions"] = scores
                 match["score_model"] = "poisson_from_api_football_season_history"
                 match["model_markets"] = markets
-                match["model_sample"] = sample | {
-                    "provider": "api_football",
-                    "source_season": source_season,
-                    "target_season": season,
-                }
-                match["model_team_mapping"] = {
-                    "coupon_home": match["home"],
-                    "history_home": fixture["homeTeam"]["name"],
-                    "home_similarity": fixture.get("teamMatchScores", {}).get("home", 1.0),
-                    "coupon_away": match["away"],
-                    "history_away": fixture["awayTeam"]["name"],
-                    "away_similarity": fixture.get("teamMatchScores", {}).get("away", 1.0),
-                }
-                if source_season != season:
-                    match["model_warning"] = (
-                        f"API-Football Free plan nedeniyle {source_season} sezonu "
-                        "tarihsel yedek veri olarak kullanildi; güncel form değildir."
-                    )
+                match["model_sample"] = sample | {"provider": "api_football"}
                 match["model_internal_alignment"] = alignment(one_x_two, scores, match["narrow_pick"])
                 match.pop("data_error", None)
 
