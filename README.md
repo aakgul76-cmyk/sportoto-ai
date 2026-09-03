@@ -54,7 +54,9 @@ Ayrıntılı karar dosyası: [`docs/DECISION_POLICY.md`](docs/DECISION_POLICY.md
 
 ## Tahmin sitesi / oynanma yüzdesi girişi
 
-`data/consensus.csv` dosyası isteğe bağlıdır. Bu dosyaya Spor Toto, Nesine, Bilyoner, Misli, Hedef15 veya benzer kaynaklardan 1-X-2 yüzdeleri girilebilir.
+Kaynak bazlı tahmin sitesi verileri `data/external_predictions.csv` dosyasına her maç ve kaynak için ayrı satır olarak girilir. `pick` alanı `1`, `X`, `2`, `1X`, `X2` veya `12` olabilir. Kaynak yüzde yayımlamıyorsa yüzde alanları boş bırakılır; sistem yüzdesiz tercihten yapay olasılık üretmez. Yorumlar tam metin olarak kopyalanmaz, kısa özet ve kaynak bağlantısı saklanır.
+
+`scripts/aggregate_external_predictions.py` bu satırları maç bazında özetleyerek `data/consensus.csv` dosyasındaki `external_*` alanlarına yazar. Aynı kaynağın aynı maçtaki birden fazla girdisinde en yeni tarihli satır kullanılır. Eski sabit Spor Toto, Nesine, Bilyoner, Misli, Hedef15 ve bağımsız model kolonları geriye uyumluluk için korunur.
 
 Bu veriler maç sonucunu kopyalamak için değil; konsensüs, tuzak favori, düşük yüzdeli ters taraf ve kolon dağılımı sinyali için kullanılır. Bayi oynanma yüzdeleri tek bir kitle sinyali kabul edilir. `model_a`, `model_b` ve `model_c` alanları farklı bağımsız tahmin modelleri için ayrılmıştır; adları ve veri tarihi de CSV'ye yazılır. Bağımsız modeller ana olasılığa en fazla %25 ağırlıkla katılır.
 
@@ -71,10 +73,12 @@ sportoto-ai/
 ├── scripts/update_coupon.py             # 15 maçlık kupon listesini oluşturur
 ├── scripts/fetch_data.py                # API-Football / football-data verisinden model üretir
 ├── scripts/apply_decision_policy.py     # Dar öncelikli, üçlüsüz kupon politikasını uygular
+├── scripts/aggregate_external_predictions.py # Kaynak satırlarını maç konsensüsüne dönüştürür
 ├── scripts/reset_consensus.py           # Yeni haftada konsensüs şablonunu sıfırlar
 ├── data/coupon.csv                      # Bağlayıcı 15 maç listesi
 ├── data/predictions.csv                 # Manuel geniş/dar tercih alanı
 ├── data/consensus.csv                   # Tahmin sitesi / oynanma yüzdesi opsiyonel girişi
+├── data/external_predictions.csv        # Her maç ve kaynak için tahmin/yorum özeti
 ├── data/matches.json                    # Ana JSON çıktı
 ├── docs/index.html                      # GitHub Pages paneli
 ├── docs/data/matches.json               # Panelin okuduğu JSON
@@ -126,6 +130,7 @@ $env:API_FOOTBALL_KEY="ANAHTARINIZ"
 python scripts/update_coupon.py
 python scripts/reset_consensus.py
 python scripts/fetch_data.py
+python scripts/aggregate_external_predictions.py
 python scripts/apply_decision_policy.py
 ```
 

@@ -31,6 +31,11 @@ CONS_FIELDS = [
     "model_c_name", "model_c_1_pct", "model_c_x_pct", "model_c_2_pct",
     "source_updated_at",
     "site_pick", "site_note",
+    "external_sites_1_pct", "external_sites_x_pct", "external_sites_2_pct",
+    "external_source_count", "external_numeric_source_count",
+    "external_pick_1_pct", "external_pick_x_pct", "external_pick_2_pct",
+    "external_top_signal", "external_agreement_pct", "external_source_names",
+    "external_comment_summary", "external_updated_at",
 ]
 PUBLIC_SOURCES = ("sportoto", "nesine", "bilyoner", "misli")
 MODEL_SOURCES = ("hedef15", "model_a", "model_b", "model_c")
@@ -183,6 +188,31 @@ def source_count(row: dict | None, sources) -> int:
     return sum(bool(source_distribution(row, source)) for source in sources)
 
 
+def independent_model_consensus(row: dict | None) -> tuple[dict[str, float], int]:
+    distributions = [
+        value for source in MODEL_SOURCES
+        if (value := source_distribution(row, source))
+    ]
+    external = source_distribution(row, "external_sites")
+    try:
+        external_count = int(float((row or {}).get("external_numeric_source_count", 0) or 0))
+    except ValueError:
+        external_count = 0
+    weighted = [(value, 1) for value in distributions]
+    if external and external_count > 0:
+        weighted.append((external, external_count))
+    total_count = sum(count for _, count in weighted)
+    if not total_count:
+        return {}, 0
+    average = {
+        symbol: round(
+            sum(value[symbol] * count for value, count in weighted) / total_count, 1
+        )
+        for symbol in OUTCOMES
+    }
+    return average, total_count
+
+
 def blend_distributions(internal: dict, external: dict, external_weight: float) -> dict:
     return {
         symbol: round(float(internal.get(symbol, 0)) * (1 - external_weight) + float(external.get(symbol, 0)) * external_weight, 1)
@@ -205,8 +235,7 @@ def has_big_team(match: dict) -> bool:
 def base_distribution(match: dict) -> tuple[dict, str]:
     model = match.get("model_1x2") or {}
     row = match.get("external_consensus") or {}
-    external_models = consensus_avg(row, MODEL_SOURCES)
-    model_coverage = source_count(row, MODEL_SOURCES)
+    external_models, model_coverage = independent_model_consensus(row)
     if model:
         if external_models:
             weight = 0.25 if model_coverage >= 2 else 0.15
@@ -239,9 +268,8 @@ def decide(match: dict) -> dict:
 
     row = match.get("external_consensus") or {}
     consensus = consensus_avg(row, PUBLIC_SOURCES)
-    external_models = consensus_avg(row, MODEL_SOURCES)
+    external_models, model_coverage = independent_model_consensus(row)
     public_coverage = source_count(row, PUBLIC_SOURCES)
-    model_coverage = source_count(row, MODEL_SOURCES)
     trap = False
     trap_reason = ""
     if consensus:
@@ -252,6 +280,18 @@ def decide(match: dict) -> dict:
         elif consensus_top != top and consensus_pct >= 45:
             trap = True
             trap_reason = "Kitle/model yönü ayrışıyor; ters taraf yaşatılmalı."
+    site_signal = (row.get("external_top_signal") or "").strip().upper()
+    try:
+        site_agreement = float((row.get("external_agreement_pct") or "0").replace(",", "."))
+    except ValueError:
+        site_agreement = 0.0
+    if not trap and site_signal in OUTCOMES:
+        if site_signal == top and site_agreement >= 65 and top_pct < 60:
+            trap = True
+            trap_reason = "Tahmin siteleri favoride birleşmiş ama model aynı gücü üretmiyor."
+        elif site_signal != top and site_agreement >= 45:
+            trap = True
+            trap_reason = "Tahmin sitesi yönü modelden ayrışıyor; ters taraf kontrol edilmeli."
 
     surprise = 10 - max(0, (top_pct - 33.3) / 5) - max(0, margin / 8)
     surprise += 1 if reasons else 0
@@ -267,7 +307,7 @@ def decide(match: dict) -> dict:
 
     return {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": source,
         "model_single": top,
         "model_double": pair([top, second]),
@@ -284,6 +324,19 @@ def decide(match: dict) -> dict:
         "consensus_coverage": {
             "public_sources": public_coverage,
             "independent_model_sources": model_coverage,
+            "prediction_site_rows": int(float(row.get("external_source_count", 0) or 0)),
+        },
+        "prediction_site_signal": {
+            "top": row.get("external_top_signal", ""),
+            "agreement_pct": row.get("external_agreement_pct", ""),
+            "pick_distribution": {
+                "1": row.get("external_pick_1_pct", ""),
+                "X": row.get("external_pick_x_pct", ""),
+                "2": row.get("external_pick_2_pct", ""),
+            },
+            "sources": row.get("external_source_names", ""),
+            "comment_summary": row.get("external_comment_summary", ""),
+            "updated_at": row.get("external_updated_at", ""),
         },
         "surprise_score": surprise,
         "confidence_class": confidence,
@@ -448,7 +501,7 @@ def build_narrow_primary(matches: list[dict]) -> dict:
     return {
         "field": "narrow_pick",
         "role": "primary_real_money_coupon",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "target_doubles": NARROW_TARGET_DOUBLES,
         "max_doubles": NARROW_MAX_DOUBLES,
         "single_count": sum(1 for match in matches if width(match.get("narrow_pick", "")) == 1),
@@ -513,7 +566,7 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
     return {
         "field": "wide_pick",
         "role": "secondary_virtual_control_coupon",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "target_doubles": WIDE_TARGET_DOUBLES,
         "single_count": sum(1 for match in matches if width(match.get("wide_pick", "")) == 1),
         "double_count": sum(1 for match in matches if width(match.get("wide_pick", "")) == 2),
@@ -569,7 +622,7 @@ def enrich(document: dict) -> dict:
     document["primary_coupon"] = "narrow"
     document["secondary_coupon"] = "wide_virtual"
     document["decision_policy"] = {
-        "name": "narrow_first_no_triples_v5",
+        "name": "narrow_first_no_triples_v6",
         "primary_coupon": "narrow_real_money",
         "secondary_coupon": "wide_virtual_plus_probability",
         "allowed_picks": sorted(ALLOWED),
@@ -581,6 +634,8 @@ def enrich(document: dict) -> dict:
             "Geniş kupon dar kuponun üzerine sanal +ihtimal kontrolüdür.",
             "1X2 kullanılmaz.",
             "Tahmin siteleri kopya için değil konsensüs/tuzak favori için kullanılır.",
+            "Kaynak tahminleri ayrı satırlarda tutulur; yüzdesiz tercihler olasılığa çevrilmez.",
+            "Yorumların yalnızca kısa özeti ve kaynak bağlantısı saklanır; tam metin kopyalanmaz.",
             "Aynı oynanma yüzdesini taşıyan bayi kaynakları tek kitle sinyali sayılır; mükerrer ağırlık verilmez.",
             "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
             "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",

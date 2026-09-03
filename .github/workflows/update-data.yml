@@ -7,8 +7,10 @@ on:
       - "data/coupon.csv"
       - "data/predictions.csv"
       - "data/consensus.csv"
+      - "data/external_predictions.csv"
       - "scripts/fetch_data.py"
       - "scripts/apply_decision_policy.py"
+      - "scripts/aggregate_external_predictions.py"
       - ".github/workflows/update-data.yml"
       - "docs/index.html"
       - "docs/DECISION_POLICY.md"
@@ -52,6 +54,7 @@ jobs:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
         run: |
           python scripts/fetch_data.py
+          python scripts/aggregate_external_predictions.py
           python scripts/apply_decision_policy.py
       - name: Yeni verileri repository'ye kaydet
         run: |

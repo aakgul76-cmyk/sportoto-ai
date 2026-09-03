@@ -83,7 +83,9 @@ Bu veriler şu amaçlarla kullanılır:
 - düşük yüzdeli ama mantıklı ters tarafı yaşatma,
 - kolon dağılımı denetimi.
 
-Bu bilgiler `data/consensus.csv` dosyasına girilebilir. Dosya boş kalırsa algoritma yalnızca model ve manuel tercihleri kullanır.
+Kaynak bazlı veriler `data/external_predictions.csv` dosyasına her maç ve kaynak için ayrı satır olarak girilir. Yüzde yayımlamayan sitelerin tercihi yapay yüzdeye çevrilmez; yalnızca yön, uyum ve tuzak sinyali olarak kullanılır. Tam 1-X-2 dağılımı veren bağımsız kaynaklar aşağıdaki ağırlık sınırları içinde modele katılır. Bu satırlar otomatik olarak `data/consensus.csv` içindeki maç bazlı `external_*` özetlerine dönüştürülür.
+
+Yorum metinleri aynen kopyalanmaz. Yalnızca kadro, ceza, form, fikstür yoğunluğu, oyun yapısı veya piyasa gibi doğrulanabilir gerekçelerin kısa özeti; kaynak adı, bağlantısı ve tarihiyle birlikte saklanır. Aynı kaynağın aynı maç için birden fazla girdisi varsa en güncel satır kullanılır.
 
 Kaynaklar iki ayrı grupta değerlendirilir:
 
