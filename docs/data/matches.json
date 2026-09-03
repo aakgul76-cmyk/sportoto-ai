@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T05:37:29.778605+00:00",
+  "generated_at": "2026-09-03T05:42:27.005766+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -825,7 +825,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:37:29.770118+00:00"
+        "analysis_refreshed_at": "2026-09-03T05:42:26.998274+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1033,7 +1033,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:37:29.771693+00:00"
+        "analysis_refreshed_at": "2026-09-03T05:42:26.999620+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1240,7 +1240,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:37:29.773741+00:00"
+        "analysis_refreshed_at": "2026-09-03T05:42:27.001579+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1508,7 +1508,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:37:29.777109+00:00"
+        "analysis_refreshed_at": "2026-09-03T05:42:27.004539+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1715,7 +1715,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:37:29.778504+00:00"
+        "analysis_refreshed_at": "2026-09-03T05:42:27.005674+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
