@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T15:13:21.266303+00:00",
+  "generated_at": "2026-09-03T19:23:23.427784+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -40,8 +40,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "1",
         "sportoto_1_pct": "",
@@ -79,6 +77,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -100,8 +110,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "2",
         "sportoto_1_pct": "",
@@ -139,6 +147,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -160,8 +180,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "3",
         "sportoto_1_pct": "",
@@ -199,6 +217,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -220,8 +250,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "4",
         "sportoto_1_pct": "",
@@ -259,6 +287,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -274,9 +314,9 @@
       "api_football_match_score": 0.845,
       "api_football_fixture_source": "date",
       "model_1x2": {
-        "1": 20.7,
-        "X": 22.4,
-        "2": 57.0
+        "1": 20.8,
+        "X": 22.5,
+        "2": 56.7
       },
       "model_score_predictions": [
         {
@@ -294,8 +334,8 @@
       ],
       "model_markets": {
         "1x2": {
-          "1": 4.55,
-          "X": 4.2,
+          "1": 4.5,
+          "X": 4.15,
           "2": 1.65
         },
         "btts": {
@@ -315,8 +355,8 @@
       },
       "market_odds": {
         "1x2": {
-          "1": 4.55,
-          "X": 4.2,
+          "1": 4.5,
+          "X": 4.15,
           "2": 1.65
         },
         "btts": {
@@ -361,9 +401,9 @@
         "coupon_match": false
       },
       "market_1x2": {
-        "1": 20.7,
-        "X": 22.4,
-        "2": 57.0
+        "1": 20.8,
+        "X": 22.5,
+        "2": 56.7
       },
       "score_predictions": [
         {
@@ -380,8 +420,6 @@
         }
       ],
       "score_model": "api_football_correct_score_odds",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "5",
         "sportoto_1_pct": "",
@@ -417,26 +455,26 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "2",
         "model_double": "X2",
         "ranked_outcomes": [
           {
             "symbol": "2",
-            "percentage": 57.0
+            "percentage": 56.7
           },
           {
             "symbol": "X",
-            "percentage": 22.4
+            "percentage": 22.5
           },
           {
             "symbol": "1",
-            "percentage": 20.7
+            "percentage": 20.8
           }
         ],
-        "top_margin_pct": 34.6,
-        "third_probability_pct": 20.7,
+        "top_margin_pct": 34.2,
+        "third_probability_pct": 20.8,
         "single_forbidden": true,
         "single_forbidden_reasons": [
           "Favori %58 altında; tek için ayrışma yok."
@@ -450,11 +488,39 @@
           "public_sources": 0,
           "independent_model_sources": 0
         },
-        "surprise_score": 1.9,
+        "surprise_score": 2.0,
         "confidence_class": "C"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "X2",
+        "best_same_width": "X2",
+        "covered_probability_pct": 79.2,
+        "best_probability_pct": 79.2,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "X2",
+        "best_same_width": "X2",
+        "covered_probability_pct": 79.2,
+        "best_probability_pct": 79.2,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     },
     {
       "match_no": "6",
@@ -475,8 +541,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "6",
         "sportoto_1_pct": "",
@@ -514,6 +578,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -535,8 +611,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "7",
         "sportoto_1_pct": "",
@@ -574,6 +648,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -595,8 +681,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "8",
         "sportoto_1_pct": "",
@@ -634,6 +718,18 @@
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "wide_pick_origin": "from_narrow_primary"
     },
     {
@@ -655,8 +751,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "9",
         "sportoto_1_pct": "",
@@ -693,6 +787,18 @@
       "decision": {
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary"
     },
@@ -825,10 +931,8 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T15:13:21.256241+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:23:23.417500+00:00"
       },
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "10",
         "sportoto_1_pct": "",
@@ -864,7 +968,7 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -901,8 +1005,36 @@
         "surprise_score": 10,
         "confidence_class": "D"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 74.1,
+        "best_probability_pct": 74.1,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 74.1,
+        "best_probability_pct": 74.1,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     },
     {
       "match_no": "11",
@@ -1033,10 +1165,8 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T15:13:21.258031+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:23:23.419262+00:00"
       },
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "11",
         "sportoto_1_pct": "",
@@ -1072,7 +1202,7 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1108,8 +1238,36 @@
         "surprise_score": 3.2,
         "confidence_class": "C"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 76.9,
+        "best_probability_pct": 76.9,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 76.9,
+        "best_probability_pct": 76.9,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     },
     {
       "match_no": "12",
@@ -1240,10 +1398,8 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T15:13:21.260426+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:23:23.421777+00:00"
       },
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "12",
         "sportoto_1_pct": "",
@@ -1279,7 +1435,7 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1316,8 +1472,36 @@
         "surprise_score": 8.2,
         "confidence_class": "D"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 75.0,
+        "best_probability_pct": 75.0,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 75.0,
+        "best_probability_pct": 75.0,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     },
     {
       "match_no": "13",
@@ -1338,8 +1522,6 @@
         "status": "unavailable"
       },
       "data_error": "football-data.org fikstur eslesmesi bulunamadi",
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "13",
         "sportoto_1_pct": "",
@@ -1376,6 +1558,18 @@
       "decision": {
         "status": "unavailable",
         "reason": "Model/konsensüs yok; manuel tek/çift tercih girilmeli."
+      },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary"
     },
@@ -1508,10 +1702,8 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T15:13:21.264499+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:23:23.425848+00:00"
       },
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "14",
         "sportoto_1_pct": "",
@@ -1547,7 +1739,7 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "1X",
@@ -1583,8 +1775,36 @@
         "surprise_score": 4.6,
         "confidence_class": "C"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "1X",
+        "best_same_width": "1X",
+        "covered_probability_pct": 74.9,
+        "best_probability_pct": 74.9,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "1X",
+        "best_same_width": "1X",
+        "covered_probability_pct": 74.9,
+        "best_probability_pct": 74.9,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     },
     {
       "match_no": "15",
@@ -1715,10 +1935,8 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T15:13:21.266192+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:23:23.427654+00:00"
       },
-      "manual_narrow_pick": "",
-      "manual_wide_pick": "",
       "external_consensus": {
         "match_no": "15",
         "sportoto_1_pct": "",
@@ -1754,7 +1972,7 @@
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1791,14 +2009,42 @@
         "surprise_score": 8.4,
         "confidence_class": "D"
       },
+      "requested_manual_narrow_pick": "",
+      "requested_manual_wide_pick": "",
+      "manual_narrow_reason": "",
+      "manual_wide_reason": "",
+      "manual_narrow_pick": "",
+      "manual_narrow_audit": {
+        "status": "not_requested"
+      },
+      "manual_wide_pick": "",
+      "manual_wide_audit": {
+        "status": "not_requested"
+      },
       "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary"
+      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 72.1,
+        "best_probability_pct": 72.1,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      },
+      "wide_pick_probability_audit": {
+        "pick": "12",
+        "best_same_width": "12",
+        "covered_probability_pct": 72.1,
+        "best_probability_pct": 72.1,
+        "probability_loss_pct": 0.0,
+        "efficient": true
+      }
     }
   ],
   "narrow_strategy": {
     "field": "narrow_pick",
     "role": "primary_real_money_coupon",
-    "policy": "narrow_first_no_triples_v4",
+    "policy": "narrow_first_no_triples_v5",
     "target_doubles": 7,
     "max_doubles": 8,
     "single_count": 0,
@@ -1807,12 +2053,35 @@
     "columns": 0,
     "warnings": [
       "Model/konsensüs olmayan maçlarda manuel dar tercih gerekiyor."
-    ]
+    ],
+    "portfolio_audit": {
+      "field": "narrow_pick",
+      "ready_model_count": 6,
+      "complete_pick_count": 6,
+      "audit_complete": false,
+      "expected_result_counts": {
+        "1": 2.44,
+        "X": 1.49,
+        "2": 2.07
+      },
+      "coverage_counts": {
+        "1": 5,
+        "X": 2,
+        "2": 5
+      },
+      "expected_x_vs_2_gap": 0.58,
+      "coverage_x_vs_2_gap": 3,
+      "imbalance_alarm": false,
+      "inefficient_selections": [],
+      "warnings": [
+        "Portföy denge denetimi kısmi: 15 maçın tamamında model ve tercih bulunmuyor."
+      ]
+    }
   },
   "wide_strategy": {
     "field": "wide_pick",
     "role": "secondary_virtual_control_coupon",
-    "policy": "narrow_first_no_triples_v4",
+    "policy": "narrow_first_no_triples_v5",
     "target_doubles": 11,
     "single_count": 0,
     "double_count": 6,
@@ -1820,12 +2089,35 @@
     "columns": 0,
     "warnings": [
       "Model/konsensüs olmayan maçlarda manuel geniş tercih gerekiyor."
-    ]
+    ],
+    "portfolio_audit": {
+      "field": "wide_pick",
+      "ready_model_count": 6,
+      "complete_pick_count": 6,
+      "audit_complete": false,
+      "expected_result_counts": {
+        "1": 2.44,
+        "X": 1.49,
+        "2": 2.07
+      },
+      "coverage_counts": {
+        "1": 5,
+        "X": 2,
+        "2": 5
+      },
+      "expected_x_vs_2_gap": 0.58,
+      "coverage_x_vs_2_gap": 3,
+      "imbalance_alarm": false,
+      "inefficient_selections": [],
+      "warnings": [
+        "Portföy denge denetimi kısmi: 15 maçın tamamında model ve tercih bulunmuyor."
+      ]
+    }
   },
   "primary_coupon": "narrow",
   "secondary_coupon": "wide_virtual",
   "decision_policy": {
-    "name": "narrow_first_no_triples_v4",
+    "name": "narrow_first_no_triples_v5",
     "primary_coupon": "narrow_real_money",
     "secondary_coupon": "wide_virtual_plus_probability",
     "allowed_picks": [
@@ -1850,6 +2142,10 @@
       "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
       "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",
       "H2H ve son form her hafta yeniden hesaplanır; ilk 5-6 haftada H2H ağırlığı düşürülür.",
+      "Tek ve çiftlerde varsayılan tercih, aynı genişlikte en yüksek toplam olasılığı kapsar; X'e güvenlik önceliği verilmez.",
+      "Model sıralamasından manuel sapma yalnızca yazılı kadro, piyasa, H2H veya takım karakteri gerekçesiyle kabul edilir.",
+      "Beklenen X ve 2 sayıları yakınken kapsama farkı 4 veya daha fazlaysa portföy dengesizliği alarmı üretilir.",
+      "Sabit 5-5-5 sonuç kotası uygulanmaz; dağılım maçların olasılıklarına göre denetlenir.",
       "Türkiye erken sezonunda büyük takım dışı %50-58 favoriler tek geçilmez."
     ]
   }
