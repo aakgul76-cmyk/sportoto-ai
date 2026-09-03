@@ -129,6 +129,15 @@ Sıra değiştirilemez:
 4. Geniş kupon 11 çift + 4 tek = 2.048 kolon hedefinde sanal kontrol kuponu olarak tamamlanır.
 5. Üçlü `1X2` hiçbir aşamada kullanılmaz.
 
+### Olasılık ve dağılım denetimi
+
+- Tek seçim, olasılığı en yüksek sonuçtur.
+- Çift seçim, olasılığı en yüksek iki sonuçtur; `1X`, `X2` ve `12` eşit adaydır. X sonucuna otomatik güvenlik önceliği verilmez.
+- Ana model çiftinden veya tekinden sapma ancak kadro, piyasa, H2H ya da takım karakteri gerekçesi yazılmışsa korunur. Gerekçesiz manuel sapma reddedilir.
+- Her kuponda model yüzdelerinden beklenen 1-X-2 sonuç sayısı ve kuponun kapsadığı 1-X-2 işaret sayısı ayrıca hesaplanır.
+- Beklenen X ve 2 sayıları arasındaki fark 0,75 maçtan az olduğu hâlde kapsama farkı 4 veya daha fazlaysa dağılım alarmı verilir.
+- Sabit 5-5-5 veya benzeri yapay kota uygulanmaz; haftanın maç yapısı esas alınır.
+
 ## 10. Haftalık çalışma döngüsü
 
 - Pazartesi: resmî yeni liste geldiyse yalnızca liste doğrulanır; eski haftanın verisi yeni hafta gibi kullanılmaz.

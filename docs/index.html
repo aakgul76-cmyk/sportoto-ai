@@ -56,6 +56,10 @@
           ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Dar gerçek: ${data.narrow_columns ?? "-"} kolon · Geniş sanal: ${data.wide_columns ?? "-"} kolon`
           : "Henüz API verisi alınmadı.";
         policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Öncelik: Dar kupon · Geniş rolü: sanal +ihtimal kontrolü`;
+        const balance = data.wide_strategy?.portfolio_audit;
+        if (balance?.audit_complete) {
+          policy.textContent += ` · Beklenen 1-X-2: ${balance.expected_result_counts?.["1"] ?? "-"}-${balance.expected_result_counts?.X ?? "-"}-${balance.expected_result_counts?.["2"] ?? "-"} · Kapsama: ${balance.coverage_counts?.["1"] ?? "-"}-${balance.coverage_counts?.X ?? "-"}-${balance.coverage_counts?.["2"] ?? "-"}${balance.imbalance_alarm ? " · DAĞILIM ALARMI" : ""}`;
+        }
 
         if (!data.matches?.length) {
           container.innerHTML = '<div class="empty">İlk GitHub Actions çalışmasından sonra maçlar burada görünecek.</div>';

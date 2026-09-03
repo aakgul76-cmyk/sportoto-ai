@@ -363,7 +363,9 @@ def main() -> None:
         {
             "match_no": str(number),
             "wide_pick": "",
+            "wide_reason": "",
             "narrow_pick": "",
+            "narrow_reason": "",
             "score_1": "",
             "score_1_pct": "",
             "score_2": "",
@@ -377,7 +379,7 @@ def main() -> None:
         csv_text(
             empty_predictions,
             [
-                "match_no", "wide_pick", "narrow_pick", "score_1", "score_1_pct",
+                "match_no", "wide_pick", "wide_reason", "narrow_pick", "narrow_reason", "score_1", "score_1_pct",
                 "score_2", "score_2_pct", "score_3", "score_3_pct",
             ],
         ),

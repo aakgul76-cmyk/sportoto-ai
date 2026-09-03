@@ -16,6 +16,8 @@ ALLOWED = {"1", "X", "2", "1X", "X2", "12"}
 NARROW_TARGET_DOUBLES = 7
 NARROW_MAX_DOUBLES = 8
 WIDE_TARGET_DOUBLES = 11
+BALANCE_EXPECTED_GAP_MAX = 0.75
+BALANCE_COVERAGE_GAP_MIN = 4
 BIG_TR = {"galatasaray", "fenerbahce", "besiktas", "trabzonspor"}
 CONS_FIELDS = [
     "match_no",
@@ -82,6 +84,52 @@ def pair(symbols) -> str:
 
 def union_pick(left: str, right: str) -> str:
     return "".join(symbol for symbol in OUTCOMES if symbol in (left or "") or symbol in (right or ""))
+
+
+def recommended_pick(decision: dict, pick_width: int) -> str:
+    if decision.get("status") != "ready" or pick_width not in {1, 2}:
+        return ""
+    symbols = [item["symbol"] for item in decision.get("ranked_outcomes", [])[:pick_width]]
+    return pair(symbols)
+
+
+def covered_probability(decision: dict, pick: str) -> float | None:
+    if decision.get("status") != "ready" or not pick:
+        return None
+    probabilities = {
+        item["symbol"]: float(item["percentage"])
+        for item in decision.get("ranked_outcomes", [])
+    }
+    return round(sum(probabilities.get(symbol, 0) for symbol in OUTCOMES if symbol in pick), 1)
+
+
+def validate_manual_pick(pick: str, reason: str, decision: dict) -> tuple[str, dict]:
+    if not pick:
+        return "", {"status": "not_requested"}
+    pick_width = width(pick)
+    recommended = recommended_pick(decision, pick_width)
+    requested_probability = covered_probability(decision, pick)
+    recommended_probability = covered_probability(decision, recommended)
+    probability_loss = (
+        round(recommended_probability - requested_probability, 1)
+        if requested_probability is not None and recommended_probability is not None
+        else None
+    )
+    audit = {
+        "requested": pick,
+        "recommended_same_width": recommended,
+        "requested_probability_pct": requested_probability,
+        "recommended_probability_pct": recommended_probability,
+        "probability_loss_pct": probability_loss,
+        "reason": reason,
+    }
+    if not recommended:
+        return pick, audit | {"status": "accepted_without_model"}
+    if pick == recommended:
+        return pick, audit | {"status": "accepted_model_aligned"}
+    if reason.strip():
+        return pick, audit | {"status": "accepted_documented_override"}
+    return "", audit | {"status": "rejected_missing_reason", "effective": recommended}
 
 
 def ensure_consensus(row_count: int = 15) -> None:
@@ -219,7 +267,7 @@ def decide(match: dict) -> dict:
 
     return {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "distribution_source": source,
         "model_single": top,
         "model_double": pair([top, second]),
@@ -286,6 +334,74 @@ def wide_upgrade_reason(match: dict, added_symbol: str) -> str:
     return "; ".join(reasons)
 
 
+def portfolio_audit(matches: list[dict], field: str) -> dict:
+    expected = {symbol: 0.0 for symbol in OUTCOMES}
+    coverage = {symbol: 0 for symbol in OUTCOMES}
+    ready_count = complete_pick_count = 0
+    inefficient = []
+
+    for match in matches:
+        pick = match.get(field, "")
+        if pick:
+            complete_pick_count += 1
+            for symbol in OUTCOMES:
+                if symbol in pick:
+                    coverage[symbol] += 1
+        decision = match.get("decision", {})
+        if decision.get("status") != "ready":
+            continue
+        ready_count += 1
+        for item in decision.get("ranked_outcomes", []):
+            expected[item["symbol"]] += float(item["percentage"]) / 100
+        if pick:
+            best = recommended_pick(decision, width(pick))
+            actual_probability = covered_probability(decision, pick)
+            best_probability = covered_probability(decision, best)
+            loss = round((best_probability or 0) - (actual_probability or 0), 1)
+            match[f"{field}_probability_audit"] = {
+                "pick": pick,
+                "best_same_width": best,
+                "covered_probability_pct": actual_probability,
+                "best_probability_pct": best_probability,
+                "probability_loss_pct": loss,
+                "efficient": loss <= 0.1,
+            }
+            if loss > 0.1:
+                inefficient.append({
+                    "match_no": match.get("match_no"),
+                    "pick": pick,
+                    "best_same_width": best,
+                    "probability_loss_pct": loss,
+                })
+
+    expected = {symbol: round(value, 2) for symbol, value in expected.items()}
+    warnings = []
+    audit_complete = ready_count == len(matches) and complete_pick_count == len(matches)
+    expected_x2_gap = round(abs(expected["X"] - expected["2"]), 2)
+    coverage_x2_gap = abs(coverage["X"] - coverage["2"])
+    if audit_complete and expected_x2_gap <= BALANCE_EXPECTED_GAP_MAX and coverage_x2_gap >= BALANCE_COVERAGE_GAP_MIN:
+        warnings.append(
+            "X ve 2 beklenen sonuç sayıları yakın olmasına rağmen kupon kapsaması aşırı ayrışıyor."
+        )
+    if inefficient:
+        warnings.append(f"{len(inefficient)} seçim aynı genişlikteki en yüksek olasılıklı tercihten sapıyor.")
+    if not audit_complete:
+        warnings.append("Portföy denge denetimi kısmi: 15 maçın tamamında model ve tercih bulunmuyor.")
+    return {
+        "field": field,
+        "ready_model_count": ready_count,
+        "complete_pick_count": complete_pick_count,
+        "audit_complete": audit_complete,
+        "expected_result_counts": expected,
+        "coverage_counts": coverage,
+        "expected_x_vs_2_gap": expected_x2_gap,
+        "coverage_x_vs_2_gap": coverage_x2_gap,
+        "imbalance_alarm": bool(warnings and audit_complete and expected_x2_gap <= BALANCE_EXPECTED_GAP_MAX and coverage_x2_gap >= BALANCE_COVERAGE_GAP_MIN),
+        "inefficient_selections": inefficient,
+        "warnings": warnings,
+    }
+
+
 def build_narrow_primary(matches: list[dict]) -> dict:
     manual_double_count = sum(1 for match in matches if width(match.get("narrow_pick", "")) == 2)
     blanks = [match for match in matches if not match.get("narrow_pick") and match.get("decision", {}).get("status") == "ready"]
@@ -313,6 +429,14 @@ def build_narrow_primary(matches: list[dict]) -> dict:
             match["narrow_pick_origin"] = "auto_primary_single"
 
     warnings = []
+    rejected_manual = [
+        match.get("match_no") for match in matches
+        if match.get("manual_narrow_audit", {}).get("status") == "rejected_missing_reason"
+    ]
+    if rejected_manual:
+        warnings.append(
+            f"Gerekçesiz manuel dar sapma reddedildi: {', '.join(rejected_manual)}. maçlar."
+        )
     if len(forced) > slots:
         warnings.append(f"Zorunlu çift sinyali {len(forced)}, dar kapasite {slots}; en riskliler çiftlendi.")
     if any(not match.get("narrow_pick") for match in matches):
@@ -324,7 +448,7 @@ def build_narrow_primary(matches: list[dict]) -> dict:
     return {
         "field": "narrow_pick",
         "role": "primary_real_money_coupon",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "target_doubles": NARROW_TARGET_DOUBLES,
         "max_doubles": NARROW_MAX_DOUBLES,
         "single_count": sum(1 for match in matches if width(match.get("narrow_pick", "")) == 1),
@@ -337,6 +461,14 @@ def build_narrow_primary(matches: list[dict]) -> dict:
 
 def build_wide_from_narrow(matches: list[dict]) -> dict:
     warnings = []
+    rejected_manual = [
+        match.get("match_no") for match in matches
+        if match.get("manual_wide_audit", {}).get("status") == "rejected_missing_reason"
+    ]
+    if rejected_manual:
+        warnings.append(
+            f"Gerekçesiz manuel geniş sapma reddedildi: {', '.join(rejected_manual)}. maçlar."
+        )
     for match in matches:
         manual_wide = match.get("manual_wide_pick", "")
         narrow = match.get("narrow_pick", "")
@@ -381,7 +513,7 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
     return {
         "field": "wide_pick",
         "role": "secondary_virtual_control_coupon",
-        "policy": "narrow_first_no_triples_v4",
+        "policy": "narrow_first_no_triples_v5",
         "target_doubles": WIDE_TARGET_DOUBLES,
         "single_count": sum(1 for match in matches if width(match.get("wide_pick", "")) == 1),
         "double_count": sum(1 for match in matches if width(match.get("wide_pick", "")) == 2),
@@ -404,15 +536,29 @@ def enrich(document: dict) -> dict:
         match_no = str(match.get("match_no") or match.get("fixture_id") or "")
         row = predictions.get(match_no, {})
         match["match_no"] = match_no
-        match["manual_narrow_pick"] = norm_pick(row.get("narrow_pick"), "narrow_pick", match_no)
-        match["manual_wide_pick"] = norm_pick(row.get("wide_pick"), "wide_pick", match_no)
-        match["narrow_pick"] = match["manual_narrow_pick"]
-        match["wide_pick"] = ""
         match["external_consensus"] = consensus_rows.get(match_no, {})
         match["decision"] = decide(match)
+        requested_narrow = norm_pick(row.get("narrow_pick"), "narrow_pick", match_no)
+        requested_wide = norm_pick(row.get("wide_pick"), "wide_pick", match_no)
+        narrow_reason = (row.get("narrow_reason") or "").strip()
+        wide_reason = (row.get("wide_reason") or "").strip()
+        match["requested_manual_narrow_pick"] = requested_narrow
+        match["requested_manual_wide_pick"] = requested_wide
+        match["manual_narrow_reason"] = narrow_reason
+        match["manual_wide_reason"] = wide_reason
+        match["manual_narrow_pick"], match["manual_narrow_audit"] = validate_manual_pick(
+            requested_narrow, narrow_reason, match["decision"]
+        )
+        match["manual_wide_pick"], match["manual_wide_audit"] = validate_manual_pick(
+            requested_wide, wide_reason, match["decision"]
+        )
+        match["narrow_pick"] = match["manual_narrow_pick"]
+        match["wide_pick"] = ""
 
     document["narrow_strategy"] = build_narrow_primary(matches)
     document["wide_strategy"] = build_wide_from_narrow(matches)
+    document["narrow_strategy"]["portfolio_audit"] = portfolio_audit(matches, "narrow_pick")
+    document["wide_strategy"]["portfolio_audit"] = portfolio_audit(matches, "wide_pick")
 
     for match in matches:
         if width(match.get("wide_pick", "")) >= 3 or width(match.get("narrow_pick", "")) >= 3:
@@ -423,7 +569,7 @@ def enrich(document: dict) -> dict:
     document["primary_coupon"] = "narrow"
     document["secondary_coupon"] = "wide_virtual"
     document["decision_policy"] = {
-        "name": "narrow_first_no_triples_v4",
+        "name": "narrow_first_no_triples_v5",
         "primary_coupon": "narrow_real_money",
         "secondary_coupon": "wide_virtual_plus_probability",
         "allowed_picks": sorted(ALLOWED),
@@ -439,6 +585,10 @@ def enrich(document: dict) -> dict:
             "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
             "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",
             "H2H ve son form her hafta yeniden hesaplanır; ilk 5-6 haftada H2H ağırlığı düşürülür.",
+            "Tek ve çiftlerde varsayılan tercih, aynı genişlikte en yüksek toplam olasılığı kapsar; X'e güvenlik önceliği verilmez.",
+            "Model sıralamasından manuel sapma yalnızca yazılı kadro, piyasa, H2H veya takım karakteri gerekçesiyle kabul edilir.",
+            "Beklenen X ve 2 sayıları yakınken kapsama farkı 4 veya daha fazlaysa portföy dengesizliği alarmı üretilir.",
+            "Sabit 5-5-5 sonuç kotası uygulanmaz; dağılım maçların olasılıklarına göre denetlenir.",
             "Türkiye erken sezonunda büyük takım dışı %50-58 favoriler tek geçilmez.",
         ],
     }
