@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T19:23:23.427784+00:00",
+  "generated_at": "2026-09-03T19:41:56.905242+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -71,7 +71,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -141,7 +154,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -211,7 +237,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -281,7 +320,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -451,11 +503,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "2",
         "model_double": "X2",
@@ -486,7 +551,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 2.0,
         "confidence_class": "C"
@@ -572,7 +650,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -642,7 +733,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -712,7 +816,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -782,7 +899,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -931,7 +1061,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T19:23:23.417500+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:41:56.895274+00:00"
       },
       "external_consensus": {
         "match_no": "10",
@@ -964,11 +1094,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1000,7 +1143,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 10,
         "confidence_class": "D"
@@ -1165,7 +1321,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T19:23:23.419262+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:41:56.897067+00:00"
       },
       "external_consensus": {
         "match_no": "11",
@@ -1198,11 +1354,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1233,7 +1402,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 3.2,
         "confidence_class": "C"
@@ -1398,7 +1580,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T19:23:23.421777+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:41:56.899497+00:00"
       },
       "external_consensus": {
         "match_no": "12",
@@ -1431,11 +1613,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -1467,7 +1662,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 8.2,
         "confidence_class": "D"
@@ -1553,7 +1761,20 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "unavailable",
@@ -1702,7 +1923,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T19:23:23.425848+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:41:56.903456+00:00"
       },
       "external_consensus": {
         "match_no": "14",
@@ -1735,11 +1956,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "1X",
@@ -1770,7 +2004,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 4.6,
         "confidence_class": "C"
@@ -1935,7 +2182,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T19:23:23.427654+00:00"
+        "analysis_refreshed_at": "2026-09-03T19:41:56.905131+00:00"
       },
       "external_consensus": {
         "match_no": "15",
@@ -1968,11 +2215,24 @@
         "model_c_2_pct": "",
         "source_updated_at": "",
         "site_pick": "",
-        "site_note": ""
+        "site_note": "",
+        "external_sites_1_pct": "",
+        "external_sites_x_pct": "",
+        "external_sites_2_pct": "",
+        "external_source_count": "",
+        "external_numeric_source_count": "",
+        "external_pick_1_pct": "",
+        "external_pick_x_pct": "",
+        "external_pick_2_pct": "",
+        "external_top_signal": "",
+        "external_agreement_pct": "",
+        "external_source_names": "",
+        "external_comment_summary": "",
+        "external_updated_at": ""
       },
       "decision": {
         "status": "ready",
-        "policy": "narrow_first_no_triples_v5",
+        "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
         "model_double": "12",
@@ -2004,7 +2264,20 @@
         "external_model_1x2": {},
         "consensus_coverage": {
           "public_sources": 0,
-          "independent_model_sources": 0
+          "independent_model_sources": 0,
+          "prediction_site_rows": 0
+        },
+        "prediction_site_signal": {
+          "top": "",
+          "agreement_pct": "",
+          "pick_distribution": {
+            "1": "",
+            "X": "",
+            "2": ""
+          },
+          "sources": "",
+          "comment_summary": "",
+          "updated_at": ""
         },
         "surprise_score": 8.4,
         "confidence_class": "D"
@@ -2044,7 +2317,7 @@
   "narrow_strategy": {
     "field": "narrow_pick",
     "role": "primary_real_money_coupon",
-    "policy": "narrow_first_no_triples_v5",
+    "policy": "narrow_first_no_triples_v6",
     "target_doubles": 7,
     "max_doubles": 8,
     "single_count": 0,
@@ -2081,7 +2354,7 @@
   "wide_strategy": {
     "field": "wide_pick",
     "role": "secondary_virtual_control_coupon",
-    "policy": "narrow_first_no_triples_v5",
+    "policy": "narrow_first_no_triples_v6",
     "target_doubles": 11,
     "single_count": 0,
     "double_count": 6,
@@ -2117,7 +2390,7 @@
   "primary_coupon": "narrow",
   "secondary_coupon": "wide_virtual",
   "decision_policy": {
-    "name": "narrow_first_no_triples_v5",
+    "name": "narrow_first_no_triples_v6",
     "primary_coupon": "narrow_real_money",
     "secondary_coupon": "wide_virtual_plus_probability",
     "allowed_picks": [
@@ -2138,6 +2411,8 @@
       "Geniş kupon dar kuponun üzerine sanal +ihtimal kontrolüdür.",
       "1X2 kullanılmaz.",
       "Tahmin siteleri kopya için değil konsensüs/tuzak favori için kullanılır.",
+      "Kaynak tahminleri ayrı satırlarda tutulur; yüzdesiz tercihler olasılığa çevrilmez.",
+      "Yorumların yalnızca kısa özeti ve kaynak bağlantısı saklanır; tam metin kopyalanmaz.",
       "Aynı oynanma yüzdesini taşıyan bayi kaynakları tek kitle sinyali sayılır; mükerrer ağırlık verilmez.",
       "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
       "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",
