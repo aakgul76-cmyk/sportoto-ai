@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-03T05:42:27.005766+00:00",
+  "generated_at": "2026-09-03T15:13:21.266303+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -825,7 +825,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:42:26.998274+00:00"
+        "analysis_refreshed_at": "2026-09-03T15:13:21.256241+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1033,7 +1033,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:42:26.999620+00:00"
+        "analysis_refreshed_at": "2026-09-03T15:13:21.258031+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1170,7 +1170,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 564663,
-      "football_data_status": "TIMED",
+      "football_data_status": "2026-09-05 14:15:00Z",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -1240,7 +1240,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:42:27.001579+00:00"
+        "analysis_refreshed_at": "2026-09-03T15:13:21.260426+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1508,7 +1508,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:42:27.004539+00:00"
+        "analysis_refreshed_at": "2026-09-03T15:13:21.264499+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
@@ -1715,7 +1715,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-03T05:42:27.005674+00:00"
+        "analysis_refreshed_at": "2026-09-03T15:13:21.266192+00:00"
       },
       "manual_narrow_pick": "",
       "manual_wide_pick": "",
