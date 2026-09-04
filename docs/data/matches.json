@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T15:14:05.261282+00:00",
+  "generated_at": "2026-09-04T19:24:11.324238+00:00",
   "timezone": "Europe/Istanbul",
   "count": 15,
   "source": "api_football_market_odds_plus_football_data_history+narrow_first_no_triples_policy",
@@ -1320,9 +1320,9 @@
       "wide_pick": "12",
       "narrow_pick": "12",
       "model_1x2": {
-        "1": 37.1,
+        "1": 37.2,
         "X": 25.9,
-        "2": 37.0
+        "2": 36.9
       },
       "model_score_predictions": [
         {
@@ -1335,22 +1335,22 @@
         },
         {
           "score": "0-1",
-          "percentage": 9.1
+          "percentage": 9.2
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 54.6,
-          "no": 45.4
+          "yes": 54.5,
+          "no": 45.5
         },
         "over_under": {
           "1.5": {
-            "over": 74.9,
-            "under": 25.1
+            "over": 74.8,
+            "under": 25.2
           },
           "2.5": {
-            "over": 50.3,
-            "under": 49.7
+            "over": 50.2,
+            "under": 49.8
           }
         }
       },
@@ -1369,7 +1369,7 @@
         "coupon_match": false
       },
       "football_data_match_id": 560567,
-      "football_data_status": "TIMED",
+      "football_data_status": "2026-09-06 12:00:00Z",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
@@ -1382,16 +1382,16 @@
         },
         {
           "score": "0-1",
-          "percentage": 9.1
+          "percentage": 9.2
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 400,
+        "league_matches": 390,
         "home_home_matches": 20,
         "away_away_matches": 20,
         "expected_home_goals": 1.344,
-        "expected_away_goals": 1.343,
+        "expected_away_goals": 1.339,
         "recent_form": {
           "home": {
             "matches": 5,
@@ -1400,8 +1400,8 @@
             "losses": 2,
             "points": 5,
             "points_per_match": 1.0,
-            "goals_for": 6,
-            "goals_against": 7
+            "goals_for": 8,
+            "goals_against": 9
           },
           "away": {
             "matches": 5,
@@ -1410,7 +1410,7 @@
             "losses": 1,
             "points": 10,
             "points_per_match": 2.0,
-            "goals_for": 11,
+            "goals_for": 9,
             "goals_against": 6
           }
         },
@@ -1439,7 +1439,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-04T15:13:35.256844+00:00"
+        "analysis_refreshed_at": "2026-09-04T19:23:41.337141+00:00"
       },
       "model_status": "ready",
       "external_consensus": {
@@ -1497,18 +1497,18 @@
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 37.1
+            "percentage": 37.2
           },
           {
             "symbol": "2",
-            "percentage": 37.0
+            "percentage": 36.9
           },
           {
             "symbol": "X",
             "percentage": 25.9
           }
         ],
-        "top_margin_pct": 0.1,
+        "top_margin_pct": 0.3,
         "third_probability_pct": 25.9,
         "single_forbidden": true,
         "single_forbidden_reasons": [
@@ -1579,17 +1579,17 @@
       "country": "İngiltere",
       "home": "Arsenal",
       "away": "Chelsea",
-      "wide_pick": "12",
-      "narrow_pick": "12",
+      "wide_pick": "1X",
+      "narrow_pick": "1X",
       "model_1x2": {
-        "1": 53.5,
-        "X": 23.1,
-        "2": 23.4
+        "1": 54.6,
+        "X": 22.9,
+        "2": 22.5
       },
       "model_score_predictions": [
         {
           "score": "1-1",
-          "percentage": 10.9
+          "percentage": 10.8
         },
         {
           "score": "2-1",
@@ -1597,22 +1597,22 @@
         },
         {
           "score": "1-0",
-          "percentage": 9.7
+          "percentage": 9.8
         }
       ],
       "model_markets": {
         "btts": {
-          "yes": 56.1,
-          "no": 43.9
+          "yes": 55.8,
+          "no": 44.2
         },
         "over_under": {
           "1.5": {
-            "over": 78.8,
-            "under": 21.2
+            "over": 78.9,
+            "under": 21.1
           },
           "2.5": {
-            "over": 55.8,
-            "under": 44.2
+            "over": 56.0,
+            "under": 44.0
           }
         }
       },
@@ -1631,12 +1631,12 @@
         "coupon_match": false
       },
       "football_data_match_id": 560570,
-      "football_data_status": "TIMED",
+      "football_data_status": "2026-09-06 14:30:00Z",
       "fixture_match_type": "exact_date_and_teams",
       "score_predictions": [
         {
           "score": "1-1",
-          "percentage": 10.9
+          "percentage": 10.8
         },
         {
           "score": "2-1",
@@ -1644,16 +1644,16 @@
         },
         {
           "score": "1-0",
-          "percentage": 9.7
+          "percentage": 9.8
         }
       ],
       "score_model": "poisson_from_football_data_history",
       "model_sample": {
-        "league_matches": 400,
+        "league_matches": 390,
         "home_home_matches": 20,
         "away_away_matches": 20,
-        "expected_home_goals": 1.804,
-        "expected_away_goals": 1.115,
+        "expected_home_goals": 1.832,
+        "expected_away_goals": 1.093,
         "recent_form": {
           "home": {
             "matches": 5,
@@ -1662,17 +1662,17 @@
             "losses": 0,
             "points": 15,
             "points_per_match": 3.0,
-            "goals_for": 8,
+            "goals_for": 10,
             "goals_against": 1
           },
           "away": {
             "matches": 5,
-            "wins": 3,
+            "wins": 2,
             "draws": 1,
-            "losses": 1,
-            "points": 10,
-            "points_per_match": 2.0,
-            "goals_for": 11,
+            "losses": 2,
+            "points": 7,
+            "points_per_match": 1.4,
+            "goals_for": 8,
             "goals_against": 9
           }
         },
@@ -1701,7 +1701,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-04T15:13:35.258639+00:00"
+        "analysis_refreshed_at": "2026-09-04T19:23:41.338926+00:00"
       },
       "model_status": "ready",
       "external_consensus": {
@@ -1755,23 +1755,23 @@
         "policy": "narrow_first_no_triples_v6",
         "distribution_source": "internal_model",
         "model_single": "1",
-        "model_double": "12",
+        "model_double": "1X",
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 53.5
-          },
-          {
-            "symbol": "2",
-            "percentage": 23.4
+            "percentage": 54.6
           },
           {
             "symbol": "X",
-            "percentage": 23.1
+            "percentage": 22.9
+          },
+          {
+            "symbol": "2",
+            "percentage": 22.5
           }
         ],
-        "top_margin_pct": 30.1,
-        "third_probability_pct": 23.1,
+        "top_margin_pct": 31.7,
+        "third_probability_pct": 22.5,
         "single_forbidden": true,
         "single_forbidden_reasons": [
           "Favori %58 altında; tek için ayrışma yok."
@@ -1798,7 +1798,7 @@
           "comment_summary": "",
           "updated_at": ""
         },
-        "surprise_score": 3.2,
+        "surprise_score": 2.8,
         "confidence_class": "C"
       },
       "requested_manual_narrow_pick": "",
@@ -1816,18 +1816,18 @@
       "narrow_pick_origin": "auto_primary_double",
       "wide_pick_origin": "from_narrow_primary",
       "narrow_pick_probability_audit": {
-        "pick": "12",
-        "best_same_width": "12",
-        "covered_probability_pct": 76.9,
-        "best_probability_pct": 76.9,
+        "pick": "1X",
+        "best_same_width": "1X",
+        "covered_probability_pct": 77.5,
+        "best_probability_pct": 77.5,
         "probability_loss_pct": 0.0,
         "efficient": true
       },
       "wide_pick_probability_audit": {
-        "pick": "12",
-        "best_same_width": "12",
-        "covered_probability_pct": 76.9,
-        "best_probability_pct": 76.9,
+        "pick": "1X",
+        "best_same_width": "1X",
+        "covered_probability_pct": 77.5,
+        "best_probability_pct": 77.5,
         "probability_loss_pct": 0.0,
         "efficient": true
       },
@@ -1846,78 +1846,78 @@
       "api_football_match_score": 0.857,
       "api_football_fixture_source": "date",
       "model_1x2": {
-        "1": 30.9,
+        "1": 30.6,
         "X": 28.0,
-        "2": 41.1
+        "2": 41.4
       },
       "model_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 22.6
+          "percentage": 22.8
         },
         {
           "score": "0-1",
-          "percentage": 15.4
+          "percentage": 15.5
         },
         {
           "score": "1-0",
-          "percentage": 13.6
+          "percentage": 13.7
         }
       ],
       "model_markets": {
         "1x2": {
-          "1": 3.08,
-          "X": 3.4,
-          "2": 2.32
+          "1": 3.12,
+          "X": 3.42,
+          "2": 2.31
         },
         "btts": {
           "yes": 3.1,
-          "no": 1.35
+          "no": 1.33
         },
         "over_under": {
           "1.5": {
-            "over": 2.05,
-            "under": 1.74
+            "over": 2.12,
+            "under": 1.715
           },
           "2.5": {
-            "over": 3.035,
-            "under": 1.525
+            "over": 4.365,
+            "under": 1.195
           }
         }
       },
       "market_odds": {
         "1x2": {
-          "1": 3.08,
-          "X": 3.4,
-          "2": 2.32
+          "1": 3.12,
+          "X": 3.42,
+          "2": 2.31
         },
         "btts": {
           "yes": 3.1,
-          "no": 1.35
+          "no": 1.33
         },
         "over_under": {
           "1.5": {
-            "over": 2.05,
-            "under": 1.74
+            "over": 2.12,
+            "under": 1.715
           },
           "2.5": {
-            "over": 3.035,
-            "under": 1.525
+            "over": 4.365,
+            "under": 1.195
           }
         }
       },
       "market_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 22.6
+          "percentage": 22.8
         },
         {
           "score": "0-1",
-          "percentage": 15.4
+          "percentage": 15.5
         },
         {
           "score": "1-0",
-          "percentage": 13.6
+          "percentage": 13.7
         }
       ],
       "market_status": "ready",
@@ -1938,15 +1938,15 @@
       "score_predictions": [
         {
           "score": "0-0",
-          "percentage": 22.6
+          "percentage": 22.8
         },
         {
           "score": "0-1",
-          "percentage": 15.4
+          "percentage": 15.5
         },
         {
           "score": "1-0",
-          "percentage": 13.6
+          "percentage": 13.7
         }
       ],
       "score_model": "api_football_correct_score_odds",
@@ -2003,12 +2003,12 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-04T15:13:35.261115+00:00"
+        "analysis_refreshed_at": "2026-09-04T19:23:41.341360+00:00"
       },
       "market_1x2": {
-        "1": 30.9,
+        "1": 30.6,
         "X": 28.0,
-        "2": 41.1
+        "2": 41.4
       },
       "model_status": "ready",
       "external_consensus": {
@@ -2066,18 +2066,18 @@
         "ranked_outcomes": [
           {
             "symbol": "2",
-            "percentage": 41.1
+            "percentage": 41.4
           },
           {
             "symbol": "1",
-            "percentage": 30.9
+            "percentage": 30.6
           },
           {
             "symbol": "X",
             "percentage": 28.0
           }
         ],
-        "top_margin_pct": 10.2,
+        "top_margin_pct": 10.8,
         "third_probability_pct": 28.0,
         "single_forbidden": true,
         "single_forbidden_reasons": [
@@ -2106,7 +2106,7 @@
           "comment_summary": "",
           "updated_at": ""
         },
-        "surprise_score": 8.2,
+        "surprise_score": 8.0,
         "confidence_class": "D"
       },
       "requested_manual_narrow_pick": "",
@@ -2149,23 +2149,23 @@
       "home": "Inter",
       "away": "Napoli",
       "wide_pick": "1X",
-      "narrow_pick": "1X",
+      "narrow_pick": "1",
       "api_football_fixture_id": 1550113,
       "api_football_match_score": 1.0,
       "api_football_fixture_source": "date",
       "model_1x2": {
-        "1": 57.5,
-        "X": 25.1,
+        "1": 58.0,
+        "X": 24.6,
         "2": 17.4
       },
       "model_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 24.5
+          "percentage": 24.6
         },
         {
           "score": "1-0",
-          "percentage": 19.4
+          "percentage": 19.3
         },
         {
           "score": "0-1",
@@ -2175,53 +2175,53 @@
       "model_markets": {
         "1x2": {
           "1": 1.66,
-          "X": 3.8,
-          "2": 5.5
+          "X": 3.91,
+          "2": 5.55
         },
         "btts": {
-          "yes": 3.685,
-          "no": 1.255
+          "yes": 3.72,
+          "no": 1.25
         },
         "over_under": {
           "1.5": {
-            "over": 2.19,
-            "under": 1.665
+            "over": 2.26,
+            "under": 1.64
           },
           "2.5": {
-            "over": 2.08,
-            "under": 1.75
+            "over": 2.7,
+            "under": 1.4
           }
         }
       },
       "market_odds": {
         "1x2": {
           "1": 1.66,
-          "X": 3.8,
-          "2": 5.5
+          "X": 3.91,
+          "2": 5.55
         },
         "btts": {
-          "yes": 3.685,
-          "no": 1.255
+          "yes": 3.72,
+          "no": 1.25
         },
         "over_under": {
           "1.5": {
-            "over": 2.19,
-            "under": 1.665
+            "over": 2.26,
+            "under": 1.64
           },
           "2.5": {
-            "over": 2.08,
-            "under": 1.75
+            "over": 2.7,
+            "under": 1.4
           }
         }
       },
       "market_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 24.5
+          "percentage": 24.6
         },
         {
           "score": "1-0",
-          "percentage": 19.4
+          "percentage": 19.3
         },
         {
           "score": "0-1",
@@ -2241,18 +2241,18 @@
         "coupon_match": false
       },
       "market_1x2": {
-        "1": 57.5,
-        "X": 25.1,
+        "1": 58.0,
+        "X": 24.6,
         "2": 17.4
       },
       "score_predictions": [
         {
           "score": "0-0",
-          "percentage": 24.5
+          "percentage": 24.6
         },
         {
           "score": "1-0",
-          "percentage": 19.4
+          "percentage": 19.3
         },
         {
           "score": "0-1",
@@ -2316,24 +2316,22 @@
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 57.5
+            "percentage": 58.0
           },
           {
             "symbol": "X",
-            "percentage": 25.1
+            "percentage": 24.6
           },
           {
             "symbol": "2",
             "percentage": 17.4
           }
         ],
-        "top_margin_pct": 32.4,
+        "top_margin_pct": 33.4,
         "third_probability_pct": 17.4,
-        "single_forbidden": true,
-        "single_forbidden_reasons": [
-          "Favori %58 altında; tek için ayrışma yok."
-        ],
-        "favorite_risk_reason": "Favori %58 altında; tek için ayrışma yok.",
+        "single_forbidden": false,
+        "single_forbidden_reasons": [],
+        "favorite_risk_reason": "Favori ayrışmış; tek kararı dar kupon bütçesine göre verilecek.",
         "trap_favorite_alarm": false,
         "trap_favorite_reason": "",
         "consensus_1x2": {},
@@ -2355,8 +2353,8 @@
           "comment_summary": "",
           "updated_at": ""
         },
-        "surprise_score": 2.1,
-        "confidence_class": "C"
+        "surprise_score": 0.9,
+        "confidence_class": "B"
       },
       "requested_manual_narrow_pick": "",
       "requested_manual_wide_pick": "",
@@ -2370,13 +2368,15 @@
       "manual_wide_audit": {
         "status": "not_requested"
       },
-      "narrow_pick_origin": "auto_primary_double",
-      "wide_pick_origin": "from_narrow_primary",
+      "narrow_pick_origin": "auto_primary_single",
+      "wide_pick_origin": "narrow_plus_sanal_extra",
+      "wide_extra_outcome": "X",
+      "wide_extra_reason": "dar kupon risk sıralaması",
       "narrow_pick_probability_audit": {
-        "pick": "1X",
-        "best_same_width": "1X",
-        "covered_probability_pct": 82.6,
-        "best_probability_pct": 82.6,
+        "pick": "1",
+        "best_same_width": "1",
+        "covered_probability_pct": 58.0,
+        "best_probability_pct": 58.0,
         "probability_loss_pct": 0.0,
         "efficient": true
       },
@@ -2403,78 +2403,78 @@
       "api_football_match_score": 0.864,
       "api_football_fixture_source": "date",
       "model_1x2": {
-        "1": 54.9,
-        "X": 25.7,
-        "2": 19.4
+        "1": 55.1,
+        "X": 25.0,
+        "2": 19.9
       },
       "model_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 23.2
+          "percentage": 22.9
         },
         {
           "score": "1-0",
-          "percentage": 18.5
+          "percentage": 18.8
         },
         {
           "score": "0-1",
-          "percentage": 10.5
+          "percentage": 10.4
         }
       ],
       "model_markets": {
         "1x2": {
-          "1": 1.73,
-          "X": 3.7,
-          "2": 4.9
+          "1": 1.735,
+          "X": 3.83,
+          "2": 4.8
         },
         "btts": {
-          "yes": 3.34,
-          "no": 1.3
+          "yes": 3.4,
+          "no": 1.285
         },
         "over_under": {
           "1.5": {
-            "over": 2.025,
-            "under": 1.745
+            "over": 2.11,
+            "under": 1.73
           },
           "2.5": {
-            "over": 1.94,
-            "under": 1.85
+            "over": 4.365,
+            "under": 1.195
           }
         }
       },
       "market_odds": {
         "1x2": {
-          "1": 1.73,
-          "X": 3.7,
-          "2": 4.9
+          "1": 1.735,
+          "X": 3.83,
+          "2": 4.8
         },
         "btts": {
-          "yes": 3.34,
-          "no": 1.3
+          "yes": 3.4,
+          "no": 1.285
         },
         "over_under": {
           "1.5": {
-            "over": 2.025,
-            "under": 1.745
+            "over": 2.11,
+            "under": 1.73
           },
           "2.5": {
-            "over": 1.94,
-            "under": 1.85
+            "over": 4.365,
+            "under": 1.195
           }
         }
       },
       "market_score_predictions": [
         {
           "score": "0-0",
-          "percentage": 23.2
+          "percentage": 22.9
         },
         {
           "score": "1-0",
-          "percentage": 18.5
+          "percentage": 18.8
         },
         {
           "score": "0-1",
-          "percentage": 10.5
+          "percentage": 10.4
         }
       ],
       "market_status": "ready",
@@ -2495,15 +2495,15 @@
       "score_predictions": [
         {
           "score": "0-0",
-          "percentage": 23.2
+          "percentage": 22.9
         },
         {
           "score": "1-0",
-          "percentage": 18.5
+          "percentage": 18.8
         },
         {
           "score": "0-1",
-          "percentage": 10.5
+          "percentage": 10.4
         }
       ],
       "score_model": "api_football_correct_score_odds",
@@ -2560,12 +2560,12 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-04T15:13:55.272493+00:00"
+        "analysis_refreshed_at": "2026-09-04T19:24:01.334773+00:00"
       },
       "market_1x2": {
-        "1": 54.9,
-        "X": 25.7,
-        "2": 19.4
+        "1": 55.1,
+        "X": 25.0,
+        "2": 19.9
       },
       "model_status": "ready",
       "external_consensus": {
@@ -2623,19 +2623,19 @@
         "ranked_outcomes": [
           {
             "symbol": "1",
-            "percentage": 54.9
+            "percentage": 55.1
           },
           {
             "symbol": "X",
-            "percentage": 25.7
+            "percentage": 25.0
           },
           {
             "symbol": "2",
-            "percentage": 19.4
+            "percentage": 19.9
           }
         ],
-        "top_margin_pct": 29.2,
-        "third_probability_pct": 19.4,
+        "top_margin_pct": 30.1,
+        "third_probability_pct": 19.9,
         "single_forbidden": true,
         "single_forbidden_reasons": [
           "Favori %58 altında; tek için ayrışma yok."
@@ -2662,7 +2662,7 @@
           "comment_summary": "",
           "updated_at": ""
         },
-        "surprise_score": 3.0,
+        "surprise_score": 2.9,
         "confidence_class": "C"
       },
       "requested_manual_narrow_pick": "",
@@ -2682,16 +2682,16 @@
       "narrow_pick_probability_audit": {
         "pick": "1X",
         "best_same_width": "1X",
-        "covered_probability_pct": 80.6,
-        "best_probability_pct": 80.6,
+        "covered_probability_pct": 80.1,
+        "best_probability_pct": 80.1,
         "probability_loss_pct": 0.0,
         "efficient": true
       },
       "wide_pick_probability_audit": {
         "pick": "1X",
         "best_same_width": "1X",
-        "covered_probability_pct": 80.6,
-        "best_probability_pct": 80.6,
+        "covered_probability_pct": 80.1,
+        "best_probability_pct": 80.1,
         "probability_loss_pct": 0.0,
         "efficient": true
       },
@@ -2826,7 +2826,7 @@
         "form_weight": 0.08,
         "h2h_weight": 0.05,
         "early_season_reduced_h2h": true,
-        "analysis_refreshed_at": "2026-09-04T15:14:05.261123+00:00"
+        "analysis_refreshed_at": "2026-09-04T19:24:11.324059+00:00"
       },
       "model_status": "ready",
       "external_consensus": {
@@ -2966,30 +2966,49 @@
     "policy": "narrow_first_no_triples_v6",
     "target_doubles": 7,
     "max_doubles": 8,
-    "single_count": 1,
-    "double_count": 8,
+    "single_count": 2,
+    "double_count": 7,
     "manual_count": 0,
     "columns": 0,
     "warnings": [
       "Model/konsensüs olmayan maçlarda manuel dar tercih gerekiyor."
     ],
+    "validation": {
+      "field": "narrow_pick",
+      "label": "Dar",
+      "status": "incomplete",
+      "final": false,
+      "playable": false,
+      "complete_pick_count": 9,
+      "incomplete_match_nos": [
+        "2",
+        "3",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "double_count": 7,
+      "columns": 0,
+      "errors": []
+    },
     "portfolio_audit": {
       "field": "narrow_pick",
       "ready_model_count": 9,
       "complete_pick_count": 9,
       "audit_complete": false,
       "expected_result_counts": {
-        "1": 3.86,
-        "X": 2.31,
+        "1": 3.88,
+        "X": 2.29,
         "2": 2.83
       },
       "coverage_counts": {
         "1": 8,
         "X": 3,
-        "2": 6
+        "2": 5
       },
-      "expected_x_vs_2_gap": 0.52,
-      "coverage_x_vs_2_gap": 3,
+      "expected_x_vs_2_gap": 0.54,
+      "coverage_x_vs_2_gap": 2,
       "imbalance_alarm": false,
       "inefficient_selections": [],
       "warnings": [
@@ -3009,23 +3028,42 @@
     "warnings": [
       "Model/konsensüs olmayan maçlarda manuel geniş tercih gerekiyor."
     ],
+    "validation": {
+      "field": "wide_pick",
+      "label": "Geniş",
+      "status": "incomplete",
+      "final": false,
+      "playable": false,
+      "complete_pick_count": 9,
+      "incomplete_match_nos": [
+        "2",
+        "3",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "double_count": 9,
+      "columns": 0,
+      "errors": []
+    },
     "portfolio_audit": {
       "field": "wide_pick",
       "ready_model_count": 9,
       "complete_pick_count": 9,
       "audit_complete": false,
       "expected_result_counts": {
-        "1": 3.86,
-        "X": 2.31,
+        "1": 3.88,
+        "X": 2.29,
         "2": 2.83
       },
       "coverage_counts": {
         "1": 8,
-        "X": 4,
-        "2": 6
+        "X": 5,
+        "2": 5
       },
-      "expected_x_vs_2_gap": 0.52,
-      "coverage_x_vs_2_gap": 2,
+      "expected_x_vs_2_gap": 0.54,
+      "coverage_x_vs_2_gap": 0,
       "imbalance_alarm": false,
       "inefficient_selections": [],
       "warnings": [
@@ -3073,6 +3111,49 @@
     "narrow_ready_count": 9,
     "wide_ready_count": 9
   },
+  "coupon_validation": {
+    "status": "incomplete",
+    "narrow_playable": false,
+    "wide_virtual_final": false,
+    "narrow": {
+      "field": "narrow_pick",
+      "label": "Dar",
+      "status": "incomplete",
+      "final": false,
+      "playable": false,
+      "complete_pick_count": 9,
+      "incomplete_match_nos": [
+        "2",
+        "3",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "double_count": 7,
+      "columns": 0,
+      "errors": []
+    },
+    "wide": {
+      "field": "wide_pick",
+      "label": "Geniş",
+      "status": "incomplete",
+      "final": false,
+      "playable": false,
+      "complete_pick_count": 9,
+      "incomplete_match_nos": [
+        "2",
+        "3",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "double_count": 9,
+      "columns": 0,
+      "errors": []
+    }
+  },
   "primary_coupon": "narrow",
   "secondary_coupon": "wide_virtual",
   "decision_policy": {
@@ -3102,6 +3183,7 @@
       "Aynı oynanma yüzdesini taşıyan bayi kaynakları tek kitle sinyali sayılır; mükerrer ağırlık verilmez.",
       "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
       "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",
+      "Kolon, çift sayısı veya kapsama kuralını ihlal eden kupon yalnız uyarılmaz; invalid ve oynanamaz işaretlenir.",
       "H2H ve son form her hafta yeniden hesaplanır; ilk 5-6 haftada H2H ağırlığı düşürülür.",
       "Tek ve çiftlerde varsayılan tercih, aynı genişlikte en yüksek toplam olasılığı kapsar; X'e güvenlik önceliği verilmez.",
       "Model sıralamasından manuel sapma yalnızca yazılı kadro, piyasa, H2H veya takım karakteri gerekçesiyle kabul edilir.",
