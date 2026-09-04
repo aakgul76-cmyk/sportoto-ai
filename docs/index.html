@@ -11,7 +11,7 @@
     header { margin-bottom: 28px; }
     h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 3.5rem); }
     .accent { color: #5ee28c; }
-    #status, #coverage, #policy { color: #a9bdb1; line-height: 1.5; }
+    #status, #coverage, #policy, #result-evaluation { color: #a9bdb1; line-height: 1.5; }
     #coupon-validation { margin-top: 8px; line-height: 1.5; font-weight: 700; }
     #coupon-validation.valid { color: #9cf0b8; }
     #coupon-validation.incomplete { color: #ffd39a; }
@@ -42,6 +42,7 @@
       <div id="status">Veriler yükleniyor…</div>
       <div id="coverage"></div>
       <div id="coupon-validation"></div>
+      <div id="result-evaluation"></div>
       <div id="policy"></div>
     </header>
     <section id="matches" class="grid"></section>
@@ -56,6 +57,7 @@
       const status = document.querySelector("#status");
       const coverage = document.querySelector("#coverage");
       const couponValidation = document.querySelector("#coupon-validation");
+      const resultEvaluation = document.querySelector("#result-evaluation");
       const policy = document.querySelector("#policy");
       const container = document.querySelector("#matches");
       try {
@@ -74,6 +76,10 @@
         const statusLabel = value => ({ valid: "GEÇERLİ", incomplete: "EKSİK", invalid: "GEÇERSİZ" })[value] || "DENETLENMEDİ";
         couponValidation.className = validation.status || "";
         couponValidation.textContent = `Kupon denetimi: Dar ${statusLabel(narrowValidation.status)} · Geniş ${statusLabel(wideValidation.status)}${narrowValidation.playable ? " · Dar kupon oynanabilir" : " · Dar kupon oynanabilir değil"}`;
+        const evaluation = data.result_evaluation;
+        resultEvaluation.textContent = evaluation
+          ? `Sonuç değerlendirmesi: ${evaluation.completed_count}/${evaluation.total_matches} tamamlandı · Dar ${evaluation.narrow_hit_count}/${evaluation.narrow_evaluated_count} doğru · Geniş ${evaluation.wide_hit_count}/${evaluation.wide_evaluated_count} doğru · Bekleyen ${(evaluation.pending_match_nos || []).join(", ") || "yok"}`
+          : "";
         policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Öncelik: Dar kupon · Geniş rolü: sanal +ihtimal kontrolü`;
         const balance = data.wide_strategy?.portfolio_audit;
         if (balance?.audit_complete) {
@@ -95,6 +101,15 @@
           const decisionReady = ["ready", "manual_ready"].includes(match.decision_status);
           const manualError = [match.manual_narrow_audit, match.manual_wide_audit]
             .find(item => item?.status === "rejected_invalid_pick");
+          const result = match.result_analysis || {};
+          const assessmentLabel = value => ({
+            correct_main_decision: "doğru ana karar",
+            narrowing_or_risk_budget_error: "daraltma/risk bütçesi hatası",
+            analysis_or_model_error: "analiz/model hatası",
+            wide_distribution_error: "geniş dağılım hatası",
+            not_evaluable: "tahmin olmadığı için değerlendirilemedi"
+          })[value] || "-";
+          const hitLabel = value => value === true ? "bildi" : value === false ? "kaçırdı" : "değerlendirilemedi";
           return `
           <article>
             <div class="teams">
@@ -122,6 +137,8 @@
             <div class="origin">Form (son 5): ev ${escapeHtml(form.home?.points ?? "-")} puan · deplasman ${escapeHtml(form.away?.points ?? "-")} puan · H2H: ${escapeHtml(h2h.matches ?? 0)} maç (${escapeHtml(h2h.home_side_wins ?? 0)}-${escapeHtml(h2h.draws ?? 0)}-${escapeHtml(h2h.away_side_wins ?? 0)})</div>
             <div class="origin">Dar kaynak: ${escapeHtml(match.narrow_pick_origin || (match.manual_narrow_pick ? "manual" : "-"))} · Geniş kaynak: ${escapeHtml(match.wide_pick_origin || "-")}</div>
             <div class="origin">Genişe ekleme nedeni: ${escapeHtml(match.wide_extra_reason || "-")}</div>
+            ${result.status === "finished" ? `<div class="reason">Sonuç: ${escapeHtml(result.score)} (${escapeHtml(result.outcome)}) · Dar ${hitLabel(result.narrow_hit)} · Geniş ${hitLabel(result.wide_hit)} · Değerlendirme: ${escapeHtml(assessmentLabel(result.assessment))}</div>` : ""}
+            ${result.status === "pending" ? `<div class="origin">Sonuç durumu: maç henüz tamamlanmadı.</div>` : ""}
             ${manualError ? `<div class="reason">Geçersiz manuel giriş: ${escapeHtml(manualError.requested)} · ${escapeHtml(manualError.error)}</div>` : ""}
           </article>`;
         }).join("");

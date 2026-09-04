@@ -18,6 +18,8 @@ Last updated: 2026-09-03
 6. A request has a 45-second timeout and at most three attempts.
 7. API-Football response headers are checked for the daily remaining quota. If the remaining daily quota falls to 10 or lower, the run stops sending new API-Football requests.
 8. If API-Football blocks a future `date` fixture query on the Free plan, the workflow falls back to the older `league + season` fixture lookup and filters the coupon match from that season data.
+9. Cumartesi-pazartesi sonuç değerlendirmesi maç başına istek göndermez; kupondaki farklı tarihler için birer fikstür isteği gönderir ve aynı merkezi 10 saniye aralığını kullanır.
+10. Akşam tahmin çalışmaları kaldırılmıştır. Planlı sağlayıcı kullanımı her gün yalnız sabah çalışır; salı-cuma tahmin, cumartesi-pazartesi sonuç sorgusudur.
 
 ## API-Football reactivation
 

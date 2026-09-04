@@ -154,12 +154,12 @@ Sıra değiştirilemez:
 
 ## 10. Haftalık çalışma döngüsü
 
-- Pazartesi: resmî yeni liste geldiyse yalnızca liste doğrulanır; eski haftanın verisi yeni hafta gibi kullanılmaz.
-- Salı: son hafta sonuçları işlenir; takım notları, son 5 form ve H2H özeti yenilenir; ilk dar taslak üretilir.
-- Çarşamba ve perşembe: bağımsız tahmin modelleri, oynanma yüzdeleri, oran hareketi, kadro ve haberlerle dar kupon yeniden kalibre edilir.
-- Cuma: önce gerçek dar kupon, sonra sanal geniş kupon kesinleştirilir.
-- Cumartesi, pazar ve pazartesi: yeni tahmin üretilmez; cuma günü oynanan dar kupon ve sanal geniş kupon takip edilir.
-- Salı: yeni kupon haftası başlar.
+- Pazartesi: resmî yeni liste geldiyse yalnızca liste hazırlanır; yeni haftanın tahmini başlatılmaz.
+- Salı sabahı: önce geçen haftanın kalan sonuçları kapatılır ve arşivlenir; ardından yeni haftanın ilk dar taslağı üretilir.
+- Çarşamba ve perşembe sabahı: bağımsız tahmin modelleri, oynanma yüzdeleri, oran hareketi, kadro ve haberlerle dar kupon yeniden kalibre edilir.
+- Cuma sabahı: gerçek dar kupon ve sanal geniş kuponun son sürümü yayımlanır ve tahminler dondurulur.
+- Cumartesi, pazar ve pazartesi sabahı: yeni tahmin üretilmez; yalnız tamamlanan maç sonuçları ile dar/geniş kupon başarısı değerlendirilir.
+- Push işlemi tahmin üretmez. Manuel tahmin yenilemesi yalnız salı-perşembe mümkündür; cuma günü yalnız planlı sabah çalışması final tahmini üretir.
 
 ## 11. Kalibrasyon ölçümü
 

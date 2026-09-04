@@ -11,15 +11,14 @@ on:
       - "scripts/fetch_data.py"
       - "scripts/apply_decision_policy.py"
       - "scripts/aggregate_external_predictions.py"
+      - "scripts/evaluate_results.py"
+      - "scripts/weekly_cycle.py"
       - ".github/workflows/update-data.yml"
       - "docs/index.html"
       - "docs/DECISION_POLICY.md"
   schedule:
-    # Sabah degerlendirmesi her gun calisir: pazartesi eski kupon, sali yeni kupon.
+    # Her sabah tek yayın: salı-cuma tahmin, cumartesi-pazartesi sonuç değerlendirme.
     - cron: "0 8 * * *"
-      timezone: "Europe/Istanbul"
-    # Pazartesi aksami yeni kuponu erken degerlendirmemek icin 18:00 calismasi yoktur.
-    - cron: "0 18 * * 0,2-6"
       timezone: "Europe/Istanbul"
 
 permissions:
@@ -48,7 +47,18 @@ jobs:
           cache: pip
       - name: Kutuphaneleri kur
         run: pip install -r requirements.txt
+      - name: Haftalik calisma modunu belirle
+        id: cycle
+        run: python scripts/weekly_cycle.py
+      - name: Gecen haftayi sali sabahi kapat
+        if: steps.cycle.outputs.close_previous_week == 'true'
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: |
+          python scripts/evaluate_results.py --archive
+          sleep 11
       - name: Saglayici verileriyle kupon modelini hazirla
+        if: steps.cycle.outputs.mode == 'prediction'
         env:
           FOOTBALL_DATA_TOKEN: ${{ secrets.FOOTBALL_DATA_TOKEN }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
@@ -56,6 +66,14 @@ jobs:
           python scripts/fetch_data.py
           python scripts/aggregate_external_predictions.py
           python scripts/apply_decision_policy.py
+      - name: Dondurulmus kuponun sonuclarini degerlendir
+        if: steps.cycle.outputs.mode == 'evaluation'
+        env:
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+        run: python scripts/evaluate_results.py
+      - name: Tahminleri degistirmeden mevcut yayini koru
+        if: steps.cycle.outputs.mode == 'frozen' || steps.cycle.outputs.mode == 'publish_only'
+        run: echo "${{ steps.cycle.outputs.cycle_reason }}"
       - name: Yeni verileri repository'ye kaydet
         run: |
           git config user.name "github-actions[bot]"

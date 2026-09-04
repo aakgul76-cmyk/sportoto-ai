@@ -76,12 +76,15 @@ sportoto-ai/
 ├── scripts/fetch_data.py                # API-Football / football-data verisinden model üretir
 ├── scripts/apply_decision_policy.py     # Dar öncelikli, üçlüsüz kupon politikasını uygular
 ├── scripts/aggregate_external_predictions.py # Kaynak satırlarını maç konsensüsüne dönüştürür
+├── scripts/weekly_cycle.py              # Haftanın tahmin/değerlendirme modunu seçer
+├── scripts/evaluate_results.py          # Dondurulmuş seçimleri değiştirmeden sonuçları değerlendirir
 ├── scripts/reset_consensus.py           # Yeni haftada konsensüs şablonunu sıfırlar
 ├── data/coupon.csv                      # Bağlayıcı 15 maç listesi
 ├── data/predictions.csv                 # Manuel geniş/dar tercih alanı
 ├── data/consensus.csv                   # Tahmin sitesi / oynanma yüzdesi opsiyonel girişi
 ├── data/external_predictions.csv        # Her maç ve kaynak için tahmin/yorum özeti
 ├── data/matches.json                    # Ana JSON çıktı
+├── data/last_week_evaluation.json       # Salı kapanışında önceki haftanın sonuç arşivi
 ├── docs/index.html                      # GitHub Pages paneli
 ├── docs/data/matches.json               # Panelin okuduğu JSON
 └── requirements.txt
@@ -138,11 +141,13 @@ python scripts/apply_decision_policy.py
 
 ## Haftalık çalışma döngüsü
 
-- **Salı:** geçen hafta sonuçlarıyla takım notları, son form ve H2H güncellenir; ilk dar taslak çıkarılır.
-- **Çarşamba, perşembe:** tahmin sitesi/model konsensüsü, oynanma yüzdeleri, oran, kadro ve haberlerle dar taslak kalibre edilir.
-- **Cuma:** önce gerçek oynanacak dar kupon, sonra sanal geniş kontrol kuponu belirlenir.
-- **Cumartesi, pazar, pazartesi:** yeni tahmin üretilmez; cuma günü oynanan dar kupon ve sanal geniş kupon takip edilir.
-- **Salı:** yeni haftanın kuponu alınır ve döngü yeniden başlar.
+- **Salı sabahı:** önce geçen haftanın kalan sonuçları kapatılıp arşivlenir; ardından yeni haftanın ilk tahmini çıkarılır.
+- **Çarşamba ve perşembe sabahı:** tahmin sitesi/model konsensüsü, oynanma yüzdeleri, oran, kadro ve haberlerle tahmin güncellenir.
+- **Cuma sabahı:** gerçek dar kupon ve sanal geniş kontrol kuponunun son sürümü yayımlanır; tahminler dondurulur.
+- **Cumartesi, pazar ve pazartesi sabahı:** yeni tahmin üretilmez; yalnız tamamlanan maçların sonuçları ve dar/geniş kupon başarısı değerlendirilir.
+- **Pazartesi yayımlanan yeni liste:** yalnız hazırlanır; yeni haftanın tahmini salı sabahından önce başlatılmaz.
+
+Planlı çalışma yalnız sabah 08.00'de çalışır. Push işlemleri mevcut çıktıyı yayımlar fakat tahmin üretmez. Manuel çalışma salı-perşembe tahmin yenileyebilir; cuma günü planlı son yayından sonra ve cumartesi-pazartesi aralığında tahmini değiştiremez.
 
 ## Haftalık kalibrasyon
 
