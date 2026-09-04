@@ -160,7 +160,7 @@ def load_inputs() -> list[dict]:
     with COUPON.open(newline="", encoding="utf-8-sig") as file:
         for row in csv.DictReader(file):
             number = row["match_no"].strip()
-            prediction = picks[number]
+            prediction = picks.get(number, {})
             matches.append({
                 "match_no": number,
                 "date": row["date"].strip(),
@@ -168,11 +168,9 @@ def load_inputs() -> list[dict]:
                 "country": row["country"].strip(),
                 "home": row["home"].strip(),
                 "away": row["away"].strip(),
-                "wide_pick": prediction["wide_pick"].strip().replace("0", "X"),
-                "narrow_pick": prediction["narrow_pick"].strip().replace("0", "X"),
+                "wide_pick": prediction.get("wide_pick", "").strip().replace("0", "X"),
+                "narrow_pick": prediction.get("narrow_pick", "").strip().replace("0", "X"),
             })
-    if len(matches) != 15:
-        raise SystemExit(f"Kuponda 15 yerine {len(matches)} mac bulundu.")
     return matches
 
 
@@ -733,11 +731,21 @@ def annotate_model_availability(matches: list[dict]) -> dict:
             )
             unavailable_match_nos.append(match_no)
 
+    expected_match_nos = {str(number) for number in range(1, 16)}
+    actual_match_nos = {str(match.get("match_no") or "?") for match in matches}
+    missing_match_nos = sorted(expected_match_nos - actual_match_nos, key=int)
+    unavailable_match_nos.extend(
+        match_no for match_no in missing_match_nos if match_no not in unavailable_match_nos
+    )
     ready_count = len(ready_match_nos)
-    status = "complete" if ready_count == len(matches) else "unavailable" if ready_count == 0 else "partial"
+    status = (
+        "complete" if ready_count == 15 and actual_match_nos == expected_match_nos
+        else "unavailable" if ready_count == 0
+        else "partial"
+    )
     return {
         "status": status,
-        "total_matches": len(matches),
+        "total_matches": 15,
         "ready_count": ready_count,
         "unavailable_count": len(unavailable_match_nos),
         "ready_match_nos": ready_match_nos,
@@ -751,9 +759,6 @@ def publish_match_results(
     outputs=OUTPUTS,
 ) -> dict:
     """Publish each available match model without coupling it to the other matches."""
-    if len(matches) != 15:
-        raise SystemExit(f"Kuponda 15 yerine {len(matches)} mac bulundu; yayin yapilmadi.")
-
     model_coverage = annotate_model_availability(matches)
 
     def columns(field: str) -> int:

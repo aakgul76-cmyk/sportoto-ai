@@ -12,6 +12,10 @@
     h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 3.5rem); }
     .accent { color: #5ee28c; }
     #status, #coverage, #policy { color: #a9bdb1; line-height: 1.5; }
+    #coupon-validation { margin-top: 8px; line-height: 1.5; font-weight: 700; }
+    #coupon-validation.valid { color: #9cf0b8; }
+    #coupon-validation.incomplete { color: #ffd39a; }
+    #coupon-validation.invalid { color: #ff9e9e; }
     .grid { display: grid; gap: 14px; }
     article { background: #10241a; border: 1px solid #254735; border-radius: 16px; padding: 18px; }
     .teams { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.1rem; font-weight: 700; }
@@ -37,6 +41,7 @@
       <h1>Spor Toto <span class="accent">Analiz</span></h1>
       <div id="status">Veriler yükleniyor…</div>
       <div id="coverage"></div>
+      <div id="coupon-validation"></div>
       <div id="policy"></div>
     </header>
     <section id="matches" class="grid"></section>
@@ -50,6 +55,7 @@
     async function loadMatches() {
       const status = document.querySelector("#status");
       const coverage = document.querySelector("#coverage");
+      const couponValidation = document.querySelector("#coupon-validation");
       const policy = document.querySelector("#policy");
       const container = document.querySelector("#matches");
       try {
@@ -62,6 +68,12 @@
         const modelCoverage = data.model_coverage || {};
         const decisionCoverage = data.decision_coverage || {};
         coverage.textContent = `Maç bazlı durum: Model ${modelCoverage.ready_count ?? "-"}/${modelCoverage.total_matches ?? data.count ?? 15} · Karar ${decisionCoverage.ready_count ?? "-"}/${decisionCoverage.total_matches ?? data.count ?? 15} · Bekleyen maçlar: ${(decisionCoverage.incomplete_match_nos || modelCoverage.unavailable_match_nos || []).join(", ") || "yok"}`;
+        const validation = data.coupon_validation || {};
+        const narrowValidation = validation.narrow || {};
+        const wideValidation = validation.wide || {};
+        const statusLabel = value => ({ valid: "GEÇERLİ", incomplete: "EKSİK", invalid: "GEÇERSİZ" })[value] || "DENETLENMEDİ";
+        couponValidation.className = validation.status || "";
+        couponValidation.textContent = `Kupon denetimi: Dar ${statusLabel(narrowValidation.status)} · Geniş ${statusLabel(wideValidation.status)}${narrowValidation.playable ? " · Dar kupon oynanabilir" : " · Dar kupon oynanabilir değil"}`;
         policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Öncelik: Dar kupon · Geniş rolü: sanal +ihtimal kontrolü`;
         const balance = data.wide_strategy?.portfolio_audit;
         if (balance?.audit_complete) {
@@ -81,6 +93,8 @@
           const riskReason = decision.favorite_risk_reason || decision.reason || "-";
           const modelReady = match.model_status === "ready";
           const decisionReady = ["ready", "manual_ready"].includes(match.decision_status);
+          const manualError = [match.manual_narrow_audit, match.manual_wide_audit]
+            .find(item => item?.status === "rejected_invalid_pick");
           return `
           <article>
             <div class="teams">
@@ -108,6 +122,7 @@
             <div class="origin">Form (son 5): ev ${escapeHtml(form.home?.points ?? "-")} puan · deplasman ${escapeHtml(form.away?.points ?? "-")} puan · H2H: ${escapeHtml(h2h.matches ?? 0)} maç (${escapeHtml(h2h.home_side_wins ?? 0)}-${escapeHtml(h2h.draws ?? 0)}-${escapeHtml(h2h.away_side_wins ?? 0)})</div>
             <div class="origin">Dar kaynak: ${escapeHtml(match.narrow_pick_origin || (match.manual_narrow_pick ? "manual" : "-"))} · Geniş kaynak: ${escapeHtml(match.wide_pick_origin || "-")}</div>
             <div class="origin">Genişe ekleme nedeni: ${escapeHtml(match.wide_extra_reason || "-")}</div>
+            ${manualError ? `<div class="reason">Geçersiz manuel giriş: ${escapeHtml(manualError.requested)} · ${escapeHtml(manualError.error)}</div>` : ""}
           </article>`;
         }).join("");
       } catch (error) {

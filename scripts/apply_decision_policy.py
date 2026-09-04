@@ -53,12 +53,25 @@ def norm_pick(value, field: str, match_no: str) -> str:
     raw = raw.replace("-", "").replace("/", "").replace(" ", "")
     if not raw:
         return ""
-    pick = "".join(symbol for symbol in OUTCOMES if symbol in raw)
-    if len(pick) == 3 or pick == "1X2":
+    if raw == "1X2":
         raise SystemExit(f"{match_no}. maçta {field}={value!r} geçersiz: 1X2 yasak.")
-    if pick not in ALLOWED:
+    if raw not in ALLOWED:
         raise SystemExit(f"{match_no}. maçta {field}={value!r} geçersiz tercih.")
-    return pick
+    return raw
+
+
+def parse_manual_pick(value, field: str, match_no: str) -> tuple[str, str, dict | None]:
+    """Parse one manual request without stopping the other match analyses."""
+    requested = (value or "").strip().upper().replace("0", "X")
+    requested = requested.replace("-", "").replace("/", "").replace(" ", "")
+    try:
+        return norm_pick(value, field, match_no), requested, None
+    except SystemExit as error:
+        return "", requested, {
+            "status": "rejected_invalid_pick",
+            "requested": requested,
+            "error": str(error),
+        }
 
 
 def width(pick: str) -> int:
@@ -85,10 +98,6 @@ def ordered(dist: dict | None) -> list[tuple[str, float]]:
 
 def pair(symbols) -> str:
     return "".join(symbol for symbol in OUTCOMES if symbol in symbols)
-
-
-def union_pick(left: str, right: str) -> str:
-    return "".join(symbol for symbol in OUTCOMES if symbol in (left or "") or symbol in (right or ""))
 
 
 def recommended_pick(decision: dict, pick_width: int) -> str:
@@ -457,7 +466,12 @@ def portfolio_audit(matches: list[dict], field: str) -> dict:
 
 def build_narrow_primary(matches: list[dict]) -> dict:
     manual_double_count = sum(1 for match in matches if width(match.get("narrow_pick", "")) == 2)
-    blanks = [match for match in matches if not match.get("narrow_pick") and match.get("decision", {}).get("status") == "ready"]
+    blanks = [
+        match for match in matches
+        if not match.get("narrow_pick")
+        and match.get("decision", {}).get("status") == "ready"
+        and match.get("manual_narrow_audit", {}).get("status") != "rejected_invalid_pick"
+    ]
     forced = sorted(
         [match for match in blanks if match["decision"].get("single_forbidden")],
         key=risk_score,
@@ -525,17 +539,16 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
     for match in matches:
         manual_wide = match.get("manual_wide_pick", "")
         narrow = match.get("narrow_pick", "")
-        if manual_wide:
-            merged = union_pick(manual_wide, narrow)
-            if width(merged) <= 2:
-                match["wide_pick"] = merged
-                match["wide_pick_origin"] = "manual_wide_plus_narrow" if merged != manual_wide else "manual_wide"
-                if merged != narrow:
-                    match["wide_extra_reason"] = "manuel geniş kupon değerlendirmesi"
-            else:
-                match["wide_pick"] = narrow
-                match["wide_pick_origin"] = "narrow_kept_manual_wide_conflict"
-                warnings.append(f"{match.get('match_no')}. maçta manuel geniş darı üçlüye çevireceği için dar tercih korundu.")
+        if match.get("manual_wide_audit", {}).get("status") == "rejected_invalid_pick":
+            match["wide_pick"] = ""
+            match["wide_pick_origin"] = "manual_wide_rejected_invalid"
+        elif manual_wide:
+            # Manuel tercih aynen korunur. Darı kapsamıyorsa bütünlük denetimi
+            # kuponu geçersiz işaretler; seçim sessizce değiştirilmez.
+            match["wide_pick"] = manual_wide
+            match["wide_pick_origin"] = "manual_wide"
+            if manual_wide != narrow:
+                match["wide_extra_reason"] = "manuel geniş kupon değerlendirmesi"
         else:
             match["wide_pick"] = narrow
             match["wide_pick_origin"] = "from_narrow_primary"
@@ -543,7 +556,12 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
     current_doubles = sum(1 for match in matches if width(match.get("wide_pick", "")) == 2)
     upgrade_slots = max(0, WIDE_TARGET_DOUBLES - current_doubles)
     candidates = sorted(
-        [match for match in matches if width(match.get("wide_pick", "")) == 1 and match.get("decision", {}).get("status") == "ready"],
+        [
+            match for match in matches
+            if width(match.get("wide_pick", "")) == 1
+            and match.get("decision", {}).get("status") == "ready"
+            and not match.get("manual_wide_pick")
+        ],
         key=risk_score,
         reverse=True,
     )
@@ -573,6 +591,115 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
         "manual_count": sum(1 for match in matches if match.get("manual_wide_pick", "")),
         "columns": col,
         "warnings": warnings,
+    }
+
+
+def coupon_integrity(matches: list[dict], field: str) -> dict:
+    """Validate a coupon without changing its effective picks."""
+    is_narrow = field == "narrow_pick"
+    label = "Dar" if is_narrow else "Geniş"
+    audit_field = "manual_narrow_audit" if is_narrow else "manual_wide_audit"
+    errors = []
+    incomplete_match_nos = []
+    expected_match_nos = {str(number) for number in range(1, 16)}
+    actual_match_nos = [str(match.get("match_no") or "?") for match in matches]
+    actual_match_no_set = set(actual_match_nos)
+
+    # Eksik satır diğer maçları bastırmaz; kuponu yalnızca eksik bırakır.
+    incomplete_match_nos.extend(sorted(expected_match_nos - actual_match_no_set, key=int))
+    duplicate_match_nos = sorted(
+        {match_no for match_no in actual_match_nos if actual_match_nos.count(match_no) > 1}
+    )
+    unexpected_match_nos = sorted(actual_match_no_set - expected_match_nos)
+    if duplicate_match_nos:
+        errors.append({
+            "code": "duplicate_match_rows",
+            "match_nos": duplicate_match_nos,
+            "message": f"Tekrarlanan maç satırları: {', '.join(duplicate_match_nos)}.",
+        })
+    if unexpected_match_nos:
+        errors.append({
+            "code": "unexpected_match_rows",
+            "match_nos": unexpected_match_nos,
+            "message": f"Beklenmeyen maç satırları: {', '.join(unexpected_match_nos)}.",
+        })
+
+    for match in matches:
+        match_no = str(match.get("match_no") or "?")
+        audit = match.get(audit_field, {})
+        if audit.get("status") == "rejected_invalid_pick":
+            errors.append({
+                "code": "invalid_manual_pick",
+                "match_no": match_no,
+                "requested": audit.get("requested", ""),
+                "message": audit.get("error", "Geçersiz manuel tercih."),
+            })
+        pick = match.get(field, "")
+        if not pick:
+            if match_no not in incomplete_match_nos:
+                incomplete_match_nos.append(match_no)
+        elif pick not in ALLOWED or width(pick) not in {1, 2}:
+            errors.append({
+                "code": "invalid_effective_pick",
+                "match_no": match_no,
+                "pick": pick,
+                "message": f"{match_no}. maçta {field}={pick!r} geçersiz.",
+            })
+
+    double_count = sum(1 for match in matches if width(match.get(field, "")) == 2)
+    col = columns(matches, field)
+    if not incomplete_match_nos:
+        if is_narrow and double_count not in {NARROW_TARGET_DOUBLES, NARROW_MAX_DOUBLES}:
+            errors.append({
+                "code": "narrow_double_count",
+                "message": f"Dar kupon 7-8 yerine {double_count} çift içeriyor.",
+            })
+        if is_narrow and not (128 <= col <= 256):
+            errors.append({
+                "code": "narrow_column_limit",
+                "message": f"Dar kupon 128-256 yerine {col} kolon içeriyor.",
+            })
+        if not is_narrow and double_count != WIDE_TARGET_DOUBLES:
+            errors.append({
+                "code": "wide_double_count",
+                "message": f"Geniş kupon 11 yerine {double_count} çift içeriyor.",
+            })
+        if not is_narrow and col > 2500:
+            errors.append({
+                "code": "wide_column_limit",
+                "message": f"Geniş kupon 2500 sınırını aşıyor: {col} kolon.",
+            })
+
+    if not is_narrow:
+        for match in matches:
+            match_no = str(match.get("match_no") or "?")
+            narrow = match.get("narrow_pick", "")
+            wide = match.get("wide_pick", "")
+            if not narrow:
+                if match_no not in incomplete_match_nos:
+                    incomplete_match_nos.append(match_no)
+                continue
+            if narrow and wide and any(symbol in narrow and symbol not in wide for symbol in OUTCOMES):
+                errors.append({
+                    "code": "wide_missing_narrow_pick",
+                    "match_no": match_no,
+                    "narrow_pick": narrow,
+                    "wide_pick": wide,
+                    "message": f"{match_no}. maçta geniş tercih ({wide}) dar tercihi ({narrow}) kapsamıyor.",
+                })
+
+    status = "invalid" if errors else "incomplete" if incomplete_match_nos else "valid"
+    return {
+        "field": field,
+        "label": label,
+        "status": status,
+        "final": status == "valid",
+        "playable": status == "valid" and is_narrow,
+        "complete_pick_count": sum(1 for match in matches if match.get(field, "")),
+        "incomplete_match_nos": incomplete_match_nos,
+        "double_count": double_count,
+        "columns": col,
+        "errors": errors,
     }
 
 
@@ -607,15 +734,24 @@ def decision_coverage(matches: list[dict]) -> dict:
         if wide_ok:
             wide_ready.append(match_no)
 
-    completed = len(narrow_ready) == len(matches) and len(wide_ready) == len(matches)
+    expected_match_nos = {str(number) for number in range(1, 16)}
+    actual_match_nos = {str(match.get("match_no") or "?") for match in matches}
+    missing_match_nos = sorted(expected_match_nos - actual_match_nos, key=int)
+    pending.extend(match_no for match_no in missing_match_nos if match_no not in pending)
+    completed = (
+        not missing_match_nos
+        and len(narrow_ready) == 15
+        and len(wide_ready) == 15
+    )
     incomplete = [
         str(match.get("match_no") or "?")
         for match in matches
         if match.get("decision_status") not in {"ready", "manual_ready"}
     ]
+    incomplete.extend(match_no for match_no in missing_match_nos if match_no not in incomplete)
     return {
-        "status": "complete" if completed else "unavailable" if len(pending) == len(matches) else "partial",
-        "total_matches": len(matches),
+        "status": "complete" if completed else "unavailable" if len(pending) == 15 else "partial",
+        "total_matches": 15,
         "ready_count": len(automatic_ready) + len(manual_only),
         "automatic_ready_count": len(automatic_ready),
         "manual_only_count": len(manual_only),
@@ -633,9 +769,6 @@ def decision_coverage(matches: list[dict]) -> dict:
 
 def enrich(document: dict) -> dict:
     matches = document.get("matches") or []
-    if len(matches) != 15:
-        raise SystemExit(f"JSON 15 yerine {len(matches)} maç içeriyor.")
-
     ensure_consensus(len(matches))
     predictions = load_csv(PRED)
     consensus_rows = load_csv(CONS)
@@ -646,25 +779,41 @@ def enrich(document: dict) -> dict:
         match["match_no"] = match_no
         match["external_consensus"] = consensus_rows.get(match_no, {})
         match["decision"] = decide(match)
-        requested_narrow = norm_pick(row.get("narrow_pick"), "narrow_pick", match_no)
-        requested_wide = norm_pick(row.get("wide_pick"), "wide_pick", match_no)
+        narrow_pick, requested_narrow, narrow_input_error = parse_manual_pick(
+            row.get("narrow_pick"), "narrow_pick", match_no
+        )
+        wide_pick, requested_wide, wide_input_error = parse_manual_pick(
+            row.get("wide_pick"), "wide_pick", match_no
+        )
         narrow_reason = (row.get("narrow_reason") or "").strip()
         wide_reason = (row.get("wide_reason") or "").strip()
         match["requested_manual_narrow_pick"] = requested_narrow
         match["requested_manual_wide_pick"] = requested_wide
         match["manual_narrow_reason"] = narrow_reason
         match["manual_wide_reason"] = wide_reason
-        match["manual_narrow_pick"], match["manual_narrow_audit"] = validate_manual_pick(
-            requested_narrow, narrow_reason, match["decision"]
-        )
-        match["manual_wide_pick"], match["manual_wide_audit"] = validate_manual_pick(
-            requested_wide, wide_reason, match["decision"]
-        )
+        if narrow_input_error:
+            match["manual_narrow_pick"] = ""
+            match["manual_narrow_audit"] = narrow_input_error
+        else:
+            match["manual_narrow_pick"], match["manual_narrow_audit"] = validate_manual_pick(
+                narrow_pick, narrow_reason, match["decision"]
+            )
+        if wide_input_error:
+            match["manual_wide_pick"] = ""
+            match["manual_wide_audit"] = wide_input_error
+        else:
+            match["manual_wide_pick"], match["manual_wide_audit"] = validate_manual_pick(
+                wide_pick, wide_reason, match["decision"]
+            )
         match["narrow_pick"] = match["manual_narrow_pick"]
         match["wide_pick"] = ""
 
     document["narrow_strategy"] = build_narrow_primary(matches)
     document["wide_strategy"] = build_wide_from_narrow(matches)
+    narrow_validation = coupon_integrity(matches, "narrow_pick")
+    wide_validation = coupon_integrity(matches, "wide_pick")
+    document["narrow_strategy"]["validation"] = narrow_validation
+    document["wide_strategy"]["validation"] = wide_validation
     document["narrow_strategy"]["portfolio_audit"] = portfolio_audit(matches, "narrow_pick")
     document["wide_strategy"]["portfolio_audit"] = portfolio_audit(matches, "wide_pick")
 
@@ -675,6 +824,19 @@ def enrich(document: dict) -> dict:
     document["narrow_columns"] = columns(matches, "narrow_pick")
     document["wide_columns"] = columns(matches, "wide_pick")
     document["decision_coverage"] = decision_coverage(matches)
+    validation_statuses = {narrow_validation["status"], wide_validation["status"]}
+    overall_validation_status = (
+        "invalid" if "invalid" in validation_statuses
+        else "incomplete" if "incomplete" in validation_statuses
+        else "valid"
+    )
+    document["coupon_validation"] = {
+        "status": overall_validation_status,
+        "narrow_playable": narrow_validation["playable"],
+        "wide_virtual_final": wide_validation["final"],
+        "narrow": narrow_validation,
+        "wide": wide_validation,
+    }
     document["publication_status"] = "match_based"
     document["primary_coupon"] = "narrow"
     document["secondary_coupon"] = "wide_virtual"
@@ -696,6 +858,7 @@ def enrich(document: dict) -> dict:
             "Aynı oynanma yüzdesini taşıyan bayi kaynakları tek kitle sinyali sayılır; mükerrer ağırlık verilmez.",
             "Bağımsız tahmin modelleri, kaynak sayısına göre ana olasılığa en fazla %25 ağırlıkla katılır.",
             "Geniş kupon yalnızca dar kuponun üzerine kurulur ve dar tercihi mutlaka kapsar.",
+            "Kolon, çift sayısı veya kapsama kuralını ihlal eden kupon yalnız uyarılmaz; invalid ve oynanamaz işaretlenir.",
             "H2H ve son form her hafta yeniden hesaplanır; ilk 5-6 haftada H2H ağırlığı düşürülür.",
             "Tek ve çiftlerde varsayılan tercih, aynı genişlikte en yüksek toplam olasılığı kapsar; X'e güvenlik önceliği verilmez.",
             "Model sıralamasından manuel sapma yalnızca yazılı kadro, piyasa, H2H veya takım karakteri gerekçesiyle kabul edilir.",

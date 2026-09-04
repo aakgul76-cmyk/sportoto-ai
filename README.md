@@ -46,6 +46,8 @@ Geniş sanal kupon hedefi:
 Dar kupon + ek ihtimaller = 11 çift + 4 tek = 2.048 kolon
 ```
 
+Bu sınırlar final kupon için zorunludur. Dar kupon 128-256 kolon dışında, geniş kupon 11 çift/2.048 kolon dışında veya dar tercihi kapsamıyorsa sistem seçimi sessizce değiştirmez; kuponu `invalid` ve oynanamaz olarak işaretler. Eksik maç kararı varsa durum `incomplete` olur, hazır maç analizleri yayımlanmaya devam eder.
+
 Tek ve çiftler olasılık sıralamasına göre üretilir; beraberliğe otomatik öncelik verilmez. `data/predictions.csv` içindeki manuel seçim modelin aynı genişlikteki önerisinden farklıysa `narrow_reason` veya `wide_reason` alanına kadro, piyasa, H2H ya da takım karakteri gerekçesi yazılmalıdır. Gerekçesiz sapma otomatik öneriye döner.
 
 Her dar ve geniş kupon için beklenen 1-X-2 sonuç sayıları ile kapsanan işaret sayıları `portfolio_audit` alanında yayımlanır. X ve 2 beklentisi yakınken kupon kapsaması aşırı ayrışırsa dağılım alarmı oluşur; sabit bir 5-5-5 kotası uygulanmaz.

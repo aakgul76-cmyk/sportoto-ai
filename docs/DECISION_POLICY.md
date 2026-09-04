@@ -55,6 +55,18 @@ Geniş kuponun görevi gelir üretmek değil, dar kuponda alamadığımız ama a
 | Dar yakaladı, geniş de yakaladı | Doğru ana karar |
 | Dar yakaladı, geniş kaçırdı | Geniş sanal dağılım hatası |
 
+### Kupon bütünlüğü zorunludur
+
+Hedefler yalnızca uyarı değildir. Bir kuponun `final` veya `oynanabilir` sayılması için:
+
+- dar kupon 7-8 çift ve 128-256 kolon olmalı,
+- geniş kupon 11 çift, 2.048 kolon ve en fazla 2.500 kolon olmalı,
+- geniş tercih her maçta dar tercihin bütün işaretlerini kapsamalı,
+- hiçbir etkin tercihte `1X2` bulunmamalı,
+- 15 maçın her birinde geçerli bir seçim bulunmalı.
+
+Kurala aykırı manuel istek sessizce başka bir seçime çevrilmez. İstek denetim kaydında korunur; ilgili kupon `invalid` işaretlenir ve oynanabilir/final olarak sunulmaz. Veri veya karar eksikliği ise `invalid` değil `incomplete` durumudur. Bu kupon denetimi maçların bağımsız model yüzdelerini ve tek/çift adaylarını değiştirmez.
+
 ## 5. Türkiye ligi erken sezon kuralı
 
 Ağustos ve eylül döneminde Türkiye maçlarında şu kural uygulanır:

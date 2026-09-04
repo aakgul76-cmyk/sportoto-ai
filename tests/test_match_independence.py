@@ -18,6 +18,7 @@ except ModuleNotFoundError:
     )
 
 from scripts import apply_decision_policy as policy
+from scripts import fetch_data
 from scripts.apply_decision_policy import decision_coverage
 from scripts.fetch_data import annotate_model_availability, has_complete_model, publish_match_results
 
@@ -91,6 +92,50 @@ class MatchIndependenceUAT(unittest.TestCase):
 
         self.assertEqual(document["model_coverage"]["status"], "unavailable")
         self.assertEqual(document["model_coverage"]["unavailable_count"], 15)
+
+    def test_fourteen_match_rows_are_published_and_missing_row_is_reported(self):
+        matches = [ready_match(number) for number in range(1, 15)]
+
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "matches.json"
+            document = publish_match_results(matches, {}, outputs=(output,))
+
+        self.assertEqual(document["count"], 14)
+        self.assertEqual(document["model_coverage"]["status"], "partial")
+        self.assertEqual(document["model_coverage"]["ready_count"], 14)
+        self.assertEqual(document["model_coverage"]["unavailable_match_nos"], ["15"])
+
+    def test_missing_prediction_row_does_not_stop_input_loading(self):
+        with tempfile.TemporaryDirectory() as directory:
+            coupon_path = Path(directory) / "coupon.csv"
+            prediction_path = Path(directory) / "predictions.csv"
+            write_csv(
+                coupon_path,
+                ["match_no", "date", "league", "country", "home", "away"],
+                [{
+                    "match_no": str(number),
+                    "date": "2026-09-05T12:00:00Z",
+                    "league": "Test League",
+                    "country": "Test",
+                    "home": f"Home {number}",
+                    "away": f"Away {number}",
+                } for number in range(1, 16)],
+            )
+            write_csv(
+                prediction_path,
+                ["match_no", "narrow_pick", "wide_pick"],
+                [{"match_no": str(number), "narrow_pick": "1", "wide_pick": "1X"}
+                 for number in range(1, 15)],
+            )
+            with patch.object(fetch_data, "COUPON", coupon_path), patch.object(
+                fetch_data, "PREDICTIONS", prediction_path
+            ):
+                matches = fetch_data.load_inputs()
+
+        self.assertEqual(len(matches), 15)
+        self.assertEqual(matches[14]["match_no"], "15")
+        self.assertEqual(matches[14]["narrow_pick"], "")
+        self.assertEqual(matches[14]["wide_pick"], "")
 
     def test_missing_model_does_not_cancel_manual_match_decision(self):
         matches = [ready_match(number) for number in range(1, 16)]
