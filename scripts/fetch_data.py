@@ -24,6 +24,7 @@ API_FOOTBALL_API = "https://v3.football.api-sports.io"
 MIN_API_INTERVAL_SECONDS = 10.0  # En fazla 6 istek/dakika; API-Football 10/dakika sinirindan guvenli uzaklik.
 DEFAULT_RATE_LIMIT_BACKOFF_SECONDS = 60.0
 API_FOOTBALL_MIN_DAILY_REMAINING = 10
+REQUIRED_MODEL_OUTCOMES = {"1", "X", "2"}
 _last_api_request_at = 0.0
 _api_football_disabled_reason: str | None = None
 
@@ -696,6 +697,89 @@ def alignment(one_x_two: dict, scores: list[dict], narrow_pick: str) -> dict:
     }
 
 
+def has_complete_model(match: dict) -> bool:
+    """Return whether a match has a usable 1-X-2 model and score output."""
+    distribution = match.get("model_1x2")
+    scores = match.get("model_score_predictions")
+    if not isinstance(distribution, dict) or not REQUIRED_MODEL_OUTCOMES.issubset(distribution):
+        return False
+    try:
+        probabilities = [float(distribution[symbol]) for symbol in ("1", "X", "2")]
+    except (TypeError, ValueError):
+        return False
+    if any(not math.isfinite(value) or value < 0 for value in probabilities):
+        return False
+    if not 99.0 <= sum(probabilities) <= 101.0:
+        return False
+    return isinstance(scores, list) and bool(scores)
+
+
+def annotate_model_availability(matches: list[dict]) -> dict:
+    """Record provider/model availability independently for every coupon match."""
+    ready_match_nos = []
+    unavailable_match_nos = []
+    for match in matches:
+        match_no = str(match.get("match_no") or "?")
+        if has_complete_model(match):
+            match["model_status"] = "ready"
+            match.pop("model_status_reason", None)
+            ready_match_nos.append(match_no)
+        else:
+            match["model_status"] = "unavailable"
+            match["model_status_reason"] = (
+                match.get("api_football_error")
+                or match.get("data_error")
+                or "Bu maç için kullanılabilir model verisi üretilemedi."
+            )
+            unavailable_match_nos.append(match_no)
+
+    ready_count = len(ready_match_nos)
+    status = "complete" if ready_count == len(matches) else "unavailable" if ready_count == 0 else "partial"
+    return {
+        "status": status,
+        "total_matches": len(matches),
+        "ready_count": ready_count,
+        "unavailable_count": len(unavailable_match_nos),
+        "ready_match_nos": ready_match_nos,
+        "unavailable_match_nos": unavailable_match_nos,
+    }
+
+
+def publish_match_results(
+    matches: list[dict],
+    fetch_errors: dict[str, str],
+    outputs=OUTPUTS,
+) -> dict:
+    """Publish each available match model without coupling it to the other matches."""
+    if len(matches) != 15:
+        raise SystemExit(f"Kuponda 15 yerine {len(matches)} mac bulundu; yayin yapilmadi.")
+
+    model_coverage = annotate_model_availability(matches)
+
+    def columns(field: str) -> int:
+        result = 1
+        for match in matches:
+            result *= sum(symbol in match[field] for symbol in ("1", "X", "2"))
+        return result
+
+    document = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "timezone": "Europe/Istanbul",
+        "count": len(matches),
+        "source": "api_football_market_odds_plus_football_data_history",
+        "wide_columns": columns("wide_pick"),
+        "narrow_columns": columns("narrow_pick"),
+        "publication_status": "match_based",
+        "model_coverage": model_coverage,
+        "fetch_errors": fetch_errors,
+        "matches": matches,
+    }
+    for path in outputs:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
+    return document
+
+
 def main() -> None:
     token = os.getenv("FOOTBALL_DATA_TOKEN")
     api_football_key = os.getenv("API_FOOTBALL_KEY")
@@ -801,34 +885,12 @@ def main() -> None:
                     match["model_internal_alignment"] = alignment(odds_1x2, scores, match["narrow_pick"])
                     match.pop("data_error", None)
 
-    def columns(field: str) -> int:
-        result = 1
-        for match in matches:
-            result *= sum(symbol in match[field] for symbol in ("1", "X", "2"))
-        return result
-
-    model_count = sum(bool(match["model_score_predictions"]) for match in matches)
-    if model_count == 0:
-        print("Hic model uretilemedi. Saglayici hatalari:", flush=True)
-        print(json.dumps(fetch_errors, ensure_ascii=False, indent=2), flush=True)
-        raise SystemExit(
-            "Veri kalite korumasi: 0/15 model uretildi; mevcut yayin korunuyor."
-        )
-
-    document = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "timezone": "Europe/Istanbul",
-        "count": len(matches),
-        "source": "api_football_market_odds_plus_football_data_history",
-        "wide_columns": columns("wide_pick"),
-        "narrow_columns": columns("narrow_pick"),
-        "fetch_errors": fetch_errors,
-        "matches": matches,
-    }
-    for path in OUTPUTS:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Veri modeli tamamlandi: {len(matches)} mac, {model_count} model.")
+    document = publish_match_results(matches, fetch_errors)
+    model_count = document["model_coverage"]["ready_count"]
+    print(
+        f"Veri modeli tamamlandi: {len(matches)} mac, {model_count} model; "
+        "her mac bagimsiz yayimlandi."
+    )
 
 
 if __name__ == "__main__":

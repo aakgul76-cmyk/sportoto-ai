@@ -11,7 +11,7 @@
     header { margin-bottom: 28px; }
     h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 3.5rem); }
     .accent { color: #5ee28c; }
-    #status, #policy { color: #a9bdb1; line-height: 1.5; }
+    #status, #coverage, #policy { color: #a9bdb1; line-height: 1.5; }
     .grid { display: grid; gap: 14px; }
     article { background: #10241a; border: 1px solid #254735; border-radius: 16px; padding: 18px; }
     .teams { display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.1rem; font-weight: 700; }
@@ -23,6 +23,8 @@
     .narrow { background: #3b3320; color: #ffe08a; }
     .model { background: #17324a; color: #9fd3ff; }
     .risk { background: #4a1f1f; color: #ffb5b5; }
+    .ready { background: #183e28; color: #9cf0b8; }
+    .pending { background: #4a351f; color: #ffd39a; }
     .match-no { color: #5ee28c; margin-right: 8px; }
     .reason { margin-top: 12px; color: #d2e6da; font-size: .92rem; line-height: 1.45; }
     .origin { margin-top: 8px; color: #a9bdb1; font-size: .82rem; }
@@ -34,6 +36,7 @@
     <header>
       <h1>Spor Toto <span class="accent">Analiz</span></h1>
       <div id="status">Veriler yükleniyor…</div>
+      <div id="coverage"></div>
       <div id="policy"></div>
     </header>
     <section id="matches" class="grid"></section>
@@ -46,6 +49,7 @@
 
     async function loadMatches() {
       const status = document.querySelector("#status");
+      const coverage = document.querySelector("#coverage");
       const policy = document.querySelector("#policy");
       const container = document.querySelector("#matches");
       try {
@@ -55,6 +59,9 @@
         status.textContent = data.generated_at
           ? `Son güncelleme: ${new Date(data.generated_at).toLocaleString("tr-TR", { timeZone: data.timezone })} · Dar gerçek: ${data.narrow_columns ?? "-"} kolon · Geniş sanal: ${data.wide_columns ?? "-"} kolon`
           : "Henüz API verisi alınmadı.";
+        const modelCoverage = data.model_coverage || {};
+        const decisionCoverage = data.decision_coverage || {};
+        coverage.textContent = `Maç bazlı durum: Model ${modelCoverage.ready_count ?? "-"}/${modelCoverage.total_matches ?? data.count ?? 15} · Karar ${decisionCoverage.ready_count ?? "-"}/${decisionCoverage.total_matches ?? data.count ?? 15} · Bekleyen maçlar: ${(decisionCoverage.incomplete_match_nos || modelCoverage.unavailable_match_nos || []).join(", ") || "yok"}`;
         policy.textContent = `Politika: ${data.decision_policy?.name ?? "-"} · Öncelik: Dar kupon · Geniş rolü: sanal +ihtimal kontrolü`;
         const balance = data.wide_strategy?.portfolio_audit;
         if (balance?.audit_complete) {
@@ -72,6 +79,8 @@
           const h2h = match.model_sample?.h2h || {};
           const form = match.model_sample?.recent_form || {};
           const riskReason = decision.favorite_risk_reason || decision.reason || "-";
+          const modelReady = match.model_status === "ready";
+          const decisionReady = ["ready", "manual_ready"].includes(match.decision_status);
           return `
           <article>
             <div class="teams">
@@ -88,6 +97,8 @@
               <span class="pick model">Model: 1 ${escapeHtml(pct(model, "1"))} · X ${escapeHtml(pct(model, "X"))} · 2 ${escapeHtml(pct(model, "2"))}</span>
             </div>
             <div class="metrics">
+              <span class="metric ${modelReady ? "ready" : "pending"}">Model durumu: ${modelReady ? "hazır" : "veri yok"}</span>
+              <span class="metric ${decisionReady ? "ready" : "pending"}">Karar durumu: ${decisionReady ? "hazır" : "bekliyor"}</span>
               <span class="metric model">Tek adayı: ${escapeHtml(decision.model_single || "-")}</span>
               <span class="metric model">Çift adayı: ${escapeHtml(decision.model_double || "-")}</span>
               <span class="metric risk">Sürpriz: ${escapeHtml(decision.surprise_score ?? "-")}</span>

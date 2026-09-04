@@ -576,6 +576,61 @@ def build_wide_from_narrow(matches: list[dict]) -> dict:
     }
 
 
+def decision_coverage(matches: list[dict]) -> dict:
+    """Summarize independent match decisions without blocking available matches."""
+    automatic_ready = []
+    manual_only = []
+    partial = []
+    pending = []
+    narrow_ready = []
+    wide_ready = []
+
+    for match in matches:
+        match_no = str(match.get("match_no") or "?")
+        decision_ready = match.get("decision", {}).get("status") == "ready"
+        narrow_ok = width(match.get("narrow_pick", "")) in {1, 2}
+        wide_ok = width(match.get("wide_pick", "")) in {1, 2}
+        if decision_ready:
+            match["decision_status"] = "ready"
+            automatic_ready.append(match_no)
+        elif narrow_ok and wide_ok:
+            match["decision_status"] = "manual_ready"
+            manual_only.append(match_no)
+        elif narrow_ok or wide_ok:
+            match["decision_status"] = "partial"
+            partial.append(match_no)
+        else:
+            match["decision_status"] = "unavailable"
+            pending.append(match_no)
+        if narrow_ok:
+            narrow_ready.append(match_no)
+        if wide_ok:
+            wide_ready.append(match_no)
+
+    completed = len(narrow_ready) == len(matches) and len(wide_ready) == len(matches)
+    incomplete = [
+        str(match.get("match_no") or "?")
+        for match in matches
+        if match.get("decision_status") not in {"ready", "manual_ready"}
+    ]
+    return {
+        "status": "complete" if completed else "unavailable" if len(pending) == len(matches) else "partial",
+        "total_matches": len(matches),
+        "ready_count": len(automatic_ready) + len(manual_only),
+        "automatic_ready_count": len(automatic_ready),
+        "manual_only_count": len(manual_only),
+        "partial_count": len(partial),
+        "pending_count": len(pending),
+        "automatic_ready_match_nos": automatic_ready,
+        "manual_only_match_nos": manual_only,
+        "partial_match_nos": partial,
+        "pending_match_nos": pending,
+        "incomplete_match_nos": incomplete,
+        "narrow_ready_count": len(narrow_ready),
+        "wide_ready_count": len(wide_ready),
+    }
+
+
 def enrich(document: dict) -> dict:
     matches = document.get("matches") or []
     if len(matches) != 15:
@@ -619,6 +674,8 @@ def enrich(document: dict) -> dict:
 
     document["narrow_columns"] = columns(matches, "narrow_pick")
     document["wide_columns"] = columns(matches, "wide_pick")
+    document["decision_coverage"] = decision_coverage(matches)
+    document["publication_status"] = "match_based"
     document["primary_coupon"] = "narrow"
     document["secondary_coupon"] = "wide_virtual"
     document["decision_policy"] = {
