@@ -294,7 +294,14 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "NS",
+        "fixture_id": 1584396,
+        "match_score": 1.0,
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "2",
@@ -380,7 +387,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "3",
@@ -466,7 +478,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "4",
@@ -715,7 +732,14 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "NS",
+        "fixture_id": 1584397,
+        "match_score": 1.0,
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "5",
@@ -964,7 +988,19 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "finished",
+        "fixture_status": "FT",
+        "fixture_id": 1584394,
+        "match_score": 0.845,
+        "score": "2-3",
+        "outcome": "2",
+        "narrow_hit": true,
+        "wide_hit": true,
+        "assessment": "correct_main_decision",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "6",
@@ -1050,7 +1086,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "7",
@@ -1136,7 +1177,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "8",
@@ -1222,7 +1268,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "9",
@@ -1308,7 +1359,12 @@
         "status": "not_requested"
       },
       "wide_pick_origin": "from_narrow_primary",
-      "decision_status": "unavailable"
+      "decision_status": "unavailable",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "10",
@@ -1570,7 +1626,12 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "11",
@@ -1831,7 +1892,12 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "12",
@@ -2139,7 +2205,14 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "NS",
+        "fixture_id": 1570364,
+        "match_score": 0.857,
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "13",
@@ -2388,7 +2461,14 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "NS",
+        "fixture_id": 1550113,
+        "match_score": 1.0,
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "14",
@@ -2695,7 +2775,14 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "NS",
+        "fixture_id": 1550107,
+        "match_score": 0.864,
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     },
     {
       "match_no": "15",
@@ -2957,7 +3044,12 @@
         "probability_loss_pct": 0.0,
         "efficient": true
       },
-      "decision_status": "ready"
+      "decision_status": "ready",
+      "result_analysis": {
+        "status": "pending",
+        "fixture_status": "not_finished",
+        "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+      }
     }
   ],
   "narrow_strategy": {
@@ -3191,5 +3283,61 @@
       "Sabit 5-5-5 sonuç kotası uygulanmaz; dağılım maçların olasılıklarına göre denetlenir.",
       "Türkiye erken sezonunda büyük takım dışı %50-58 favoriler tek geçilmez."
     ]
+  },
+  "weekly_cycle": {
+    "mode": "evaluation",
+    "predictions_frozen": true,
+    "evaluated_at": "2026-09-05T05:06:56.631985+00:00"
+  },
+  "result_evaluation": {
+    "status": "partial",
+    "total_matches": 15,
+    "completed_count": 1,
+    "pending_count": 14,
+    "unavailable_count": 0,
+    "completed_match_nos": [
+      "5"
+    ],
+    "pending_match_nos": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "unavailable_match_nos": [],
+    "narrow_hit_count": 1,
+    "wide_hit_count": 1,
+    "narrow_evaluated_count": 1,
+    "wide_evaluated_count": 1,
+    "narrow_evaluated_match_nos": [
+      "5"
+    ],
+    "wide_evaluated_match_nos": [
+      "5"
+    ],
+    "narrow_hit_match_nos": [
+      "5"
+    ],
+    "wide_hit_match_nos": [
+      "5"
+    ],
+    "assessment_counts": {
+      "correct_main_decision": 1,
+      "narrowing_or_risk_budget_error": 0,
+      "analysis_or_model_error": 0,
+      "wide_distribution_error": 0,
+      "not_evaluable": 0
+    },
+    "errors": {}
   }
 }
